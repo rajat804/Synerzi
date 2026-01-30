@@ -6,12 +6,12 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [active, setActive] = useState("Home");
 
-  const links = ["Home","All Properties", "About Us", "Contact"];
+  const links = ["Home", "All Properties", "About Us", "Contact"];
 
   return (
     <>
       <TopBar />
-      <nav className="w-full bg-[#0F172A]/95 backdrop-blur-md border-b border-[#1E293B] shadow-lg fixed z-50">
+      <nav className="w-full bg-[#0F172A]/95 backdrop-blur-md border-b border-[#1E293B] shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
