@@ -21,29 +21,29 @@ const Home = () => {
       {/* inner image */}
       <div className="">
         <section
-  className="w-full min-h-[75vh] md:min-h-[85vh] relative flex items-center"
-  style={{
-    backgroundImage: `url(${innerImage})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  }}
->
-  {/* Overlay */}
-  <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
+          className="w-full min-h-[75vh] md:min-h-[85vh] relative flex items-center"
+          style={{
+            backgroundImage: `url(${innerImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
 
-  {/* Content */}
-  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
-    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-      Find the Perfect Property
-    </h1>
-    <p className="text-base sm:text-lg md:text-xl max-w-2xl text-gray-200 mb-6">
-      Invest, Lease & Buy premium properties in top locations
-    </p>
-    <button className="px-7 py-3 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold hover:scale-105 transition">
-      Explore Properties
-    </button>
-  </div>
-</section>
+          {/* Content */}
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              Find the Perfect Property
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl max-w-2xl text-gray-200 mb-6">
+              Invest, Lease & Buy premium properties in top locations
+            </p>
+            <button className="px-7 py-3 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold hover:scale-105 transition">
+              Explore Properties
+            </button>
+          </div>
+        </section>
       </div>
 
       <div className="w-full px-4">
@@ -150,7 +150,7 @@ const Home = () => {
       </div>
 
       {/* Property by area */}
-      <PropertyByArea/>
+      <PropertyByArea />
     </>
   );
 };
