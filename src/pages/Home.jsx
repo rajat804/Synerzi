@@ -1,8 +1,8 @@
 import { useState } from "react";
 const innerImage =
   "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80";
-import PropertyByArea from "../components/PropertybyArea";
 import SynerziSection from "../components/SynerziSection";
+import PropertyArea from "../components/PropertyArea";
 
 
 const Home = () => {
@@ -152,7 +152,7 @@ const Home = () => {
       </div>
 
       {/* Property by area */}
-      <PropertyByArea />
+      <PropertyArea/>
       {/* seyner Section */}
       <SynerziSection/>
     </>
