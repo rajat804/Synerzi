@@ -3,6 +3,9 @@ const innerImage =
   "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80";
 import SynerziSection from "../components/SynerziSection";
 import PropertyArea from "../components/PropertyArea";
+import CompanyOverview from "../components/CompanyOurView";
+import Testimonials from "../components/Testimonials";
+import ContactUs from "../components/ContactUs";
 
 
 const Home = () => {
@@ -155,6 +158,16 @@ const Home = () => {
       <PropertyArea/>
       {/* seyner Section */}
       <SynerziSection/>
+      {/* our company overview  */}
+
+      <CompanyOverview/>
+
+      {/* Testimonials */}
+      <Testimonials/>
+      {/* contact us */}
+      <ContactUs/>
+
+      {/* footer */}
     </>
   );
 };
