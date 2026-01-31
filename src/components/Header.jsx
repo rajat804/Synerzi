@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TopBar from "./TopBar";
-import navLogo from "../assets/images/synerzi-logo.png";
+import navLogo from "../assets/images/srm-logo.png";
 import { Link } from "react-router-dom";
 
 const Header = () => {
