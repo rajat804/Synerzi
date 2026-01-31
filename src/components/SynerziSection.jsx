@@ -46,36 +46,43 @@ const SynerziSection = () => {
 
   return (
     <section
-      className="py-20 bg-cover bg-center relative"
+      className="py-12 sm:py-14 lg:py-16 bg-cover bg-center relative"
       style={{
-        backgroundImage: `url("https://images.pexels.com/photos/323776/pexels-photo-323776.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80")`, // premium building background
+        backgroundImage: `url("https://images.pexels.com/photos/323776/pexels-photo-323776.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80")`,
       }}
     >
-      {/* Dark overlay for readability */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/60"></div>
 
-      <div className="relative max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-8">
+      <div className="relative max-w-7xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-6">
         {items.map((item) => (
-          <div key={item.letter} className="text-center group">
-            {/* Letter with background image + overlay */}
-            <div className="relative w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden shadow-xl">
+          <div
+            key={item.letter}
+            className="text-center group flex flex-col items-center"
+          >
+            {/* Circle */}
+            <div className="relative w-20 h-20 sm:w-22 sm:h-22 lg:w-24 lg:h-24 mb-3 rounded-full overflow-hidden shadow-lg">
               <img
                 src={item.img}
                 alt={item.letter}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                <span className="text-4xl font-bold text-white">{item.letter}</span>
+                <span className="text-3xl lg:text-4xl font-bold text-white">
+                  {item.letter}
+                </span>
               </div>
             </div>
 
             {/* Title */}
-            <h3 className="text-lg font-semibold mb-1 text-white group-hover:text-[#06B6D4] transition-colors">
+            <h3 className="text-sm sm:text-base font-semibold text-white group-hover:text-[#06B6D4] transition">
               {item.title}
             </h3>
 
-            {/* Description */}
-            <p className="text-sm text-gray-200">{item.description}</p>
+            {/* Description (hidden on very small screens) */}
+            <p className="hidden sm:block text-xs text-gray-200 mt-1 leading-snug">
+              {item.description}
+            </p>
           </div>
         ))}
       </div>
