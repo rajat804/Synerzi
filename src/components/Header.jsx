@@ -26,8 +26,8 @@ const Header = () => {
               <img src={navLogo} alt="Logo" className="h-9 sm:h-10 w-auto" />
             </Link>
 
-            {/* CENTER: Navigation (Desktop Only) */}
-            <div className="hidden md:flex flex-1 justify-center gap-6 lg:gap-6">
+            {/* CENTER: Navigation (Desktop & Tablet) */}
+            <div className="hidden md:flex flex-1 justify-center gap-6 lg:gap-8">
               {links.map((link) => {
                 const isActive = location.pathname === link.path;
                 return (
@@ -47,11 +47,11 @@ const Header = () => {
             </div>
 
             {/* RIGHT: Icons + Add Listing + Toggle */}
-            <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-              {/* Phone */}
+            <div className="flex items-center gap-2 sm:gap-3 md:gap-3 lg:gap-4">
+              {/* Phone Icon only on Tablet/Desktop, hide number on tablet */}
               <div className="flex items-center text-gray-300 hover:text-[#06B6D4] transition cursor-pointer">
                 <i className="fas fa-phone-alt text-[#06B6D4]" />
-                <span className="hidden sm:inline ml-1 text-sm">
+                <span className="hidden lg:inline ml-1 text-sm">
                   +91 98765 43210
                 </span>
               </div>
@@ -60,8 +60,8 @@ const Header = () => {
               <Link
                 to="/login"
                 className="flex items-center justify-center w-9 h-9 rounded-full
-                bg-[#1E293B] text-gray-300 hover:bg-[#06B6D4] hover:text-[#0F172A]
-                transition"
+          bg-[#1E293B] text-gray-300 hover:bg-[#06B6D4] hover:text-[#0F172A]
+          transition"
               >
                 <i className="fas fa-user text-sm" />
               </Link>
@@ -69,13 +69,13 @@ const Header = () => {
               {/* Add Listing */}
               <Link
                 to="/contact"
-                className="px-2 sm:px-3 md:px-4 py-1 sm:py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9]
-          text-[#0F172A] text-xs sm:text-sm md:text-sm font-semibold shadow-lg hover:scale-105 transition-transform"
+                className="px-2 sm:px-3 md:px-3 lg:px-4 py-1 sm:py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9]
+          text-[#0F172A] text-xs sm:text-sm md:text-sm lg:text-sm font-semibold shadow-lg hover:scale-105 transition-transform"
               >
                 Add Listing
               </Link>
 
-              {/* MOBILE TOGGLE (only visible on <md) */}
+              {/* MOBILE TOGGLE (only <md) */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="ml-1 md:hidden"
