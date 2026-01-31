@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import Propertypage from "./pages/PropertyPage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -16,7 +18,8 @@ function App() {
         <Route path="/about-us" element={<AboutUs/>}></Route>
         <Route path="/contact" element={<Contact/>}></Route>
         <Route path="/properties" element={<Propertypage/>}></Route>
-        
+        <Route path="/login" element={<Login/>}></Route>
+        <Route path="/register" element={<Register/>}></Route>
       </Routes>
       <Footer />
 
