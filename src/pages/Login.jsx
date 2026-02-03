@@ -10,14 +10,14 @@ const Login = () => {
   const [error, setError] = useState("");
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-  const googleLogin = () => window.location.href = "https://synerzi.vercel.app/api/auth/google";
+  const googleLogin = () => window.location.href = "https://synerzi-backend.vercel.app/api/auth/google";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); setError("");
 
     try {
-      const response = await fetch("https://synerzi.vercel.app/api/auth/login", {
+      const response = await fetch("https://synerzi-backend.vercel.app/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -70,6 +70,6 @@ const Login = () => {
       </div>
     </section>
   );
-};
+};  
 
 export default Login;
