@@ -28,7 +28,7 @@ const Register = () => {
     setError("");
 
     try {
-      const response = await fetch("https://synerzi-backend.vercel.app//api/auth/register", {
+      const response = await fetch("https://synerzi-backend.vercel.app/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
