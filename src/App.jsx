@@ -7,6 +7,8 @@ import Contact from "./pages/Contact";
 import Propertypage from "./pages/PropertyPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import GoogleSuccess from "./pages/GoogleSuccess";
+import UserDashboard from "./pages/UserDashboard";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/properties" element={<Propertypage/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/register" element={<Register/>}></Route>
+        <Route path="/google-success" element={<GoogleSuccess/>}></Route>
+        <Route path="/dashboard" element={<UserDashboard/>}></Route>
       </Routes>
       <Footer />
 
