@@ -121,7 +121,7 @@ const Header = () => {
             {/* Mobile Phone */}
             <div className="flex items-center gap-2 text-gray-300 px-3 py-2">
               <i className="fas fa-phone-alt text-[#06B6D4]" />
-              <span>+91 98765 43210</span>
+              <span>+91 98967 07022</span>
             </div>
 
             {/* Mobile Actions */}
