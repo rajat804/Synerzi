@@ -12,18 +12,23 @@ import UserDashboard from "./pages/UserDashboard";
 import AdminRegister from "./pages/AdminRegister";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import ShowListings from "./pages/ShowListings";
+import AdminEditProperty from "./pages/AdminEditProperty";
 
 
 function App() {
   const location = useLocation();
 
   // admin page header or footer hide
-  const hideHeaderandFooter = [
-    "/admin-login",
-    "/admin-register",
-    "/admin-dashboard"
-  ].includes(location.pathname);
-
+  const adminRoutes = [
+  "/admin-login",
+  "/admin-register",
+  "/admin-dashboard",
+  "/admin-listings",
+];
+const hideHeaderandFooter =
+  adminRoutes.includes(location.pathname) ||
+  location.pathname.startsWith("/admin-edit-property");
   return (
     <>
 
@@ -43,6 +48,8 @@ function App() {
         <Route path="/admin-login" element={<AdminLogin/>}></Route>
         <Route path="/admin-register" element={<AdminRegister/>}></Route>
         <Route path="/admin-dashboard" element={<AdminDashboard/>}></Route>
+        <Route path="/admin-listings" element={<ShowListings/>}></Route>
+        <Route path="/admin-edit-property/:id" element={<AdminEditProperty/>}></Route>
       </Routes>
       {!hideHeaderandFooter && <Footer />}
 
