@@ -46,10 +46,10 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-gray-400">
               <li className="flex gap-2 items-start">
                 <FaMapMarkerAlt className="mt-1" />
-                Gurugram, Haryana, India
+                Shop No. B-14, Main Market, Sector 1, IMT Manesar, Gurugram – 122050 (HR.)
               </li>
               <li className="flex gap-2 items-center">
-                <FaPhoneAlt /> +91 98765 43210
+                <FaPhoneAlt /> +91 9896707022
               </li>
               <li className="flex gap-2 items-center">
                 <FaEnvelope /> info@synerzi.com
