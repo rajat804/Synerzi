@@ -58,7 +58,7 @@ const Header = () => {
               {/* Phone */}
               <div className="flex items-center gap-2 text-sm text-gray-300 hover:text-[#06B6D4] transition cursor-pointer">
                 <i className="fas fa-phone-alt text-[#06B6D4]" />
-                <span className="hidden lg:block">+91 98765 43210</span>
+                <span className="hidden lg:block">+91 98967 07022</span>
               </div>
 
               {/* User Login */}
