@@ -31,15 +31,15 @@ const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-[#0F172A]">
       <div className="max-w-7xl mx-auto px-4">
         
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#F59E0B]">
             Frequently Asked Questions
           </h2>
-          <p className="text-gray-600 mt-2">
+          <p className="text-[#E5E7EB] mt-2">
             Clear answers to common questions about Synerzi
           </p>
         </div>
@@ -49,7 +49,7 @@ const FAQSection = () => {
           {faqs.map((item, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition"
+              className="bg-[#1F2937] rounded-xl border border-[#374151] shadow-sm hover:shadow-md transition"
             >
               <button
                 onClick={() =>
@@ -57,16 +57,16 @@ const FAQSection = () => {
                 }
                 className="w-full flex justify-between items-start p-5 text-left"
               >
-                <span className="font-medium text-gray-900 pr-6">
+                <span className="font-medium text-[#E5E7EB] pr-6">
                   {item.q}
                 </span>
-                <span className="text-2xl text-[#06B6D4] leading-none">
+                <span className="text-2xl bg-clip-text text-transparent bg-gradient-to-r from-[#F59E0B] to-[#10B981] leading-none">
                   {openIndex === index ? "−" : "+"}
                 </span>
               </button>
 
               {openIndex === index && (
-                <div className="px-5 pb-5 text-gray-600 text-sm md:text-base leading-relaxed">
+                <div className="px-5 pb-5 text-[#D1D5DB] text-sm md:text-base leading-relaxed">
                   {item.a}
                 </div>
               )}
