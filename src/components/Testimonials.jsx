@@ -39,16 +39,16 @@ export default function TestimonialsSection() {
   }, []);
 
   return (
-    <section className="py-16 bg-gray-50">
-        <div className="text-center mb-[50px]">
-          <h2 className="text-3xl font-bold text-black">
-            Testimonials
-          </h2>
-        </div>
+    <section className="py-16 bg-gradient-to-b from-[#F0F4F8] to-[#E5E7EB]">
+      <div className="text-center mb-[50px]">
+        <h2 className="text-3xl font-bold text-gray-900">
+          Testimonials
+        </h2>
+      </div>
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
         {/* LEFT - YOUTUBE */}
-        <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
+        <div className="aspect-video rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500">
           <iframe
             className="w-full h-full"
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
@@ -61,18 +61,18 @@ export default function TestimonialsSection() {
         <div className="flex flex-col gap-8">
 
           {/* TESTIMONIAL CARD */}
-          <div className="bg-white p-6 rounded-xl shadow-lg transition-all duration-500">
+          <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-indigo-500 hover:shadow-2xl transition-all duration-500">
             <div className="flex items-center gap-4">
               <img
                 src={testimonials[index].image}
                 alt={testimonials[index].name}
-                className="w-16 h-16 rounded-full object-cover border"
+                className="w-16 h-16 rounded-full object-cover border-2 border-indigo-500"
               />
               <div>
-                <h4 className="font-semibold text-gray-900">
+                <h4 className="font-semibold text-gray-800">
                   {testimonials[index].name}
                 </h4>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-600">
                   {testimonials[index].role}
                 </p>
               </div>
@@ -83,28 +83,27 @@ export default function TestimonialsSection() {
             </p>
 
             {/* DOTS */}
-            <div className="flex gap-2 mt-4">
+            <div className="flex gap-2 mt-4 justify-center">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setIndex(i)}
-                  className={`h-2 w-2 rounded-full ${
-                    i === index ? "bg-black" : "bg-gray-300"
-                  }`}
+                  className={`h-3 w-3 rounded-full transition-all duration-300
+                    ${i === index ? "bg-indigo-500 w-4" : "bg-gray-300"}`}
                 />
               ))}
             </div>
           </div>
 
           {/* COMPANY LOGOS - RIGHT SIDE */}
-          <div className="overflow-hidden bg-white py-4 rounded-xl shadow">
+          <div className="overflow-hidden bg-white py-4 rounded-xl shadow hover:shadow-2xl transition-shadow">
             <div className="flex gap-10 animate-scroll px-6">
               {logos.concat(logos).map((logo, i) => (
                 <img
                   key={i}
                   src={logo}
                   alt="Company Logo"
-                  className="h-8 w-auto object-contain grayscale hover:grayscale-0 transition"
+                  className="h-8 w-auto object-contain grayscale hover:grayscale-0 hover:scale-110 hover:shadow-lg transition-all duration-500"
                 />
               ))}
             </div>
