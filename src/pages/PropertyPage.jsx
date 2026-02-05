@@ -25,10 +25,18 @@ export default function PropertyPage() {
   }, []);
 
   if (loading)
-    return <div className="min-h-screen flex items-center justify-center text-lg">Loading properties...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-lg">
+        Loading properties...
+      </div>
+    );
 
   if (error)
-    return <div className="min-h-screen flex items-center justify-center text-red-600">{error}</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-red-600">
+        {error}
+      </div>
+    );
 
   return (
     <>
@@ -51,13 +59,13 @@ export default function PropertyPage() {
       <section className="bg-white py-8 shadow-sm">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-purple-500 outline-none">
+            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
               <option>Type</option>
               <option>Buy</option>
               <option>Rent</option>
             </select>
 
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-purple-500 outline-none">
+            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
               <option>Category</option>
               <option>Apartment</option>
               <option>Villa</option>
@@ -66,7 +74,7 @@ export default function PropertyPage() {
               <option>Office Space</option>
             </select>
 
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-purple-500 outline-none">
+            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
               <option>State</option>
               <option>Maharashtra</option>
               <option>Delhi</option>
@@ -74,7 +82,7 @@ export default function PropertyPage() {
               <option>Gujarat</option>
             </select>
 
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-purple-500 outline-none">
+            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
               <option>City</option>
               <option>Mumbai</option>
               <option>Pune</option>
@@ -85,10 +93,10 @@ export default function PropertyPage() {
             <input
               type="text"
               placeholder="Area (sq ft)"
-              className="border rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 outline-none"
+              className="border rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#06B6D4] outline-none"
             />
 
-            <button className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-lg font-semibold hover:from-indigo-500 hover:to-purple-500 hover:scale-105 transition-all">
+            <button className="bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] rounded-lg font-semibold hover:scale-105 transition">
               Search
             </button>
           </div>
@@ -100,7 +108,9 @@ export default function PropertyPage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {properties.length === 0 ? (
-              <p className="text-center col-span-full text-gray-600">No properties available</p>
+              <p className="text-center col-span-full text-gray-600">
+                No properties available
+              </p>
             ) : (
               properties.map((item) => (
                 <div
@@ -121,21 +131,30 @@ export default function PropertyPage() {
                       </div>
                     )}
 
-                    <span className="absolute top-4 left-4 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-xs px-3 py-1 rounded-full font-semibold shadow">
+                    <span className="absolute top-4 left-4 bg-[#06B6D4] text-[#0F172A] text-xs px-3 py-1 rounded-full font-semibold shadow">
                       {item.type}
                     </span>
                   </div>
 
                   {/* Content */}
                   <div className="p-6">
-                    <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
-                    <p className="text-gray-500 text-sm mt-1">{item.state}, {item.city}</p>
-                    <p className="text-gray-600 text-sm mt-3 line-clamp-2">{item.description}</p>
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {item.title}
+                    </h3>
+                    {/* State & City */}
+                    <p className="text-gray-500 text-sm mt-1">
+                      {item.state}, {item.city}
+                    </p>
+                    {/* Description */}
+                    <p className="text-gray-600 text-sm mt-3 line-clamp-2">
+                      {item.description}
+                    </p>
+                    {/* Price */}
                     <div className="flex justify-between items-center mt-5">
-                      <span className="text-gradient font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center">
+                      <span className="text-[#06B6D4] font-bold flex items-center">
                         <span className="mr-1">₹</span> {item.price}
                       </span>
-                      <button className="text-sm px-4 py-2 rounded-full border border-purple-500 text-purple-500 hover:bg-gradient-to-r hover:from-purple-500 hover:to-indigo-500 hover:text-white transition-all">
+                      <button className="text-sm px-4 py-2 rounded-full border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-[#0F172A] transition">
                         View Details
                       </button>
                     </div>
@@ -149,7 +168,7 @@ export default function PropertyPage() {
           <div className="flex justify-center mt-12">
             <a
               href="/properties"
-              className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold shadow-lg hover:from-indigo-500 hover:to-purple-500 hover:scale-105 transition-transform"
+              className="px-8 py-3 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold shadow-lg hover:scale-105 transition-transform"
             >
               View All Properties
             </a>
