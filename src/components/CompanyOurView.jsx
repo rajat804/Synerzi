@@ -1,14 +1,14 @@
 const CompanyOverview = () => {
   return (
-    <section className="bg-white py-12 px-4">
+    <section className="bg-[#0F172A] py-12 px-4">
       <div className="max-w-7xl mx-auto">
         
         {/* Heading */}
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-black">
+          <h2 className="text-3xl font-bold text-[#F59E0B]">
             Company Overview
           </h2>
-          <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
+          <p className="mt-3 text-[#E5E7EB] max-w-2xl mx-auto">
             Learn more about our company, vision, and the services we provide
             through the videos below.
           </p>
@@ -18,7 +18,7 @@ const CompanyOverview = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
           {/* Video 1 */}
-          <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg">
+          <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg shadow-[#10B981]/30">
             <iframe
               className="absolute top-0 left-0 w-full h-full"
               src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1"
@@ -29,7 +29,7 @@ const CompanyOverview = () => {
           </div>
 
           {/* Video 2 */}
-          <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg">
+          <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg shadow-[#10B981]/30">
             <iframe
               className="absolute top-0 left-0 w-full h-full"
               src="https://www.youtube.com/embed/YOUR_VIDEO_ID_2"
