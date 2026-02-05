@@ -52,7 +52,7 @@ const SynerziSection = () => {
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-black/50"></div>
 
       <div className="relative max-w-7xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-6">
         {items.map((item) => (
@@ -61,26 +61,26 @@ const SynerziSection = () => {
             className="text-center group flex flex-col items-center"
           >
             {/* Circle */}
-            <div className="relative w-20 h-20 sm:w-22 sm:h-22 lg:w-24 lg:h-24 mb-3 rounded-full overflow-hidden shadow-lg">
+            <div className="relative w-20 h-20 sm:w-22 sm:h-22 lg:w-24 lg:h-24 mb-3 rounded-full overflow-hidden shadow-lg group-hover:shadow-2xl transition-transform duration-500 transform group-hover:scale-105">
               <img
                 src={item.img}
                 alt={item.letter}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                <span className="text-3xl lg:text-4xl font-bold text-white">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#F59E0B]/80 to-[#10B981]/80 flex items-center justify-center">
+                <span className="text-3xl lg:text-4xl font-bold text-white drop-shadow-lg">
                   {item.letter}
                 </span>
               </div>
             </div>
 
             {/* Title */}
-            <h3 className="text-sm sm:text-base font-semibold text-white group-hover:text-[#06B6D4] transition">
+            <h3 className="text-sm sm:text-base font-semibold text-white group-hover:text-[#F59E0B] transition">
               {item.title}
             </h3>
 
-            {/* Description (hidden on very small screens) */}
-            <p className="hidden sm:block text-xs text-gray-200 mt-1 leading-snug">
+            {/* Description */}
+            <p className="hidden sm:block text-xs text-[#E5E7EB] mt-1 leading-snug">
               {item.description}
             </p>
           </div>
