@@ -5,11 +5,15 @@ import srmLogo from "../assets/images/srm-logo.png";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ emailOrPhone: "", password: "" });
+  const [formData, setFormData] = useState({
+    emailOrPhone: "",
+    password: "",
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +21,7 @@ const Login = () => {
     setError("");
 
     try {
+      // ✅ Backend URL fixed to localhost:4000
       const response = await fetch("https://vercel-synerzi-sbckend.vercel.app/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,12 +35,13 @@ const Login = () => {
         return;
       }
 
+      // ✅ Save token & user in localStorage
       localStorage.setItem("token", result.token);
       localStorage.setItem("user", JSON.stringify(result.user));
 
-      navigate("/dashboard");
+      navigate("/dashboard"); // Redirect after login
     } catch (err) {
-      console.error("Login error:", err);
+      console.error("Login error:", err); // For debugging
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -48,6 +54,7 @@ const Login = () => {
         <img src={srmLogo} alt="Logo" className="h-12 mb-4" />
         <h2 className="text-2xl font-bold mb-2">Login</h2>
         {error && <p className="text-red-500 mb-2">{error}</p>}
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -55,7 +62,7 @@ const Login = () => {
             placeholder="Email or Phone"
             value={formData.emailOrPhone}
             onChange={handleChange}
-            className="w-full border px-4 py-2 rounded focus:ring-2 focus:ring-purple-500 focus:outline-none transition"
+            className="w-full border px-4 py-2 rounded"
             required
           />
           <input
@@ -64,13 +71,13 @@ const Login = () => {
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full border px-4 py-2 rounded focus:ring-2 focus:ring-purple-500 focus:outline-none transition"
+            className="w-full border px-4 py-2 rounded"
             required
           />
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded hover:from-indigo-500 hover:to-purple-500 hover:scale-105 transition-all duration-300"
+            className="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
           >
             {loading ? "Logging in..." : "Login"}
           </button>
@@ -78,7 +85,7 @@ const Login = () => {
 
         <p className="mt-4 text-sm text-center">
           Don’t have an account?{" "}
-          <Link to="/register" className="text-purple-500 hover:underline hover:text-indigo-500 transition-colors">
+          <Link to="/register" className="text-blue-500 hover:underline">
             Register
           </Link>
         </p>
