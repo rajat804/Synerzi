@@ -9,13 +9,17 @@ const logos = [
 export default function CompanyLogos() {
   return (
     <div className="mt-14 overflow-hidden bg-white py-6">
+      <h2 className="text-center text-2xl font-bold text-gray-900 mb-6">
+        Trusted by SRM
+      </h2>
+
       <div className="flex gap-12 animate-scroll px-6">
         {logos.concat(logos).map((logo, i) => (
           <img
             key={i}
             src={logo}
             alt="Company Logo"
-            className="h-10 w-auto object-contain grayscale hover:grayscale-0 transition"
+            className="h-10 w-auto object-contain filter grayscale hover:filter-none transition-all duration-300"
           />
         ))}
       </div>
