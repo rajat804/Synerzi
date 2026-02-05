@@ -3,18 +3,25 @@ import { Link, useNavigate } from "react-router-dom";
 import srmLogo from "../assets/images/srm-logo.png";
 
 const Register = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // To redirect after successful register
+
+  // Form state
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     phone: "",
     password: "",
   });
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  // Handle input change
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -23,7 +30,9 @@ const Register = () => {
     try {
       const response = await fetch("https://vercel-synerzi-sbckend.vercel.app/api/auth/register", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formData),
       });
 
@@ -33,7 +42,7 @@ const Register = () => {
         setError(result.message || "Registration failed");
       } else {
         alert("Registration successful!");
-        navigate("/login");
+        navigate("/login"); // Redirect to login page
       }
     } catch (err) {
       setError("Something went wrong. Please try again.");
@@ -65,7 +74,11 @@ const Register = () => {
         <div className="p-8 sm:p-10 flex flex-col justify-center">
           {/* LOGO */}
           <div className="mb-6 flex items-center">
-            <img src={srmLogo} alt="SRM Logo" className="h-10 sm:h-12 w-auto object-contain" />
+            <img
+              src={srmLogo}
+              alt="SRM Logo"
+              className="h-10 sm:h-12 w-auto object-contain"
+            />
           </div>
 
           {/* TITLE */}
@@ -82,9 +95,7 @@ const Register = () => {
               value={formData.fullName}
               onChange={handleChange}
               placeholder="Full Name"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300
-                focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30 outline-none
-                hover:border-purple-400 transition"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#06B6D4] focus:ring-2 focus:ring-[#06B6D4]/30 outline-none"
               required
             />
 
@@ -94,9 +105,7 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email Address"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300
-                focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30 outline-none
-                hover:border-purple-400 transition"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#06B6D4] focus:ring-2 focus:ring-[#06B6D4]/30 outline-none"
               required
             />
 
@@ -106,9 +115,7 @@ const Register = () => {
               value={formData.phone}
               onChange={handleChange}
               placeholder="Phone Number"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300
-                focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30 outline-none
-                hover:border-purple-400 transition"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#06B6D4] focus:ring-2 focus:ring-[#06B6D4]/30 outline-none"
               required
             />
 
@@ -118,17 +125,13 @@ const Register = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Password"
-              className="w-full px-4 py-3 rounded-lg border border-gray-300
-                focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30 outline-none
-                hover:border-purple-400 transition"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#06B6D4] focus:ring-2 focus:ring-[#06B6D4]/30 outline-none"
               required
             />
 
             <button
               type="submit"
-              className="w-full py-3 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500
-                text-white font-semibold hover:scale-105 hover:from-indigo-500 hover:to-purple-500
-                transition-transform duration-300"
+              className="w-full py-3 rounded-lg bg-[#06B6D4] text-[#0F172A] font-semibold hover:bg-[#0EA5E9] transition"
               disabled={loading}
             >
               {loading ? "Registering..." : "Register"}
@@ -140,7 +143,7 @@ const Register = () => {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-purple-500 font-semibold hover:text-indigo-500 hover:underline transition"
+              className="text-[#06B6D4] font-semibold hover:underline"
             >
               Login
             </Link>
