@@ -22,15 +22,20 @@ export default function AdminDashboard() {
   const [properties, setProperties] = useState([]);
   const [showListBtn, setShowListBtn] = useState(false);
 
+  /* ================= AUTH CHECK ================= */
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) return (window.location.href = "/admin-login");
+    if (!token) {
+      window.location.href = "/admin-login";
+      return;
+    }
 
     try {
       const decoded = jwtDecode(token);
       if (decoded.role !== "admin") {
         localStorage.removeItem("token");
-        return (window.location.href = "/admin-login");
+        window.location.href = "/admin-login";
+        return;
       }
       setAdmin(decoded);
     } catch {
@@ -44,6 +49,7 @@ export default function AdminDashboard() {
     window.location.href = "/admin-login";
   };
 
+  /* ================= FORM HANDLERS ================= */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -58,21 +64,44 @@ export default function AdminDashboard() {
     }));
   };
 
+  const fetchProperties = async () => {
+    try {
+      const res = await fetch("https://synerzi-backend.vercel.app/api/properties");
+      const data = await res.json();
+      setProperties(data);
+      setShowListBtn(data.length > 0);
+    } catch (err) {
+      console.error("Failed to fetch properties");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!images.length) return alert("Please select at least one image");
+
+    if (images.length === 0) {
+      alert("Please select at least one image");
+      return;
+    }
 
     const data = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      if (key === "amenities") data.append(key, JSON.stringify(value));
-      else data.append(key, value);
-    });
+    data.append("propertyType", formData.propertyType);
+    data.append("bhk", formData.bhk);
+    data.append("bathrooms", formData.bathrooms);
+    data.append("balconies", formData.balconies);
+    data.append("floorNumber", formData.floorNo);
+    data.append("totalFloors", formData.totalFloors);
+    data.append("facing", formData.facing);
+    data.append("parking", formData.parking);
+    data.append("amenities", JSON.stringify(formData.amenities));
     images.forEach((img) => data.append("images", img));
 
     const token = localStorage.getItem("token");
+
     const res = await fetch("https://synerzi-backend.vercel.app/api/properties/add", {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       body: data,
     });
 
@@ -81,11 +110,17 @@ export default function AdminDashboard() {
     try {
       result = JSON.parse(text);
     } catch {
-      return alert("Backend error — check server logs");
+      alert("Backend error — check server logs");
+      return;
     }
-    if (!res.ok) return alert(result.message || "Failed to add property");
+
+    if (!res.ok) {
+      alert(result.message || "Failed to add property");
+      return;
+    }
 
     alert("Property added successfully 🚀");
+    // 🔥 RESET FORM
     setFormData(initialFormState);
     setImages([]);
     document.getElementById("imagesInput").value = "";
@@ -96,27 +131,25 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen flex bg-gray-100">
       {/* SIDEBAR */}
-      <aside className="w-64 bg-gradient-to-b from-slate-900 to-slate-800 text-white hidden md:block">
-        <div className="p-6 text-xl font-bold border-b border-slate-700">
-          Admin Panel
-        </div>
+      <aside className="w-64 bg-slate-900 text-white hidden md:block">
+        <div className="p-6 text-xl font-bold border-b border-slate-700">Admin Panel</div>
         <nav className="p-4 space-y-2">
-          {[
-            { id: "dashboard", label: "Dashboard" },
-            { id: "add-listing", label: "Add Listing" },
-          ].map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setActivePage(item.id)}
-              className={`w-full text-left px-4 py-2 rounded transition-all duration-300 font-medium ${
-                activePage === item.id
-                  ? "bg-cyan-500 text-white shadow-md"
-                  : "hover:bg-cyan-600 hover:shadow-sm"
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
+          <button
+            onClick={() => setActivePage("dashboard")}
+            className={`w-full text-left px-4 py-2 rounded ${
+              activePage === "dashboard" ? "bg-slate-700" : "hover:bg-slate-800"
+            }`}
+          >
+            Dashboard
+          </button>
+          <button
+            onClick={() => setActivePage("add-listing")}
+            className={`w-full text-left px-4 py-2 rounded ${
+              activePage === "add-listing" ? "bg-slate-700" : "hover:bg-slate-800"
+            }`}
+          >
+            Add Listing
+          </button>
         </nav>
       </aside>
 
@@ -131,7 +164,7 @@ export default function AdminDashboard() {
             <span className="font-medium text-gray-700">{admin.fullName}</span>
             <button
               onClick={handleLogout}
-              className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-500 text-white rounded shadow-md hover:shadow-lg transition-all"
+              className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
             >
               Logout
             </button>
@@ -141,13 +174,14 @@ export default function AdminDashboard() {
         {/* CONTENT */}
         <main className="p-6">
           {activePage === "dashboard" && (
-            <div className="bg-white p-6 rounded shadow hover:shadow-2xl transition-all duration-300">
-              <h2 className="text-2xl font-bold mb-4">Welcome, {admin.fullName} 👋</h2>
+            <div className="bg-white p-6 rounded shadow">
+              <h2 className="text-2xl font-bold mb-4"> Welcome, {admin.fullName} 👋 </h2>
               <p>Email: {admin.email}</p>
               <p>Role: {admin.role}</p>
               <Link
                 to={"/admin-listings"}
-                className="mt-4 inline-block bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-500 text-white py-3 px-6 rounded shadow-md hover:shadow-lg transition-all"
+                className="mt-4 bg-green-600 text-white py-3 rounded"
+                style={{ display: "inline-block" }}
               >
                 Show Listings
               </Link>
@@ -155,9 +189,12 @@ export default function AdminDashboard() {
           )}
 
           {activePage === "add-listing" && (
-            <div className="bg-white p-6 rounded shadow max-w-3xl hover:shadow-2xl transition-all duration-300">
+            <div className="bg-white p-6 rounded shadow max-w-3xl">
               <h2 className="text-2xl font-bold mb-6">Add Property Listing</h2>
-              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <form
+                onSubmit={handleSubmit}
+                className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              >
                 {/* IMAGES */}
                 <div className="md:col-span-2">
                   <label className="font-medium">Property Images</label>
@@ -167,7 +204,7 @@ export default function AdminDashboard() {
                     multiple
                     accept="image/*"
                     onChange={(e) => setImages(Array.from(e.target.files))}
-                    className="w-full border p-2 rounded hover:shadow-md transition"
+                    className="w-full border p-2 rounded"
                   />
                 </div>
 
@@ -176,7 +213,7 @@ export default function AdminDashboard() {
                   name="propertyType"
                   value={formData.propertyType}
                   onChange={handleChange}
-                  className="w-full border p-2 rounded hover:shadow-md transition"
+                  className="w-full border p-2 rounded"
                   required
                 >
                   <option value="">Property Type</option>
@@ -186,11 +223,12 @@ export default function AdminDashboard() {
                   <option>Commercial</option>
                 </select>
 
+                {/* BHK */}
                 <select
                   name="bhk"
                   value={formData.bhk}
                   onChange={handleChange}
-                  className="w-full border p-2 rounded hover:shadow-md transition"
+                  className="w-full border p-2 rounded"
                   required
                 >
                   <option value="">BHK</option>
@@ -207,7 +245,7 @@ export default function AdminDashboard() {
                   placeholder="Bathrooms"
                   value={formData.bathrooms}
                   onChange={handleChange}
-                  className="border p-2 rounded hover:shadow-md transition"
+                  className="border p-2 rounded"
                 />
                 <input
                   type="number"
@@ -215,7 +253,7 @@ export default function AdminDashboard() {
                   placeholder="Balconies"
                   value={formData.balconies}
                   onChange={handleChange}
-                  className="border p-2 rounded hover:shadow-md transition"
+                  className="border p-2 rounded"
                 />
                 <input
                   type="number"
@@ -223,7 +261,7 @@ export default function AdminDashboard() {
                   placeholder="Floor Number"
                   value={formData.floorNo}
                   onChange={handleChange}
-                  className="border p-2 rounded hover:shadow-md transition"
+                  className="border p-2 rounded"
                 />
                 <input
                   type="number"
@@ -231,14 +269,14 @@ export default function AdminDashboard() {
                   placeholder="Total Floors"
                   value={formData.totalFloors}
                   onChange={handleChange}
-                  className="border p-2 rounded hover:shadow-md transition"
+                  className="border p-2 rounded"
                 />
 
                 <select
                   name="facing"
                   value={formData.facing}
                   onChange={handleChange}
-                  className="border p-2 rounded hover:shadow-md transition"
+                  className="border p-2 rounded"
                 >
                   <option value="">Facing</option>
                   <option>East</option>
@@ -251,7 +289,7 @@ export default function AdminDashboard() {
                   name="parking"
                   value={formData.parking}
                   onChange={handleChange}
-                  className="border p-2 rounded hover:shadow-md transition"
+                  className="border p-2 rounded"
                 >
                   <option value="">Parking</option>
                   <option>Available</option>
@@ -272,7 +310,7 @@ export default function AdminDashboard() {
                       "Club House",
                       "CCTV",
                     ].map((a) => (
-                      <label key={a} className="flex gap-2 items-center hover:text-cyan-500 transition">
+                      <label key={a} className="flex gap-2">
                         <input
                           type="checkbox"
                           checked={formData.amenities.includes(a)}
@@ -286,7 +324,7 @@ export default function AdminDashboard() {
 
                 <button
                   type="submit"
-                  className="md:col-span-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-500 text-white py-3 rounded shadow-md hover:shadow-lg transition-all"
+                  className="md:col-span-2 bg-blue-600 text-white py-3 rounded hover:bg-blue-700"
                 >
                   Publish Property
                 </button>
