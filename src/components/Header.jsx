@@ -18,7 +18,7 @@ const Header = () => {
     <>
       <TopBar />
 
-      <nav className="w-full bg-[#1F2937]/95 backdrop-blur-md border-b border-[#374151] shadow-lg sticky top-0 z-50">
+      <nav className="w-full bg-[#0F172A]/95 backdrop-blur-md border-b border-[#1E293B] shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center h-16 relative">
             {/* LEFT: Logo */}
@@ -34,15 +34,18 @@ const Header = () => {
                   <Link
                     key={link.name}
                     to={link.path}
-                    className={`relative text-sm lg:text-base font-medium transition
-                ${isActive ? "text-[#F59E0B]" : "text-[#E5E7EB] hover:text-[#F59E0B]"}`}
+                    className={`relative text-sm lg:text-base font-medium transition ${
+                      isActive
+                        ? "text-[#06B6D4]"
+                        : "text-gray-300 hover:text-[#06B6D4]"
+                    }`}
                   >
                     {link.name}
-
                     {/* Active underline */}
                     <span
-                      className={`absolute -bottom-2 left-0 h-0.5 bg-[#F59E0B] transition-all duration-300
-                ${isActive ? "w-full" : "w-0 group-hover:w-full"}`}
+                      className={`absolute -bottom-2 left-0 h-0.5 bg-[#06B6D4] transition-all duration-300 ${
+                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
                     />
                   </Link>
                 );
@@ -52,8 +55,8 @@ const Header = () => {
             {/* RIGHT: Secondary Actions */}
             <div className="hidden md:flex items-center gap-4 ml-auto">
               {/* Phone */}
-              <div className="flex items-center gap-2 text-sm text-[#E5E7EB] hover:text-[#10B981] transition cursor-pointer">
-                <i className="fas fa-phone-alt text-[#10B981]" />
+              <div className="flex items-center gap-2 text-sm text-gray-300 hover:text-[#06B6D4] transition cursor-pointer">
+                <i className="fas fa-phone-alt text-[#06B6D4]" />
                 <span className="hidden lg:block">+91 98967 07022</span>
               </div>
 
@@ -61,10 +64,7 @@ const Header = () => {
               <Link
                 to="/login"
                 title="Login"
-                className="flex items-center justify-center w-9 h-9 rounded-full
-            bg-[#374151] text-[#E5E7EB]
-            hover:bg-[#F59E0B] hover:text-[#1F2937]
-            transition"
+                className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1E293B] text-gray-300 hover:bg-[#06B6D4] hover:text-[#0F172A] transition"
               >
                 <i className="fas fa-user text-sm" />
               </Link>
@@ -72,8 +72,7 @@ const Header = () => {
               {/* CTA */}
               <Link
                 to="/contact"
-                className="px-4 py-2 rounded-full bg-gradient-to-r from-[#F59E0B] to-[#10B981]
-            text-[#1F2937] text-sm font-semibold shadow-lg hover:scale-105 transition-transform"
+                className="px-4 py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] text-sm font-semibold shadow-lg hover:scale-105 transition-transform"
               >
                 Add Listing
               </Link>
@@ -83,7 +82,9 @@ const Header = () => {
             <div className="md:hidden ml-auto">
               <button onClick={() => setIsOpen(!isOpen)}>
                 <i
-                  className={`fas ${isOpen ? "fa-times" : "fa-bars"} text-2xl text-[#E5E7EB]`}
+                  className={`fas ${
+                    isOpen ? "fa-times" : "fa-bars"
+                  } text-2xl text-gray-300`}
                 />
               </button>
             </div>
@@ -92,7 +93,7 @@ const Header = () => {
 
         {/* MOBILE MENU */}
         {isOpen && (
-          <div className="md:hidden bg-[#1F2937]/95 backdrop-blur-md border-t border-[#374151] px-4 py-5 space-y-3">
+          <div className="md:hidden bg-[#0F172A]/95 backdrop-blur-md border-t border-[#1E293B] px-4 py-5 space-y-3">
             {links.map((link) => {
               const isActive = location.pathname === link.path;
               return (
@@ -100,12 +101,11 @@ const Header = () => {
                   key={link.name}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-2 rounded-md transition
-              ${
-                isActive
-                  ? "bg-[#F59E0B]/20 text-[#F59E0B]"
-                  : "text-[#E5E7EB] hover:bg-[#F59E0B]/10 hover:text-[#F59E0B]"
-              }`}
+                  className={`block px-3 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-[#06B6D4]/20 text-[#06B6D4]"
+                      : "text-gray-300 hover:bg-[#06B6D4]/10 hover:text-[#06B6D4]"
+                  }`}
                 >
                   {link.name}
                 </Link>
@@ -113,8 +113,8 @@ const Header = () => {
             })}
 
             {/* Mobile Phone */}
-            <div className="flex items-center gap-2 text-[#E5E7EB] px-3 py-2">
-              <i className="fas fa-phone-alt text-[#10B981]" />
+            <div className="flex items-center gap-2 text-gray-300 px-3 py-2">
+              <i className="fas fa-phone-alt text-[#06B6D4]" />
               <span>+91 98967 07022</span>
             </div>
 
@@ -123,8 +123,7 @@ const Header = () => {
               <Link
                 to="/login"
                 onClick={() => setIsOpen(false)}
-                className="w-10 h-10 flex items-center justify-center rounded-full
-            bg-[#374151] text-[#E5E7EB] hover:bg-[#F59E0B] hover:text-[#1F2937]"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1E293B] text-gray-300 hover:bg-[#06B6D4] hover:text-[#0F172A]"
               >
                 <i className="fas fa-user" />
               </Link>
@@ -132,9 +131,7 @@ const Header = () => {
               <Link
                 to="/contact"
                 onClick={() => setIsOpen(false)}
-                className="flex-1 text-center px-4 py-2 rounded-full
-            bg-gradient-to-r from-[#F59E0B] to-[#10B981]
-            text-[#1F2937] font-semibold shadow-lg"
+                className="flex-1 text-center px-4 py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold shadow-lg"
               >
                 Add Listing
               </Link>
@@ -142,6 +139,7 @@ const Header = () => {
           </div>
         )}
       </nav>
+
 
       {/* <nav className="w-full bg-[#0F172A]/95 backdrop-blur-md border-b border-[#1E293B] shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
