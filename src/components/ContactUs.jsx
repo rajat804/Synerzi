@@ -16,52 +16,51 @@ export default function ContactUs() {
 
           {/* LEFT CONTENT */}
           <div className="text-white">
-            <h2 className="text-4xl font-bold mb-4 text-[#F59E0B]">Contact Us</h2>
-            <p className="text-[#E5E7EB] leading-relaxed">
-              Looking for the best commercial or residential property?
-              Get in touch with our expert team today.
+            <h2 className="text-4xl font-bold mb-4 text-[#06B6D4]">Contact SRM</h2>
+            <p className="text-gray-200 leading-relaxed">
+              Looking for the best commercial or residential property? Get in touch with our expert team today.
             </p>
           </div>
 
           {/* FORM */}
-          <form className="bg-[#1F2937] rounded-xl shadow-xl p-8 grid grid-cols-1 md:grid-cols-2 gap-5">
+          <form className="bg-white rounded-xl shadow-xl p-8 grid grid-cols-1 md:grid-cols-2 gap-5">
             
             <input
               type="text"
               placeholder="Full Name"
-              className="border border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] bg-[#111827] text-[#E5E7EB]"
+              className="border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#06B6D4] focus:border-[#06B6D4] transition"
               required
             />
 
             <input
               type="tel"
               placeholder="Mobile Number"
-              className="border border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] bg-[#111827] text-[#E5E7EB]"
+              className="border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#06B6D4] focus:border-[#06B6D4] transition"
               required
             />
 
             <input
               type="text"
               placeholder="City"
-              className="border border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] bg-[#111827] text-[#E5E7EB]"
+              className="border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#06B6D4] focus:border-[#06B6D4] transition"
             />
 
             <input
               type="email"
               placeholder="Email Address"
-              className="border border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] bg-[#111827] text-[#E5E7EB]"
+              className="border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#06B6D4] focus:border-[#06B6D4] transition"
               required
             />
 
             <textarea
               placeholder="Your Message"
               rows="4"
-              className="md:col-span-2 border border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] bg-[#111827] text-[#E5E7EB]"
+              className="md:col-span-2 border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#06B6D4] focus:border-[#06B6D4] transition"
             ></textarea>
 
             <button
               type="submit"
-              className="md:col-span-2 bg-gradient-to-r from-[#F59E0B] to-[#10B981] text-black py-3 rounded-md hover:opacity-90 transition font-semibold"
+              className="md:col-span-2 bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white py-3 rounded-md font-semibold shadow hover:scale-[1.02] transition-transform"
             >
               Send Message
             </button>
