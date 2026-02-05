@@ -8,7 +8,7 @@ export default function ContactUs() {
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-black/70"></div>
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-4">
@@ -16,52 +16,52 @@ export default function ContactUs() {
 
           {/* LEFT CONTENT */}
           <div className="text-white">
-            <h2 className="text-4xl font-bold mb-4">Contact Us</h2>
-            <p className="text-gray-200 leading-relaxed">
+            <h2 className="text-4xl font-bold mb-4 text-[#F59E0B]">Contact Us</h2>
+            <p className="text-[#E5E7EB] leading-relaxed">
               Looking for the best commercial or residential property?
               Get in touch with our expert team today.
             </p>
           </div>
 
           {/* FORM */}
-          <form className="bg-white rounded-xl shadow-xl p-8 grid grid-cols-1 md:grid-cols-2 gap-5">
+          <form className="bg-[#1F2937] rounded-xl shadow-xl p-8 grid grid-cols-1 md:grid-cols-2 gap-5">
             
             <input
               type="text"
               placeholder="Full Name"
-              className="border rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
+              className="border border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] bg-[#111827] text-[#E5E7EB]"
               required
             />
 
             <input
               type="tel"
               placeholder="Mobile Number"
-              className="border rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
+              className="border border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] bg-[#111827] text-[#E5E7EB]"
               required
             />
 
             <input
               type="text"
               placeholder="City"
-              className="border rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
+              className="border border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] bg-[#111827] text-[#E5E7EB]"
             />
 
             <input
               type="email"
               placeholder="Email Address"
-              className="border rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
+              className="border border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] bg-[#111827] text-[#E5E7EB]"
               required
             />
 
             <textarea
               placeholder="Your Message"
               rows="4"
-              className="md:col-span-2 border rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black"
+              className="md:col-span-2 border border-gray-600 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] bg-[#111827] text-[#E5E7EB]"
             ></textarea>
 
             <button
               type="submit"
-              className="md:col-span-2 bg-black text-white py-3 rounded-md hover:bg-gray-800 transition font-semibold"
+              className="md:col-span-2 bg-gradient-to-r from-[#F59E0B] to-[#10B981] text-black py-3 rounded-md hover:opacity-90 transition font-semibold"
             >
               Send Message
             </button>
