@@ -9,7 +9,7 @@ export default function PropertyPage() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const res = await fetch("https://synerzi-backend.vercel.app/api/properties");
+        const res = await fetch("http://localhost:4000/api/properties");
         if (!res.ok) throw new Error("Failed to fetch properties");
         const data = await res.json();
         setProperties(data);
@@ -51,13 +51,13 @@ export default function PropertyPage() {
       <section className="bg-white py-8 shadow-sm">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
+            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-purple-500 outline-none">
               <option>Type</option>
               <option>Buy</option>
               <option>Rent</option>
             </select>
 
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
+            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-purple-500 outline-none">
               <option>Category</option>
               <option>Apartment</option>
               <option>Villa</option>
@@ -66,7 +66,7 @@ export default function PropertyPage() {
               <option>Office Space</option>
             </select>
 
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
+            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-purple-500 outline-none">
               <option>State</option>
               <option>Maharashtra</option>
               <option>Delhi</option>
@@ -74,7 +74,7 @@ export default function PropertyPage() {
               <option>Gujarat</option>
             </select>
 
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
+            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-purple-500 outline-none">
               <option>City</option>
               <option>Mumbai</option>
               <option>Pune</option>
@@ -85,10 +85,10 @@ export default function PropertyPage() {
             <input
               type="text"
               placeholder="Area (sq ft)"
-              className="border rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#06B6D4] outline-none"
+              className="border rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 outline-none"
             />
 
-            <button className="bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] rounded-lg font-semibold hover:scale-105 transition">
+            <button className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-lg font-semibold hover:from-indigo-500 hover:to-purple-500 hover:scale-105 transition-all">
               Search
             </button>
           </div>
@@ -111,7 +111,7 @@ export default function PropertyPage() {
                   <div className="relative h-56 overflow-hidden">
                     {item.images && item.images.length > 0 ? (
                       <img
-                        src={`https://synerzi-backend.vercel.app/${item.images[0]}`}
+                        src={`http://localhost:4000/${item.images[0]}`}
                         alt={item.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
@@ -121,7 +121,7 @@ export default function PropertyPage() {
                       </div>
                     )}
 
-                    <span className="absolute top-4 left-4 bg-[#06B6D4] text-[#0F172A] text-xs px-3 py-1 rounded-full font-semibold shadow">
+                    <span className="absolute top-4 left-4 bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-xs px-3 py-1 rounded-full font-semibold shadow">
                       {item.type}
                     </span>
                   </div>
@@ -129,16 +129,13 @@ export default function PropertyPage() {
                   {/* Content */}
                   <div className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
-                    {/* State & City */}
-                   <p className="text-gray-500 text-sm mt-1">{item.state}, {item.city}</p>
-                    {/* Description */}
+                    <p className="text-gray-500 text-sm mt-1">{item.state}, {item.city}</p>
                     <p className="text-gray-600 text-sm mt-3 line-clamp-2">{item.description}</p>
-                    {/* Price */}
                     <div className="flex justify-between items-center mt-5">
-                      <span className="text-[#06B6D4] font-bold flex items-center">
+                      <span className="text-gradient font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-500 flex items-center">
                         <span className="mr-1">₹</span> {item.price}
                       </span>
-                      <button className="text-sm px-4 py-2 rounded-full border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-[#0F172A] transition">
+                      <button className="text-sm px-4 py-2 rounded-full border border-purple-500 text-purple-500 hover:bg-gradient-to-r hover:from-purple-500 hover:to-indigo-500 hover:text-white transition-all">
                         View Details
                       </button>
                     </div>
@@ -152,7 +149,7 @@ export default function PropertyPage() {
           <div className="flex justify-center mt-12">
             <a
               href="/properties"
-              className="px-8 py-3 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold shadow-lg hover:scale-105 transition-transform"
+              className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold shadow-lg hover:from-indigo-500 hover:to-purple-500 hover:scale-105 transition-transform"
             >
               View All Properties
             </a>

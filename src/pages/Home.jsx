@@ -7,7 +7,6 @@ import CompanyOverview from "../components/CompanyOurView";
 import Testimonials from "../components/Testimonials";
 import ContactUs from "../components/ContactUs";
 
-
 const Home = () => {
   const tabs = ["Invest", "Lease", "Sales"];
   const [activeTab, setActiveTab] = useState("Invest");
@@ -18,7 +17,6 @@ const Home = () => {
   };
   const [location, setLocation] = useState("");
   const [area, setArea] = useState("");
-
   const areas = locationAreaMap[location] || [];
 
   return (
@@ -34,7 +32,7 @@ const Home = () => {
           }}
         >
           {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/80 via-indigo-900/60 to-indigo-800/30"></div>
 
           {/* Content */}
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
@@ -44,7 +42,7 @@ const Home = () => {
             <p className="text-base sm:text-lg md:text-xl max-w-2xl text-gray-200 mb-6">
               Invest, Lease & Buy premium properties in top locations
             </p>
-            <button className="px-7 py-3 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold hover:scale-105 transition">
+            <button className="px-7 py-3 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold hover:scale-105 hover:from-indigo-500 hover:to-purple-500 transition-all">
               Explore Properties
             </button>
           </div>
@@ -61,8 +59,8 @@ const Home = () => {
                 onClick={() => setActiveTab(tab)}
                 className={`whitespace-nowrap px-5 py-2 rounded-full text-sm sm:text-base font-semibold transition-all ${
                   activeTab === tab
-                    ? "bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white shadow"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    ? "bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-lg"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-800"
                 }`}
               >
                 {tab}
@@ -81,7 +79,7 @@ const Home = () => {
                   setLocation(e.target.value);
                   setArea(""); // reset area when location changes
                 }}
-                className="w-full h-[44px] rounded-lg border px-3"
+                className="w-full h-[44px] rounded-lg border border-gray-300 px-3 focus:ring-2 focus:ring-purple-500 focus:outline-none transition"
               >
                 <option value="">Select Location</option>
                 {Object.keys(locationAreaMap).map((loc) => (
@@ -99,7 +97,7 @@ const Home = () => {
                 value={area}
                 onChange={(e) => setArea(e.target.value)}
                 disabled={!location}
-                className="w-full h-[44px] rounded-lg border px-3 disabled:bg-gray-100"
+                className="w-full h-[44px] rounded-lg border border-gray-300 px-3 focus:ring-2 focus:ring-purple-500 focus:outline-none disabled:bg-gray-100 transition"
               >
                 <option value="">
                   {location ? "Select Area" : "Select Location First"}
@@ -114,10 +112,10 @@ const Home = () => {
 
             {/* Type */}
             <div className="w-full lg:col-span-3">
-              <label className=" block text-xs sm:text-sm font-medium text-gray-600 mb-1">
+              <label className="block text-xs sm:text-sm font-medium text-gray-600 mb-1">
                 Type
               </label>
-              <select className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-[#06B6D4] focus:outline-none">
+              <select className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:outline-none transition">
                 <option>Select Type</option>
                 <option>Invest</option>
                 <option>Lease</option>
@@ -129,23 +127,10 @@ const Home = () => {
             <input type="hidden" value={activeTab} />
 
             {/* Button */}
-            <div className=" lg:col-span-2 flex items-end">
+            <div className="lg:col-span-2 flex items-end">
               <button
                 type="submit"
-                className="
-      w-full
-      h-[44px]
-      mt-1
-      rounded-lg
-      bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9]
-      text-white
-      text-sm sm:text-base
-      font-semibold
-      shadow-md
-      hover:scale-[1.03]
-      transition-transform duration-300
-      flex items-center justify-center
-    "
+                className="w-full h-[44px] mt-1 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-sm sm:text-base font-semibold shadow-md hover:scale-[1.03] hover:from-indigo-500 hover:to-purple-500 transition-transform duration-300 flex items-center justify-center"
               >
                 Search {activeTab}
               </button>
@@ -155,19 +140,15 @@ const Home = () => {
       </div>
 
       {/* Property by area */}
-      <PropertyArea/>
-      {/* seyner Section */}
-      <SynerziSection/>
-      {/* our company overview  */}
-
-      <CompanyOverview/>
-
+      <PropertyArea />
+      {/* Synerzi Section */}
+      <SynerziSection />
+      {/* Company Overview */}
+      <CompanyOverview />
       {/* Testimonials */}
-      <Testimonials/>
-      {/* contact us */}
-      <ContactUs/>
-
-      {/* footer */}
+      <Testimonials />
+      {/* Contact Us */}
+      <ContactUs />
     </>
   );
 };

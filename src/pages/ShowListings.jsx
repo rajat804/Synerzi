@@ -45,7 +45,7 @@ export default function ShowListings() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(`https://synerzi-backend.vercel.app/api/properties/${id}`, {
+      const res = await fetch(`httpp://localhost:4000/api/properties/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -132,7 +132,7 @@ export default function ShowListings() {
                         p.images.map((img, idx) => (
                           <img
                             key={idx}
-                            src={`https://synerzi-backend.vercel.app/${img}`}
+                            src={`httpp://localhost:4000/${img}`}
                             alt="property"
                             className="w-12 h-12 rounded object-cover border"
                           />

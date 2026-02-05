@@ -19,7 +19,7 @@ const Contact = () => {
             'url("https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=1600")',
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-purple-900/60 to-indigo-900/50"></div>
 
         <div className="relative max-w-7xl mx-auto px-4 text-white">
           <h1 className="text-4xl md:text-6xl font-bold">
@@ -42,7 +42,7 @@ const Contact = () => {
       </div>
 
       {/* ===== CONTACT CONTENT ===== */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12">
 
           {/* LEFT INFO */}
@@ -59,7 +59,7 @@ const Contact = () => {
 
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <FaMapMarkerAlt className="text-[#06B6D4] text-xl mt-1" />
+                <FaMapMarkerAlt className="text-purple-600 text-xl mt-1" />
                 <p className="text-gray-700">
                   Synerzi Realty Pvt Ltd <br />
                   Sector 62, Noida, Uttar Pradesh
@@ -67,12 +67,12 @@ const Contact = () => {
               </div>
 
               <div className="flex items-center gap-4">
-                <FaPhoneAlt className="text-[#06B6D4]" />
+                <FaPhoneAlt className="text-purple-600" />
                 <span className="text-gray-700">+91 98765 43210</span>
               </div>
 
               <div className="flex items-center gap-4">
-                <FaEnvelope className="text-[#06B6D4]" />
+                <FaEnvelope className="text-purple-600" />
                 <span className="text-gray-700">info@synerzi.com</span>
               </div>
             </div>
@@ -87,7 +87,9 @@ const Contact = () => {
                   (Icon, i) => (
                     <div
                       key={i}
-                      className="w-11 h-11 rounded-full bg-white shadow-md flex items-center justify-center text-gray-600 hover:bg-[#06B6D4] hover:text-white transition-all cursor-pointer hover:-translate-y-1"
+                      className="w-11 h-11 rounded-full bg-gray-100 shadow-md flex items-center justify-center text-gray-600
+                                 hover:bg-gradient-to-r hover:from-purple-500 hover:to-indigo-500
+                                 hover:text-white transition-all duration-300 cursor-pointer hover:-translate-y-1"
                     >
                       <Icon />
                     </div>
@@ -99,9 +101,9 @@ const Contact = () => {
 
           {/* RIGHT FORM */}
           <div className="relative">
-            <div className="absolute inset-0 bg-[#06B6D4]/10 rounded-3xl blur-3xl"></div>
+            <div className="absolute inset-0 bg-purple-600/10 rounded-3xl blur-3xl"></div>
 
-            <div className="relative bg-white/90 backdrop-blur-lg p-8 rounded-3xl shadow-xl">
+            <div className="relative bg-white/95 backdrop-blur-lg p-8 rounded-3xl shadow-xl">
               <h3 className="text-2xl font-semibold text-gray-900 mb-6">
                 Send Us a Message
               </h3>
@@ -110,30 +112,30 @@ const Contact = () => {
                 <input
                   type="text"
                   placeholder="Your Name"
-                  className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-[#06B6D4] outline-none"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 outline-none transition"
                 />
 
                 <input
                   type="text"
                   placeholder="Your Phone"
-                  className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-[#06B6D4] outline-none"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 outline-none transition"
                 />
 
                 <input
                   type="email"
                   placeholder="Your Email"
-                  className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-[#06B6D4] outline-none"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 outline-none transition"
                 />
 
                 <textarea
                   rows="4"
                   placeholder="Your Message"
-                  className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-[#06B6D4] outline-none"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 outline-none transition"
                 ></textarea>
 
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-lg bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white font-semibold hover:scale-[1.02] transition-all shadow-lg"
+                  className="w-full py-3 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold hover:scale-[1.03] hover:from-indigo-500 hover:to-purple-500 transition-all shadow-lg"
                 >
                   Send Email
                 </button>
