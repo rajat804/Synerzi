@@ -238,16 +238,20 @@ export default function AddListing() {
               <p className="font-semibold mb-2">Amenities</p>
               <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
                 {["Lift", "Gym", "Pool", "Security", "Garden", "CCTV"].map(
-                  (a) => (
-                    <label key={a} className="flex gap-2">
+                  (amenity) => (
+                    <label
+                      key={amenity}
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
                       <input
                         type="checkbox"
-                        checked={formData.amenities.includes(a)}
-                        onChange={() => handleAmenityChange(a)}
+                        checked={formData.amenities?.includes(amenity) || false}
+                        onChange={() => handleAmenityChange(amenity)}
+                        className="w-4 h-4 accent-blue-600"
                       />
-                      {a}
+                      <span className="select-none">{amenity}</span>
                     </label>
-                  )
+                  ),
                 )}
               </div>
             </div>
