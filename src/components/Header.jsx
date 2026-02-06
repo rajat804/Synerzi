@@ -71,10 +71,10 @@ const Header = () => {
 
               {/* CTA */}
               <Link
-                to="/contact"
+                to="/admin-login"
                 className="px-4 py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] text-sm font-semibold shadow-lg hover:scale-105 transition-transform"
               >
-                Add Listing
+                Admin Login
               </Link>
             </div>
 
@@ -129,11 +129,11 @@ const Header = () => {
               </Link>
 
               <Link
-                to="/contact"
+                to="/admin-login"
                 onClick={() => setIsOpen(false)}
                 className="flex-1 text-center px-4 py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold shadow-lg"
               >
-                Add Listing
+                Admin Login
               </Link>
             </div>
           </div>
