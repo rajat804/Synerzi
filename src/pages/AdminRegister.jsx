@@ -12,19 +12,20 @@ export default function AdminRegister() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters");
+      return;
+    }
     const formData = { fullName, email, password };
-
+    const BASE_URL = "https://vercel-synerzi-sbckend.vercel.app/";
     try {
-      const response = await fetch(
-        "https://synerzi-backend.vercel.app/api/admin/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${BASE_URL}/api/admin/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const data = await response.json();
 
