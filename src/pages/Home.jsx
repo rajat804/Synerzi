@@ -45,9 +45,9 @@ const Home = () => {
             <p className="text-base sm:text-lg md:text-xl max-w-2xl text-gray-200 mb-6">
               Invest, Lease & Buy premium properties in top locations
             </p>
-            <button className="px-7 py-3 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold hover:scale-105 transition">
+            {/* <button className="px-7 py-3 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold hover:scale-105 transition">
               Explore Properties
-            </button>
+            </button> */}
           </div>
         </section>
       </div>
@@ -60,7 +60,7 @@ const Home = () => {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`whitespace-nowrap px-5 py-2 rounded-full text-sm sm:text-base font-semibold transition-all ${
+                className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-sm sm:text-base font-semibold transition-all flex-shrink-0 ${
                   activeTab === tab
                     ? "bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white shadow"
                     : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -72,15 +72,15 @@ const Home = () => {
           </div>
 
           {/* Form */}
-          <form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4">
+          <form className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-12 gap-4">
             {/* Location */}
-            <div className="lg:col-span-3">
+            <div className="col-span-1 lg:col-span-3">
               <label className="text-sm text-gray-500">Location</label>
               <select
                 value={location}
                 onChange={(e) => {
                   setLocation(e.target.value);
-                  setArea(""); // reset area when location changes
+                  setArea("");
                 }}
                 className="w-full h-[44px] rounded-lg border px-3"
               >
@@ -94,7 +94,7 @@ const Home = () => {
             </div>
 
             {/* Area */}
-            <div className="lg:col-span-3">
+            <div className="col-span-1 lg:col-span-3">
               <label className="text-sm text-gray-500">Area</label>
               <select
                 value={area}
@@ -113,24 +113,21 @@ const Home = () => {
               </select>
             </div>
 
-            {/* Type */}
-            <div className="w-full lg:col-span-3">
+            {/* Purpose */}
+            <div className="col-span-1 lg:col-span-3">
               <label className="block text-xs sm:text-sm font-medium text-gray-600 mb-1">
-                Type
+                Purpose
               </label>
               <select className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-[#06B6D4] focus:outline-none">
-                <option>Select Type</option>
+                <option>Select Purpose</option>
                 <option>Invest</option>
                 <option>Lease</option>
                 <option>Sales</option>
               </select>
             </div>
 
-            {/* Hidden Active Tab */}
-            <input type="hidden" value={activeTab} />
-
             {/* Button */}
-            <div className="lg:col-span-2 flex items-end">
+            <div className="col-span-1 lg:col-span-3 flex items-end">
               <button
                 type="submit"
                 className="w-full h-[44px] mt-1 rounded-lg bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white text-sm sm:text-base font-semibold shadow-md hover:scale-[1.03] transition-transform duration-300 flex items-center justify-center"
@@ -138,6 +135,9 @@ const Home = () => {
                 Search {activeTab}
               </button>
             </div>
+
+            {/* Hidden Active Tab */}
+            <input type="hidden" value={activeTab} />
           </form>
         </div>
       </div>
