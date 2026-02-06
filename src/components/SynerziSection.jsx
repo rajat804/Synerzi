@@ -1,4 +1,4 @@
-import WhyChooseUs from "./Whychooseus";
+import WhyChooseUs from "./WhyChooseUs"
 
 const SynerziSection = () => {
   const items = [
