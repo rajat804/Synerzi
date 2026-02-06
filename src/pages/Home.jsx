@@ -45,9 +45,7 @@ const Home = () => {
             <p className="text-base sm:text-lg md:text-xl max-w-2xl text-gray-200 mb-6">
               Invest, Lease & Buy premium properties in top locations
             </p>
-            {/* <button className="px-7 py-3 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold hover:scale-105 transition">
-              Explore Properties
-            </button> */}
+            
           </div>
         </section>
       </div>
