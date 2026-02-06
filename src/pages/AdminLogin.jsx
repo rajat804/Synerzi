@@ -5,7 +5,7 @@ export default function AdminLogin() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const BASE_URL ="https://vercel-synerzi-sbckend.vercel.app/";
+  const BASE_URL ="https://vercel-synerzi-sbckend.vercel.app";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
