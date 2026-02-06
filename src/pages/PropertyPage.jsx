@@ -5,12 +5,13 @@ export default function PropertyPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Fetch properties from backend
+  /* ================= FETCH PROPERTIES ================= */
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/properties");
+        const res = await fetch("https://vercel-synerzi-sbckend.vercel.app/api/properties");
         if (!res.ok) throw new Error("Failed to fetch properties");
+
         const data = await res.json();
         setProperties(data);
       } catch (err) {
@@ -24,23 +25,32 @@ export default function PropertyPage() {
     fetchProperties();
   }, []);
 
-  if (loading)
+  /* ================= HELPERS ================= */
+  const truncateText = (text, limit = 120) => {
+    if (!text) return "No description available";
+    return text.length > limit ? text.slice(0, limit) + "..." : text;
+  };
+
+  /* ================= LOADING / ERROR ================= */
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center text-lg">
         Loading properties...
       </div>
     );
+  }
 
-  if (error)
+  if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center text-red-600">
         {error}
       </div>
     );
+  }
 
   return (
     <>
-      {/* HERO */}
+      {/* ================= HERO ================= */}
       <section
         className="relative h-[45vh] flex items-center justify-center bg-cover bg-center"
         style={{
@@ -103,7 +113,7 @@ export default function PropertyPage() {
         </div>
       </section>
 
-      {/* Properties Grid */}
+      {/* ================= PROPERTIES GRID ================= */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -117,43 +127,50 @@ export default function PropertyPage() {
                   key={item._id}
                   className="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden group"
                 >
-                  {/* Image */}
+                  {/* IMAGE */}
                   <div className="relative h-56 overflow-hidden">
-                    {item.images && item.images.length > 0 ? (
+                    {item.images?.length > 0 ? (
                       <img
-                        src={`http://localhost:4000/${item.images[0]}`}
+                        src={`https://vercel-synerzi-sbckend.vercel.app/${
+                          item.images[0].startsWith("uploads")
+                            ? item.images[0]
+                            : `uploads/${item.images[0]}`
+                        }`}
                         alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
+                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
                         No Image
                       </div>
                     )}
 
+                    {/* PURPOSE BADGE */}
                     <span className="absolute top-4 left-4 bg-[#06B6D4] text-[#0F172A] text-xs px-3 py-1 rounded-full font-semibold shadow">
-                      {item.type}
+                      {item.purpose || item.type || "Property"}
                     </span>
                   </div>
 
-                  {/* Content */}
+                  {/* CONTENT */}
                   <div className="p-6">
                     <h3 className="text-lg font-semibold text-gray-900">
                       {item.title}
                     </h3>
-                    {/* State & City */}
+
                     <p className="text-gray-500 text-sm mt-1">
-                      {item.state}, {item.city}
+                      {item.city}, {item.state}
                     </p>
-                    {/* Description */}
-                    <p className="text-gray-600 text-sm mt-3 line-clamp-2">
-                      {item.description}
+
+                    <p className="text-gray-600 text-sm mt-3">
+                      {truncateText(item.description, 120)}
                     </p>
-                    {/* Price */}
+
                     <div className="flex justify-between items-center mt-5">
-                      <span className="text-[#06B6D4] font-bold flex items-center">
-                        <span className="mr-1">₹</span> {item.price}
+                      <span className="text-[#06B6D4] font-bold">
+                        ₹{" "}
+                        {item.price}
                       </span>
+
                       <button className="text-sm px-4 py-2 rounded-full border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-[#0F172A] transition">
                         View Details
                       </button>
@@ -162,16 +179,6 @@ export default function PropertyPage() {
                 </div>
               ))
             )}
-          </div>
-
-          {/* View All Button */}
-          <div className="flex justify-center mt-12">
-            <a
-              href="/properties"
-              className="px-8 py-3 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold shadow-lg hover:scale-105 transition-transform"
-            >
-              View All Properties
-            </a>
           </div>
         </div>
       </section>
