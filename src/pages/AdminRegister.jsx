@@ -17,7 +17,7 @@ export default function AdminRegister() {
       return;
     }
     const formData = { fullName, email, password };
-    const BASE_URL = "https://vercel-synerzi-sbckend.vercel.app/";
+    const BASE_URL = "https://vercel-synerzi-sbckend.vercel.app";
     try {
       const response = await fetch(`${BASE_URL}/api/admin/register`, {
         method: "POST",
