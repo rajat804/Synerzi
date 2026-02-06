@@ -45,7 +45,6 @@ const Home = () => {
             <p className="text-base sm:text-lg md:text-xl max-w-2xl text-gray-200 mb-6">
               Invest, Lease & Buy premium properties in top locations
             </p>
-            
           </div>
         </section>
       </div>
