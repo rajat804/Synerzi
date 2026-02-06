@@ -80,13 +80,16 @@ export default function AddListing() {
     images.forEach((img) => data.append("images", img));
 
     try {
-      const res = await fetch("https://vercel-synerzi-sbckend.vercel.app/api/properties/add", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+      const res = await fetch(
+        "https://vercel-synerzi-sbckend.vercel.app/api/properties/add",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: data,
         },
-        body: data,
-      });
+      );
 
       const result = await res.json();
       if (!res.ok) throw new Error(result.message || "Failed to add property");
@@ -244,7 +247,7 @@ export default function AddListing() {
                       />
                       {a}
                     </label>
-                  )
+                  ),
                 )}
               </div>
             </div>
