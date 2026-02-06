@@ -14,6 +14,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import ShowListings from "./pages/ShowListings";
 import AdminEditProperty from "./pages/AdminEditProperty";
+import AddListing from "./pages/AddListing";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
   "/admin-register",
   "/admin-dashboard",
   "/admin-listings",
+  "/admin/add-listing",
 ];
 const hideHeaderandFooter =
   adminRoutes.includes(location.pathname) ||
@@ -48,12 +50,11 @@ const hideHeaderandFooter =
         <Route path="/admin-login" element={<AdminLogin/>}></Route>
         <Route path="/admin-register" element={<AdminRegister/>}></Route>
         <Route path="/admin-dashboard" element={<AdminDashboard/>}></Route>
+        <Route path="/admin/add-listing" element={<AddListing/>}></Route>
         <Route path="/admin-listings" element={<ShowListings/>}></Route>
         <Route path="/admin-edit-property/:id" element={<AdminEditProperty/>}></Route>
       </Routes>
       {!hideHeaderandFooter && <Footer />}
-
-      
     </>
   );
 }
