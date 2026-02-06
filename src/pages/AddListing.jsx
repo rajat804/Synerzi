@@ -247,7 +247,7 @@ export default function AddListing() {
                       />
                       {a}
                     </label>
-                  ),
+                  )
                 )}
               </div>
             </div>
