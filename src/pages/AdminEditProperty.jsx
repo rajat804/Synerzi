@@ -53,10 +53,10 @@ export default function AdminEditProperty() {
 
   // Delete old image handler
   const handleDeleteOldImage = (index) => {
-    if (!window.confirm("Remove this image?")) return;
-
     const removed = formData.images[index];
+
     setDeletedImages((prev) => [...prev, removed]);
+
     setFormData({
       ...formData,
       images: formData.images.filter((_, i) => i !== index),
@@ -301,26 +301,21 @@ export default function AdminEditProperty() {
         />
 
         {/* Existing Images */}
-        {formData.images?.length > 0 && (
-          <div className="flex gap-2 flex-wrap col-span-full">
-            {formData.images.map((img, idx) => (
-              <div key={idx} className="relative">
-                <img
-                  src={img} // ✅ Cloudinary URL direct
-                  alt={`property-${idx}`}
-                  className="w-24 h-24 object-cover rounded"
-                />
-                <button
-                  type="button"
-                  onClick={() => handleDeleteOldImage(idx)}
-                  className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
-                >
-                  ×
-                </button>
-              </div>
-            ))}
+        {formData.images?.map((img, idx) => (
+          <div key={idx} className="relative">
+            <img
+              src={img} // Cloudinary URL direct
+              className="w-24 h-24 object-cover rounded"
+            />
+            <button
+              type="button"
+              onClick={() => handleDeleteOldImage(idx)}
+              className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6"
+            >
+              ×
+            </button>
           </div>
-        )}
+        ))}
 
         {/* Upload New Images */}
         <input
