@@ -1,3 +1,10 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 const propertyAreas = [
   {
     title: "Udyog Vihar",
@@ -105,12 +112,18 @@ const PropertyArea = () => {
                   alt={area.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition"></div>
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-                  <h3 className="text-xl font-semibold text-white">{area.title}</h3>
-                  <p className="text-md font-bold text-[#06B6D4]">{area.listings}</p>
+
+                {/* Center Content */}
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center">
+                  <h3 className="text-xl font-semibold text-white">
+                    {area.title}
+                  </h3>
+                  <p className="text-md font-bold text-[#06B6D4] mt-2">
+                    {area.listings}
+                  </p>
                 </div>
               </div>
             ))}
@@ -119,7 +132,7 @@ const PropertyArea = () => {
       </section>
 
       {/* Featured Properties Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
           <div className="mb-12 text-center">
@@ -131,48 +144,67 @@ const PropertyArea = () => {
             </p>
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Swiper */}
+          <Swiper
+            className="featured-swiper"
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={24}
+            navigation
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 3500, disableOnInteraction: false }}
+            breakpoints={{
+              320: { slidesPerView: 2, spaceBetween: 12 }, // mobile
+              640: { slidesPerView: 2, spaceBetween: 20 }, // large mobile / tablet
+              768: { slidesPerView: 3 }, // tablet
+              1024: { slidesPerView: 3 },
+              1280: { slidesPerView: 4 },
+            }}
+          >
             {properties.map((property, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl overflow-hidden shadow-lg group hover:shadow-2xl transition-shadow duration-300"
-              >
-                {/* Image + Overlay */}
-                <div className="relative h-56">
-                  <img
-                    src={property.image}
-                    alt={property.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition"></div>
-                  {/* Price */}
-                  <div className="absolute top-3 left-3 bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white font-bold px-3 py-1 rounded shadow-lg">
-                    {property.price}
-                  </div>
-                  {/* Hover icon */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="text-white text-3xl bg-black/40 p-3 rounded-full shadow-lg cursor-pointer">
-                      <i className="fas fa-eye"></i>
-                    </span>
-                  </div>
-                </div>
+              <SwiperSlide key={index}>
+                <div className="bg-white rounded-xl overflow-hidden shadow-lg group hover:shadow-2xl transition-shadow duration-300 h-full">
+                  {/* Image */}
+                  <div className="relative h-56">
+                    <img
+                      src={property.image}
+                      alt={property.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition"></div>
 
-                {/* Content */}
-                <div className="p-4 flex flex-col items-center">
-                  <h3 className="text-lg font-semibold mb-3 text-center">{property.title}</h3>
-                  <div className="flex gap-3 w-full">
-                    <button className="flex-1 px-3 py-2 bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold rounded-lg hover:scale-105 transition-transform">
-                      More Info
-                    </button>
-                    <button className="flex-1 px-3 py-2 border border-[#06B6D4] text-[#06B6D4] font-semibold rounded-lg hover:bg-[#06B6D4] hover:text-white transition-colors">
-                      Call Now
-                    </button>
+                    {/* Price */}
+                    <div className="absolute top-3 left-3 bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white font-bold px-3 py-1 rounded-lg shadow">
+                      {property.price}
+                    </div>
+
+                    {/* Hover Icon */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="text-white text-2xl bg-black/50 p-4 rounded-full shadow-lg">
+                        <i className="fas fa-eye"></i>
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-4 flex flex-col items-center">
+                    <h3 className="text-lg font-semibold mb-3 text-center">
+                      {property.title}
+                    </h3>
+
+                    <div className="flex gap-3 w-full">
+                      <button className="flex-1 py-2 bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold rounded-lg hover:scale-105 transition">
+                        More Info
+                      </button>
+
+                      <button className="flex-1 py-2 border border-[#06B6D4] text-[#06B6D4] font-semibold rounded-lg hover:bg-[#06B6D4] hover:text-white transition">
+                        Call Now
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
       </section>
     </>
