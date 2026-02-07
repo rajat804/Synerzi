@@ -92,8 +92,6 @@ export default function AdminDashboard() {
               >
                 📋 Show Listings
               </Link>
-
-              
             </div>
           </div>
         </main>
