@@ -53,8 +53,10 @@ export default function AdminEditProperty() {
 
   // Delete old image handler
   const handleDeleteOldImage = (index) => {
-    const removed = formData.images[index]; // the image to delete
-    setDeletedImages((prev) => [...prev, removed]); // add it to deletedImages
+    if (!window.confirm("Remove this image?")) return;
+
+    const removed = formData.images[index];
+    setDeletedImages((prev) => [...prev, removed]);
     setFormData({
       ...formData,
       images: formData.images.filter((_, i) => i !== index),
@@ -66,28 +68,55 @@ export default function AdminEditProperty() {
     try {
       const fd = new FormData();
 
+      const ignoreFields = [
+        "_id",
+        "__v",
+        "images",
+        "amenities",
+        "createdAt",
+        "updatedAt",
+      ];
+
       Object.keys(formData).forEach((key) => {
-        if (key !== "images" && key !== "amenities")
-          fd.append(key, formData[key] || "");
+        if (!ignoreFields.includes(key)) {
+          const value = formData[key];
+
+          // skip null / undefined / empty string
+          if (value !== null && value !== undefined && value !== "") {
+            fd.append(key, value);
+          }
+        }
       });
 
+      // amenities
       fd.append("amenities", JSON.stringify(formData.amenities || []));
 
-      if (formData.images?.length > 0)
-        formData.images.forEach((img) => fd.append("existingImages", img));
+      // existing images (Cloudinary URLs)
+      if (formData.images?.length > 0) {
+        formData.images
+          .filter(
+            (img) => img && img !== "null" && !deletedImages.includes(img),
+          )
+          .forEach((img) => fd.append("existingImages", img));
+      }
 
-      if (newImages.length > 0)
+      // new uploaded images
+      if (newImages.length > 0) {
         newImages.forEach((img) => fd.append("images", img));
+      }
 
-      // THIS LINE IS NEW — send deleted images
-      if (deletedImages.length > 0)
-        deletedImages.forEach((img) => fd.append("deletedImages", img));
+      // deleted images
+      if (deletedImages.length > 0) {
+        fd.append("deletedImages", JSON.stringify(deletedImages));
+      }
 
       const res = await fetch(
         `https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`,
         {
           method: "PUT",
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
           body: fd,
         },
       );
