@@ -61,48 +61,49 @@ export default function AdminEditProperty() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const fd = new FormData();
+  e.preventDefault();
+  try {
+    const fd = new FormData();
 
-      // Add other fields
-      Object.keys(formData).forEach((key) => {
-        if (!["_id", "__v", "images", "amenities"].includes(key)) {
-          fd.append(key, formData[key]);
-        }
-      });
+    // 1️⃣ Add all normal fields
+    Object.keys(formData).forEach((key) => {
+      if (!["_id", "__v", "images", "amenities"].includes(key)) {
+        fd.append(key, formData[key] || "");
+      }
+    });
 
-      // Add amenities
-      fd.append("amenities", JSON.stringify(formData.amenities || []));
+    // 2️⃣ Add amenities
+    fd.append("amenities", JSON.stringify(formData.amenities || []));
 
-      // Existing images (not deleted)
-      formData.images.forEach((img) => fd.append("existingImages", img));
+    // 3️⃣ Add existing images (old images that were not deleted)
+    formData.images?.forEach((img) => fd.append("existingImages", img));
 
-      // New images
-      newImages.forEach((img) => fd.append("images", img));
+    // 4️⃣ Add newly uploaded images
+    newImages.forEach((img) => fd.append("images", img));
 
-      // Images marked for deletion
-      fd.append("deletedImages", JSON.stringify(deletedImages));
+    // 5️⃣ Add images to delete (if any)
+    fd.append("deletedImages", JSON.stringify(deletedImages));
 
-      const res = await fetch(
-        `https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`,
-        {
-          method: "PUT",
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-          body: fd,
-        },
-      );
+    const res = await fetch(
+      `https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`,
+      {
+        method: "PUT",
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        body: fd,
+      }
+    );
 
-      const data = await res.json();
-      if (!res.ok) return alert(data.message || "Update failed");
+    const data = await res.json();
+    if (!res.ok) return alert(data.message || "Update failed");
 
-      alert("Property updated successfully 🚀");
-      navigate("/admin-listings");
-    } catch (err) {
-      console.error(err);
-      alert("Server error!");
-    }
-  };
+    alert("Property updated successfully 🚀");
+    navigate("/admin-listings");
+  } catch (err) {
+    console.error(err);
+    alert("Server error!");
+  }
+};
+
 
   return (
     <div className="p-6 max-w-5xl mx-auto bg-white rounded shadow my-5">
@@ -143,7 +144,6 @@ export default function AdminEditProperty() {
           placeholder="Area (sq ft)"
           className="border p-2 rounded"
         />
-
         {/* Purpose & Category */}
         <select
           name="purpose"
@@ -171,7 +171,6 @@ export default function AdminEditProperty() {
             </option>
           ))}
         </select>
-
         {/* State & City */}
         <input
           name="state"
@@ -188,7 +187,6 @@ export default function AdminEditProperty() {
           className="border p-2 rounded"
           list="cities"
         />
-
         {/* Numeric Fields */}
         <input
           name="bhk"
@@ -206,7 +204,6 @@ export default function AdminEditProperty() {
           placeholder="Bathrooms"
           className="border p-2 rounded"
         />
-
         <input
           name="balconies"
           type="number"
@@ -223,7 +220,6 @@ export default function AdminEditProperty() {
           placeholder="Floor Number"
           className="border p-2 rounded"
         />
-
         <input
           name="totalFloors"
           type="number"
@@ -232,7 +228,6 @@ export default function AdminEditProperty() {
           placeholder="Total Floors"
           className="border p-2 rounded"
         />
-
         {/* Facing & Parking */}
         <input
           name="facing"
@@ -254,7 +249,6 @@ export default function AdminEditProperty() {
             </option>
           ))}
         </select>
-
         {/* Amenities */}
         <input
           name="amenities"
@@ -268,15 +262,12 @@ export default function AdminEditProperty() {
           placeholder="Amenities (comma separated)"
           className="border p-2 rounded col-span-full"
         />
-
-        {/* Existing Images */}
         {formData.images?.length > 0 && (
           <div className="flex gap-2 flex-wrap col-span-full">
             {formData.images.map((img, idx) => (
               <div key={idx} className="relative">
                 <img
                   src={img} // Cloudinary URL
-                  alt={`property-${idx}`}
                   className="w-24 h-24 object-cover rounded"
                 />
                 <button
