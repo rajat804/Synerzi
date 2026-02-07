@@ -69,7 +69,7 @@ const Home = () => {
           </div>
 
           {/* Form */}
-          <form className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-12 gap-4">
+          <form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4">
             {/* Location */}
             <div className="col-span-1 lg:col-span-3">
               <label className="text-sm text-gray-500">Location</label>
@@ -129,7 +129,7 @@ const Home = () => {
                 type="submit"
                 className="w-full h-[44px] mt-1 rounded-lg bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white text-sm sm:text-base font-semibold shadow-md hover:scale-[1.03] transition-transform duration-300 flex items-center justify-center"
               >
-                Search {activeTab}
+                Buy
               </button>
             </div>
 
