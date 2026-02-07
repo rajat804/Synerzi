@@ -9,7 +9,9 @@ export default function PropertyPage() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const res = await fetch("https://vercel-synerzi-sbckend.vercel.app/api/properties");
+        const res = await fetch(
+          "https://vercel-synerzi-sbckend.vercel.app/api/properties",
+        );
         if (!res.ok) throw new Error("Failed to fetch properties");
 
         const data = await res.json();
@@ -131,11 +133,11 @@ export default function PropertyPage() {
                   <div className="relative h-56 overflow-hidden">
                     {item.images?.length > 0 ? (
                       <img
-                        src={`https://vercel-synerzi-sbckend.vercel.app/${
-                          item.images[0].startsWith("uploads")
-                            ? item.images[0]
-                            : `uploads/${item.images[0]}`
-                        }`}
+                        src={
+                          item.images[0].startsWith("http")
+                            ? item.images[0] // Already a full URL (Cloudinary)
+                            : `https://vercel-synerzi-sbckend.vercel.app/${item.images[0]}` // Backend path
+                        }
                         alt={item.title}
                         className="w-full h-full object-cover"
                       />
@@ -147,7 +149,7 @@ export default function PropertyPage() {
 
                     {/* PURPOSE BADGE */}
                     <span className="absolute top-4 left-4 bg-[#06B6D4] text-[#0F172A] text-xs px-3 py-1 rounded-full font-semibold shadow">
-                      {item.purpose || item.type || "Property"}
+                      {item.purpose || "Property"}
                     </span>
                   </div>
 
@@ -167,8 +169,7 @@ export default function PropertyPage() {
 
                     <div className="flex justify-between items-center mt-5">
                       <span className="text-[#06B6D4] font-bold">
-                        ₹{" "}
-                        {item.price}
+                        ₹ {item.price}
                       </span>
 
                       <button className="text-sm px-4 py-2 rounded-full border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-[#0F172A] transition">
