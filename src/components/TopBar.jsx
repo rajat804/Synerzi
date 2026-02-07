@@ -22,7 +22,7 @@ const TopBar = () => {
             {/* Email (hide text on very small screens) */}
             <div className="flex items-center gap-2 hover:text-white transition">
               <i className="far fa-envelope text-[#38bdf8]" />
-              <span className="sm:inline">info@synerzi.com</span>
+              <span className="sm:inline">shreeramrealtygroup@gmail.com</span>
 
               {/* WhatsApp CTA */}
               <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#38bdf8] text-[#38bdf8] hover:bg-[#38bdf8] hover:text-[#020617] transition cursor-pointer font-medium">
