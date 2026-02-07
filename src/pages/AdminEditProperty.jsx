@@ -53,13 +53,13 @@ export default function AdminEditProperty() {
   };
 
   const handleDeleteOldImage = (index) => {
-    const removed = formData.images[index];
-    setDeletedImages((prev) => [...prev, removed]); // mark for deletion
-    setFormData({
-      ...formData,
-      images: formData.images.filter((_, i) => i !== index),
-    });
-  };
+  const removed = formData.images[index];
+  setDeletedImages((prev) => [...prev, removed]); // mark for deletion
+  setFormData({
+    ...formData,
+    images: formData.images.filter((_, i) => i !== index),
+  });
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
