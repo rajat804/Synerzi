@@ -14,9 +14,12 @@ export default function ShowListings() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("https://vercel-synerzi-sbckend.vercel.app/api/properties", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        "https://vercel-synerzi-sbckend.vercel.app/api/properties",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
 
       if (!res.ok) throw new Error("Failed to fetch properties");
 
@@ -31,15 +34,19 @@ export default function ShowListings() {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this property?")) return;
+    if (!window.confirm("Are you sure you want to delete this property?"))
+      return;
 
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(`https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        `https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`,
+        {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
 
       const data = await res.json();
 
@@ -132,17 +139,26 @@ export default function ShowListings() {
                   <td className="border p-2">{p.facing || "—"}</td>
                   <td className="border p-2">{p.parking || "—"}</td>
                   <td className="border p-2">{p.description || "—"}</td>
-                  <td className="border p-2">{p.amenities?.join(", ") || "—"}</td>
+                  <td className="border p-2">
+                    {p.amenities?.join(", ") || "—"}
+                  </td>
                   <td className="border p-2">
                     <div className="flex flex-wrap gap-2">
-                      {p.images?.map((img, idx) => (
-                        <img
-                          key={idx}
-                          src={`https://vercel-synerzi-sbckend.vercel.app/${img.startsWith("uploads") ? img : `uploads/${img}`}`}
-                          className="w-12 h-12 object-cover rounded border"
-                          alt={`property-${idx}`}
-                        />
-                      ))}
+                      {Array.isArray(p.images) &&
+                        p.images.filter(Boolean).map((img, idx) => {
+                          const imageUrl = img.startsWith("http")
+                            ? img // ✅ Cloudinary
+                            : `https://vercel-synerzi-sbckend.vercel.app/${img.startsWith("uploads") ? img : `uploads/${img}`}`;
+
+                          return (
+                            <img
+                              key={idx}
+                              src={imageUrl}
+                              className="w-12 h-12 object-cover rounded border"
+                              alt={`property-${idx}`}
+                            />
+                          );
+                        })}
                     </div>
                   </td>
                   <td className="border p-2 flex flex-wrap gap-2 justify-center">
