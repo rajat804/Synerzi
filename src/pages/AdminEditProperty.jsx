@@ -291,7 +291,7 @@ export default function AdminEditProperty() {
         <div className="col-span-full">
           <label className="block mb-1 font-semibold">Amenities</label>
           <div className="flex flex-wrap gap-4">
-            {allAmenities.map((amenity, idx) => (
+            {Amenities.map((amenity, idx) => (
               <label key={idx} className="flex items-center gap-1">
                 <input
                   type="checkbox"
