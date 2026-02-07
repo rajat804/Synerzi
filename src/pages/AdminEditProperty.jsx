@@ -61,49 +61,48 @@ export default function AdminEditProperty() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const fd = new FormData();
+    e.preventDefault();
+    try {
+      const fd = new FormData();
 
-    // 1️⃣ Add all normal fields
-    Object.keys(formData).forEach((key) => {
-      if (!["_id", "__v", "images", "amenities"].includes(key)) {
-        fd.append(key, formData[key] || "");
-      }
-    });
+      // 1️⃣ Add all normal fields
+      Object.keys(formData).forEach((key) => {
+        if (!["_id", "__v", "images", "amenities"].includes(key)) {
+          fd.append(key, formData[key] || "");
+        }
+      });
 
-    // 2️⃣ Add amenities
-    fd.append("amenities", JSON.stringify(formData.amenities || []));
+      // 2️⃣ Add amenities
+      fd.append("amenities", JSON.stringify(formData.amenities || []));
 
-    // 3️⃣ Add existing images (old images that were not deleted)
-    formData.images?.forEach((img) => fd.append("existingImages", img));
+      // 3️⃣ Add existing images (old images that were not deleted)
+      formData.images?.forEach((img) => fd.append("existingImages", img));
 
-    // 4️⃣ Add newly uploaded images
-    newImages.forEach((img) => fd.append("images", img));
+      // 4️⃣ Add newly uploaded images
+      newImages.forEach((img) => fd.append("images", img));
 
-    // 5️⃣ Add images to delete (if any)
-    fd.append("deletedImages", JSON.stringify(deletedImages));
+      // 5️⃣ Add images to delete (if any)
+      fd.append("deletedImages", JSON.stringify(deletedImages));
 
-    const res = await fetch(
-      `https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`,
-      {
-        method: "PUT",
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        body: fd,
-      }
-    );
+      const res = await fetch(
+        `https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`,
+        {
+          method: "PUT",
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          body: fd,
+        },
+      );
 
-    const data = await res.json();
-    if (!res.ok) return alert(data.message || "Update failed");
+      const data = await res.json();
+      if (!res.ok) return alert(data.message || "Update failed");
 
-    alert("Property updated successfully 🚀");
-    navigate("/admin-listings");
-  } catch (err) {
-    console.error(err);
-    alert("Server error!");
-  }
-};
-
+      alert("Property updated successfully 🚀");
+      navigate("/admin-listings");
+    } catch (err) {
+      console.error(err);
+      alert("Server error!");
+    }
+  };
 
   return (
     <div className="p-6 max-w-5xl mx-auto bg-white rounded shadow my-5">
@@ -120,156 +119,197 @@ export default function AdminEditProperty() {
         onSubmit={handleSubmit}
         className="grid grid-cols-1 md:grid-cols-2 gap-4"
       >
-        {/* Title & Description */}
-        <input
-          name="title"
-          value={formData.title || ""}
-          onChange={handleChange}
-          placeholder="Property Title"
-          className="border p-2 rounded"
-          required
-        />
+        {/* Title */}
+        <div className="col-span-full">
+          <label className="block mb-1 font-semibold">Property Title</label>
+          <input
+            name="title"
+            value={formData.title || ""}
+            onChange={handleChange}
+            placeholder="Property Title"
+            className="border p-2 rounded w-full"
+            required
+          />
+        </div>
+
         {/* Price & Area */}
-        <input
-          name="price"
-          value={formData.price || ""}
-          onChange={handleChange}
-          placeholder="Price"
-          className="border p-2 rounded"
-        />
-        <input
-          name="area"
-          value={formData.area || ""}
-          onChange={handleChange}
-          placeholder="Area (sq ft)"
-          className="border p-2 rounded"
-        />
+        <div>
+          <label className="block mb-1 font-semibold">Price</label>
+          <input
+            name="price"
+            value={formData.price || ""}
+            onChange={handleChange}
+            placeholder="Price"
+            className="border p-2 rounded w-full"
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-semibold">Area (sq ft)</label>
+          <input
+            name="area"
+            value={formData.area || ""}
+            onChange={handleChange}
+            placeholder="Area"
+            className="border p-2 rounded w-full"
+          />
+        </div>
+
         {/* Purpose & Category */}
-        <select
-          name="purpose"
-          value={formData.purpose || ""}
-          onChange={handleChange}
-          className="border p-2 rounded"
-        >
-          <option value="">Select Purpose</option>
-          {purposes.map((p, i) => (
-            <option key={i} value={p}>
-              {p}
-            </option>
-          ))}
-        </select>
-        <select
-          name="category"
-          value={formData.category || ""}
-          onChange={handleChange}
-          className="border p-2 rounded"
-        >
-          <option value="">Select Category</option>
-          {categories.map((c, i) => (
-            <option key={i} value={c}>
-              {c}
-            </option>
-          ))}
-        </select>
+        <div>
+          <label className="block mb-1 font-semibold">Purpose</label>
+          <select
+            name="purpose"
+            value={formData.purpose || ""}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+          >
+            <option value="">Select Purpose</option>
+            {purposes.map((p, i) => (
+              <option key={i} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block mb-1 font-semibold">Category</label>
+          <select
+            name="category"
+            value={formData.category || ""}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+          >
+            <option value="">Select Category</option>
+            {categories.map((c, i) => (
+              <option key={i} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+        </div>
+
         {/* State & City */}
-        <input
-          name="state"
-          value={formData.state || ""}
-          onChange={handleChange}
-          placeholder="State"
-          className="border p-2 rounded"
-        />
-        <input
-          name="city"
-          value={formData.city || ""}
-          onChange={handleChange}
-          placeholder="City"
-          className="border p-2 rounded"
-          list="cities"
-        />
-        {/* Numeric Fields */}
-        <input
-          name="bhk"
-          type="number"
-          value={formData.bhk || ""}
-          onChange={handleChange}
-          placeholder="BHK"
-          className="border p-2 rounded"
-        />
-        <input
-          name="bathrooms"
-          type="number"
-          value={formData.bathrooms || ""}
-          onChange={handleChange}
-          placeholder="Bathrooms"
-          className="border p-2 rounded"
-        />
-        <input
-          name="balconies"
-          type="number"
-          value={formData.balconies || ""}
-          onChange={handleChange}
-          placeholder="Balconies"
-          className="border p-2 rounded"
-        />
-        <input
-          name="floorNumber"
-          type="number"
-          value={formData.floorNumber || ""}
-          onChange={handleChange}
-          placeholder="Floor Number"
-          className="border p-2 rounded"
-        />
-        <input
-          name="totalFloors"
-          type="number"
-          value={formData.totalFloors || ""}
-          onChange={handleChange}
-          placeholder="Total Floors"
-          className="border p-2 rounded"
-        />
+        <div>
+          <label className="block mb-1 font-semibold">State</label>
+          <input
+            name="state"
+            value={formData.state || ""}
+            onChange={handleChange}
+            placeholder="State"
+            className="border p-2 rounded w-full"
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-semibold">City</label>
+          <input
+            name="city"
+            value={formData.city || ""}
+            onChange={handleChange}
+            placeholder="City"
+            className="border p-2 rounded w-full"
+            list="cities"
+          />
+        </div>
+
+        {/* BHK & Bathrooms */}
+        <div>
+          <label className="block mb-1 font-semibold">BHK</label>
+          <input
+            name="bhk"
+            type="number"
+            value={formData.bhk || ""}
+            onChange={handleChange}
+            placeholder="BHK"
+            className="border p-2 rounded w-full"
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-semibold">Bathrooms</label>
+          <input
+            name="bathrooms"
+            type="number"
+            value={formData.bathrooms || ""}
+            onChange={handleChange}
+            placeholder="Bathrooms"
+            className="border p-2 rounded w-full"
+          />
+        </div>
+
+        {/* Balconies & Total Floors */}
+        <div>
+          <label className="block mb-1 font-semibold">Balconies</label>
+          <input
+            name="balconies"
+            type="number"
+            value={formData.balconies || ""}
+            onChange={handleChange}
+            placeholder="Balconies"
+            className="border p-2 rounded w-full"
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-semibold">Total Floors</label>
+          <input
+            name="totalFloors"
+            type="number"
+            value={formData.totalFloors || ""}
+            onChange={handleChange}
+            placeholder="Total Floors"
+            className="border p-2 rounded w-full"
+          />
+        </div>
+
         {/* Facing & Parking */}
-        <input
-          name="facing"
-          value={formData.facing || ""}
-          onChange={handleChange}
-          placeholder="Facing"
-          className="border p-2 rounded"
-        />
-        <select
-          name="parking"
-          value={formData.parking || ""}
-          onChange={handleChange}
-          className="border p-2 rounded"
-        >
-          <option value="">Select Parking</option>
-          {parkingOptions.map((p, i) => (
-            <option key={i} value={p}>
-              {p}
-            </option>
-          ))}
-        </select>
+        <div>
+          <label className="block mb-1 font-semibold">Facing</label>
+          <input
+            name="facing"
+            value={formData.facing || ""}
+            onChange={handleChange}
+            placeholder="Facing"
+            className="border p-2 rounded w-full"
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-semibold">Parking</label>
+          <select
+            name="parking"
+            value={formData.parking || ""}
+            onChange={handleChange}
+            className="border p-2 rounded w-full"
+          >
+            <option value="">Select Parking</option>
+            {parkingOptions.map((p, i) => (
+              <option key={i} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
+        </div>
+
         {/* Amenities */}
-        <input
-          name="amenities"
-          value={formData.amenities?.join(", ") || ""}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              amenities: e.target.value.split(",").map((a) => a.trim()),
-            })
-          }
-          placeholder="Amenities (comma separated)"
-          className="border p-2 rounded col-span-full"
-        />
+        <div className="col-span-full">
+          <label className="block mb-1 font-semibold">Amenities</label>
+          <div className="flex flex-wrap gap-4">
+            {allAmenities.map((amenity, idx) => (
+              <label key={idx} className="flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  checked={formData.amenities?.includes(amenity)}
+                  onChange={() => handleAmenityChange(amenity)}
+                />
+                {amenity}
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Existing Images */}
         {formData.images?.length > 0 && (
-          <div className="flex gap-2 flex-wrap col-span-full">
+          <div className="col-span-full flex gap-2 flex-wrap">
             {formData.images.map((img, idx) => (
               <div key={idx} className="relative">
-                <img
-                  src={img} // Cloudinary URL
-                  className="w-24 h-24 object-cover rounded"
-                />
+                <img src={img} className="w-24 h-24 object-cover rounded" />
                 <button
                   type="button"
                   onClick={() => handleDeleteOldImage(idx)}
@@ -281,21 +321,33 @@ export default function AdminEditProperty() {
             ))}
           </div>
         )}
+
         {/* Upload New Images */}
-        <input
-          type="file"
-          multiple
-          onChange={(e) => setNewImages(Array.from(e.target.files))}
-          className="col-span-full"
-        />
-        <textarea
-          name="description"
-          value={formData.description || ""}
-          onChange={handleChange}
-          placeholder="Property Description"
-          className="border p-2 rounded"
-          rows={4}
-        />
+        <div className="col-span-full">
+          <label className="block mb-1 font-semibold">Upload New Images</label>
+          <input
+            type="file"
+            multiple
+            onChange={(e) => setNewImages(Array.from(e.target.files))}
+            className="w-full"
+          />
+        </div>
+
+        {/* Description */}
+        <div className="col-span-full">
+          <label className="block mb-1 font-semibold">
+            Property Description
+          </label>
+          <textarea
+            name="description"
+            value={formData.description || ""}
+            onChange={handleChange}
+            placeholder="Property Description"
+            className="border p-2 rounded w-full"
+            rows={4}
+          />
+        </div>
+
         <button
           type="submit"
           className="bg-blue-600 text-white py-2 rounded mt-2 col-span-full"
