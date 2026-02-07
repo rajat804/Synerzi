@@ -67,31 +67,61 @@ export default function AddListing() {
 
     setLoading(true);
 
-    const data = new FormData();
-
-    Object.entries(formData).forEach(([key, value]) => {
-      if (key === "amenities") {
-        data.append(key, JSON.stringify(value));
-      } else {
-        data.append(key, value);
-      }
-    });
-
-    images.forEach((img) => data.append("images", img));
-
     try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("You are not logged in as admin");
+        setLoading(false);
+        return;
+      }
+
+      const data = new FormData();
+
+      // Add form data
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key === "amenities") {
+          data.append(key, JSON.stringify(value));
+        } else {
+          data.append(key, value);
+        }
+      });
+
+      // Add images
+      images.forEach((img) => data.append("images", img));
+
+      // Log FormData for debugging
+      console.log("FormData to send:");
+      for (let pair of data.entries()) {
+        console.log(pair[0], pair[1]);
+      }
+
       const res = await fetch(
         "https://vercel-synerzi-sbckend.vercel.app/api/properties/add",
         {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`, // send token
           },
           body: data,
         },
       );
 
-      const result = await res.json();
+      // Safe parsing: try JSON first
+      const text = await res.text();
+      console.log("Server response:", text);
+
+      let result;
+      try {
+        result = JSON.parse(text);
+      } catch (err) {
+        alert(
+          "Server returned HTML instead of JSON. Check console for response.",
+        );
+        console.error(text);
+        setLoading(false);
+        return;
+      }
+
       if (!res.ok) throw new Error(result.message || "Failed to add property");
 
       alert("Property added successfully 🚀");
@@ -100,6 +130,7 @@ export default function AddListing() {
       setImages([]);
       document.getElementById("imagesInput").value = "";
     } catch (err) {
+      console.error("Add property error:", err);
       alert(err.message || "Server error");
     } finally {
       setLoading(false);
@@ -247,8 +278,7 @@ export default function AddListing() {
                       />
                       {a}
                     </label>
-                  )   
-                  
+                  ),
                 )}
               </div>
             </div>
