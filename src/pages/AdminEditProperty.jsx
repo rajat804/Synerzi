@@ -9,6 +9,7 @@ export default function AdminEditProperty() {
   const [formData, setFormData] = useState(null);
   const [newImages, setNewImages] = useState([]);
   const [deletedImages, setDeletedImages] = useState([]);
+  const allAmenities = ["Lift", "Gym", "Pool", "Security", "Garden", "CCTV"];
 
   const purposes = ["Sale", "Rent", "Lease", "Investment"]; // replaced type with purpose
   const categories = [
@@ -103,7 +104,15 @@ export default function AdminEditProperty() {
       alert("Server error!");
     }
   };
-
+  const handleAmenityChange = (amenity) => {
+    let updatedAmenities = formData.amenities || [];
+    if (updatedAmenities.includes(amenity)) {
+      updatedAmenities = updatedAmenities.filter((a) => a !== amenity);
+    } else {
+      updatedAmenities.push(amenity);
+    }
+    setFormData({ ...formData, amenities: updatedAmenities });
+  };
   return (
     <div className="p-6 max-w-5xl mx-auto bg-white rounded shadow my-5">
       <div className="flex flex-col md:flex-row items-center justify-between mb-6">
@@ -291,7 +300,7 @@ export default function AdminEditProperty() {
         <div className="col-span-full">
           <label className="block mb-1 font-semibold">Amenities</label>
           <div className="flex flex-wrap gap-4">
-            {Amenities.map((amenity, idx) => (
+            {allAmenities.map((amenity, idx) => (
               <label key={idx} className="flex items-center gap-1">
                 <input
                   type="checkbox"
