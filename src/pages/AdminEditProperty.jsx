@@ -25,9 +25,14 @@ export default function AdminEditProperty() {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const res = await fetch(`https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        });
+        const res = await fetch(
+          `https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          },
+        );
         const data = await res.json();
         setFormData(data);
       } catch (err) {
@@ -78,11 +83,14 @@ export default function AdminEditProperty() {
       if (deletedImages.length > 0)
         deletedImages.forEach((img) => fd.append("deletedImages", img));
 
-      const res = await fetch(`https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`, {
-        method: "PUT",
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        body: fd,
-      });
+      const res = await fetch(
+        `https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`,
+        {
+          method: "PUT",
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          body: fd,
+        },
+      );
 
       const data = await res.json();
       if (!res.ok) {
@@ -269,8 +277,8 @@ export default function AdminEditProperty() {
             {formData.images.map((img, idx) => (
               <div key={idx} className="relative">
                 <img
-                  src={`https://vercel-synerzi-sbckend.vercel.app/${img.startsWith("uploads") ? img : `uploads/${img}`}`}
-                  alt="property"
+                  src={img} // ✅ Cloudinary URL direct
+                  alt={`property-${idx}`}
                   className="w-24 h-24 object-cover rounded"
                 />
                 <button
