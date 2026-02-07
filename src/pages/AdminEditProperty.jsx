@@ -51,12 +51,9 @@ export default function AdminEditProperty() {
     setFormData({ ...formData, [name]: value });
   };
 
-  // Delete old image handler
   const handleDeleteOldImage = (index) => {
     const removed = formData.images[index];
-
-    setDeletedImages((prev) => [...prev, removed]);
-
+    setDeletedImages((prev) => [...prev, removed]); // mark for deletion
     setFormData({
       ...formData,
       images: formData.images.filter((_, i) => i !== index),
@@ -68,64 +65,36 @@ export default function AdminEditProperty() {
     try {
       const fd = new FormData();
 
-      const ignoreFields = [
-        "_id",
-        "__v",
-        "images",
-        "amenities",
-        "createdAt",
-        "updatedAt",
-      ];
-
+      // Add other fields
       Object.keys(formData).forEach((key) => {
-        if (!ignoreFields.includes(key)) {
-          const value = formData[key];
-
-          // skip null / undefined / empty string
-          if (value !== null && value !== undefined && value !== "") {
-            fd.append(key, value);
-          }
+        if (!["_id", "__v", "images", "amenities"].includes(key)) {
+          fd.append(key, formData[key]);
         }
       });
 
-      // amenities
+      // Add amenities
       fd.append("amenities", JSON.stringify(formData.amenities || []));
 
-      // existing images (Cloudinary URLs)
-      if (formData.images?.length > 0) {
-        formData.images
-          .filter(
-            (img) => img && img !== "null" && !deletedImages.includes(img),
-          )
-          .forEach((img) => fd.append("existingImages", img));
-      }
+      // Existing images (not deleted)
+      formData.images.forEach((img) => fd.append("existingImages", img));
 
-      // new uploaded images
-      if (newImages.length > 0) {
-        newImages.forEach((img) => fd.append("images", img));
-      }
+      // New images
+      newImages.forEach((img) => fd.append("images", img));
 
-      // deleted images
-      if (deletedImages.length > 0) {
-        fd.append("deletedImages", JSON.stringify(deletedImages));
-      }
+      // Images marked for deletion
+      fd.append("deletedImages", JSON.stringify(deletedImages));
 
       const res = await fetch(
         `https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`,
         {
           method: "PUT",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           body: fd,
         },
       );
 
       const data = await res.json();
-      if (!res.ok) {
-        alert(data.message || "Update failed");
-        return;
-      }
+      if (!res.ok) return alert(data.message || "Update failed");
 
       alert("Property updated successfully 🚀");
       navigate("/admin-listings");
@@ -301,22 +270,26 @@ export default function AdminEditProperty() {
         />
 
         {/* Existing Images */}
-        {formData.images?.map((img, idx) => (
-          <div key={idx} className="relative">
-            <img
-              src={img} // Cloudinary URL direct
-              className="w-24 h-24 object-cover rounded"
-            />
-            <button
-              type="button"
-              onClick={() => handleDeleteOldImage(idx)}
-              className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6"
-            >
-              ×
-            </button>
+        {formData.images?.length > 0 && (
+          <div className="flex gap-2 flex-wrap col-span-full">
+            {formData.images.map((img, idx) => (
+              <div key={idx} className="relative">
+                <img
+                  src={img} // Cloudinary URL
+                  alt={`property-${idx}`}
+                  className="w-24 h-24 object-cover rounded"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleDeleteOldImage(idx)}
+                  className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
           </div>
-        ))}
-
+        )}
         {/* Upload New Images */}
         <input
           type="file"
