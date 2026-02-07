@@ -34,29 +34,22 @@ export default function ShowListings() {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this property?"))
-      return;
-
+    if (!window.confirm("Are you sure?")) return;
     try {
-      const token = localStorage.getItem("token");
-
       const res = await fetch(
         `https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`,
         {
           method: "DELETE",
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         },
       );
-
       const data = await res.json();
-
       if (!res.ok) return alert(data.message || "Delete failed");
-
+      alert("Property deleted ✅");
       setProperties((prev) => prev.filter((p) => p._id !== id));
-      alert("Property deleted successfully ✅");
     } catch (err) {
       console.error(err);
-      alert("Server error while deleting property");
+      alert("Server error!");
     }
   };
 
@@ -170,7 +163,7 @@ export default function ShowListings() {
                     </Link>
                     <button
                       onClick={() => handleDelete(p._id)}
-                      className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                      className="bg-red-600 text-white px-3 py-1 rounded"
                     >
                       Delete
                     </button>
