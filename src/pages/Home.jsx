@@ -50,11 +50,33 @@ const Home = () => {
       </div>
 
       <div className="w-full px-4">
-        <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl p-5 sm:p-6 md:p-8 -mt-20 sm:-mt-24 relative z-20">
-          {/* Form */}
-          <form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4">
-            {/* Location (Manual Input) */}
-            <div className="col-span-1 lg:col-span-3">
+        <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl p-5 sm:p-6 md:p-8 -mt-20 sm:-mt-24 relative z-20">
+          <form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+            {/* Type */}
+            <div>
+              <label className="text-sm text-gray-500">Type</label>
+              <select className="w-full h-[44px] rounded-lg border px-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
+                <option>Select Type</option>
+                <option>Rent</option>
+                <option>Lease</option>
+                <option>Buy</option>
+                <option>Sale</option>
+              </select>
+            </div>
+            {/* Property Type */}
+            <div>
+              <label className="text-sm text-gray-500">Property Type</label>
+              <select className="w-full h-[44px] rounded-lg border px-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
+                <option>Select Property</option>
+                <option>Commercial</option>
+                <option>Office Space</option>
+                <option>Retail Shop</option>
+                <option>Warehouse</option>
+                <option>Residential</option>
+              </select>
+            </div>
+            {/* Location */}
+            <div>
               <label className="text-sm text-gray-500">Location</label>
               <input
                 type="text"
@@ -63,8 +85,8 @@ const Home = () => {
               />
             </div>
 
-            {/* Area (Manual Input) */}
-            <div className="col-span-1 lg:col-span-3">
+            {/* Area */}
+            <div>
               <label className="text-sm text-gray-500">Area</label>
               <input
                 type="text"
@@ -73,38 +95,13 @@ const Home = () => {
               />
             </div>
 
-            {/* Type */}
-            <div className="col-span-1 lg:col-span-3">
-              <label className="text-sm text-gray-500">Type</label>
-              <select className="w-full h-[44px] rounded-lg border px-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
-                <option value="">Select Type</option>
-                <option>Rent</option>
-                <option>Lease</option>
-                <option>Buy</option>
-                <option>Sale</option>
-              </select>
-            </div>
-
-            {/* Property Type */}
-            <div className="col-span-1 lg:col-span-3">
-              <label className="text-sm text-gray-500">Property Type</label>
-              <select className="w-full h-[44px] rounded-lg border px-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
-                <option value="">Select Property Type</option>
-                <option>Commercial</option>
-                <option>Office Space</option>
-                <option>Retail Shop</option>
-                <option>Warehouse</option>
-                <option>Residential</option>
-              </select>
-            </div>
-
             {/* Button */}
-            <div className="col-span-1 lg:col-span-12 mt-2">
+            <div>
               <button
                 type="submit"
-                className="w-full h-[48px] rounded-xl bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white text-sm sm:text-base font-semibold shadow-md hover:scale-[1.03] transition-transform duration-300"
+                className="w-full h-[44px] rounded-lg bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white font-semibold shadow-md hover:scale-[1.03] transition"
               >
-                Search Property
+                Search
               </button>
             </div>
           </form>
