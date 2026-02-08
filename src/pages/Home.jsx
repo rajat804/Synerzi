@@ -51,90 +51,62 @@ const Home = () => {
 
       <div className="w-full px-4">
         <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl p-5 sm:p-6 md:p-8 -mt-20 sm:-mt-24 relative z-20">
-          {/* Tabs */}
-          <div className="flex overflow-x-auto gap-3 justify-start sm:justify-center mb-6 scrollbar-hide">
-            {tabs.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-sm sm:text-base font-semibold transition-all flex-shrink-0 ${
-                  activeTab === tab
-                    ? "bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white shadow"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-
           {/* Form */}
           <form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4">
-            {/* Location */}
+            {/* Location (Manual Input) */}
             <div className="col-span-1 lg:col-span-3">
               <label className="text-sm text-gray-500">Location</label>
-              <select
-                value={location}
-                onChange={(e) => {
-                  setLocation(e.target.value);
-                  setArea("");
-                }}
-                className="w-full h-[44px] rounded-lg border px-3"
-              >
-                <option value="">Select Location</option>
-                {Object.keys(locationAreaMap).map((loc) => (
-                  <option key={loc} value={loc}>
-                    {loc}
-                  </option>
-                ))}
-              </select>
+              <input
+                type="text"
+                placeholder="Enter Location"
+                className="w-full h-[44px] rounded-lg border px-3 focus:ring-2 focus:ring-[#06B6D4] outline-none"
+              />
             </div>
 
-            {/* Area */}
+            {/* Area (Manual Input) */}
             <div className="col-span-1 lg:col-span-3">
               <label className="text-sm text-gray-500">Area</label>
-              <select
-                value={area}
-                onChange={(e) => setArea(e.target.value)}
-                disabled={!location}
-                className="w-full h-[44px] rounded-lg border px-3 disabled:bg-gray-100"
-              >
-                <option value="">
-                  {location ? "Select Area" : "Select Location First"}
-                </option>
-                {areas.map((ar) => (
-                  <option key={ar} value={ar}>
-                    {ar}
-                  </option>
-                ))}
+              <input
+                type="text"
+                placeholder="Enter Area"
+                className="w-full h-[44px] rounded-lg border px-3 focus:ring-2 focus:ring-[#06B6D4] outline-none"
+              />
+            </div>
+
+            {/* Type */}
+            <div className="col-span-1 lg:col-span-3">
+              <label className="text-sm text-gray-500">Type</label>
+              <select className="w-full h-[44px] rounded-lg border px-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
+                <option value="">Select Type</option>
+                <option>Rent</option>
+                <option>Lease</option>
+                <option>Buy</option>
+                <option>Sale</option>
               </select>
             </div>
 
-            {/* Purpose */}
+            {/* Property Type */}
             <div className="col-span-1 lg:col-span-3">
-              <label className="block text-xs sm:text-sm font-medium text-gray-600 mb-1">
-                Purpose
-              </label>
-              <select className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-[#06B6D4] focus:outline-none">
-                <option>Select Purpose</option>
-                <option>Invest</option>
-                <option>Lease</option>
-                <option>Sales</option>
+              <label className="text-sm text-gray-500">Property Type</label>
+              <select className="w-full h-[44px] rounded-lg border px-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
+                <option value="">Select Property Type</option>
+                <option>Commercial</option>
+                <option>Office Space</option>
+                <option>Retail Shop</option>
+                <option>Warehouse</option>
+                <option>Residential</option>
               </select>
             </div>
 
             {/* Button */}
-            <div className="col-span-1 lg:col-span-3 flex items-end">
+            <div className="col-span-1 lg:col-span-12 mt-2">
               <button
                 type="submit"
-                className="w-full h-[44px] mt-1 rounded-lg bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white text-sm sm:text-base font-semibold shadow-md hover:scale-[1.03] transition-transform duration-300 flex items-center justify-center"
+                className="w-full h-[48px] rounded-xl bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white text-sm sm:text-base font-semibold shadow-md hover:scale-[1.03] transition-transform duration-300"
               >
-                Buy
+                Search Property
               </button>
             </div>
-
-            {/* Hidden Active Tab */}
-            <input type="hidden" value={activeTab} />
           </form>
         </div>
       </div>
