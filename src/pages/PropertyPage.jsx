@@ -11,7 +11,7 @@ export default function PropertyPage() {
     const fetchProperties = async () => {
       try {
         const res = await fetch(
-          "https://vercel-synerzi-sbckend.vercel.app/api/properties"
+          "https://vercel-synerzi-sbckend.vercel.app/api/properties",
         );
         if (!res.ok) throw new Error("Failed to fetch properties");
 
@@ -19,7 +19,7 @@ export default function PropertyPage() {
 
         // 🔥 DESC ORDER (latest first)
         const sorted = [...data].sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
         );
 
         setProperties(sorted);
@@ -71,6 +71,72 @@ export default function PropertyPage() {
         <div className="relative text-center text-white px-4">
           <h1 className="text-3xl md:text-4xl font-bold">All Properties</h1>
           <p className="mt-2 text-gray-200">Home / All Properties</p>
+        </div>
+      </section>
+
+      {/* FILTER BAR */}
+      <section className="bg-white py-8 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
+              <option>Type</option>
+              <option>Buy</option>
+              <option>Rent</option>
+              <option>Sale</option>
+              <option>Lease</option>
+            </select>
+
+            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
+              <option>Property Type</option>
+              <option>Apartment</option>
+              <option>Villa</option>
+              <option>Plot</option>
+              <option>Commercial</option>
+              <option>Office Space</option>
+            </select>
+
+            <div>
+              <input
+                list="states"
+                placeholder="State"
+                className="border rounded-lg px-4 py-3 w-full text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none"
+              />
+              <datalist id="states">
+                <option value="Maharashtra" />
+                <option value="Delhi" />
+                <option value="Karnataka" />
+                <option value="Gujarat" />
+                <option value="Rajasthan" />
+                <option value="Uttar Pradesh" />
+              </datalist>
+            </div>
+
+            <div>
+              <input
+                list="cities"
+                placeholder="City"
+                className="border rounded-lg px-4 py-3 w-full text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none"
+              />
+              <datalist id="cities">
+                <option value="Mumbai" />
+                <option value="Pune" />
+                <option value="Delhi" />
+                <option value="Bangalore" />
+                <option value="Ahmedabad" />
+                <option value="Jaipur" />
+              </datalist>
+            </div>
+
+            <input
+              type="text"
+              placeholder="Area (sq ft)"
+              className="border rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#06B6D4] outline-none"
+            />
+
+            <button className="bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] rounded-lg font-semibold hover:scale-105 transition">
+              Search
+            </button>
+          </div>
         </div>
       </section>
 
