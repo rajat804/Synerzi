@@ -13,7 +13,7 @@ export default function PropertyDetails() {
     const fetchProperty = async () => {
       try {
         const res = await fetch(
-          `https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`
+          `https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`,
         );
         const data = await res.json();
         setProperty(data);
@@ -28,7 +28,8 @@ export default function PropertyDetails() {
   }, [id]);
 
   if (loading) return <div className="p-6 text-center">Loading...</div>;
-  if (!property) return <div className="p-6 text-center">Property not found</div>;
+  if (!property)
+    return <div className="p-6 text-center">Property not found</div>;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
@@ -68,8 +69,7 @@ export default function PropertyDetails() {
           </h1>
 
           <p className="text-gray-500 mt-1">
-            {property.location}, {property.area},{" "}
-            {property.city}, {property.state}
+            {property.location}, {property.city}, {property.state}
           </p>
 
           {/* Tags */}
@@ -93,6 +93,10 @@ export default function PropertyDetails() {
 
           {/* QUICK DETAILS */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6 text-sm">
+            <Detail
+              label="Area"
+              value={property.area ? `${property.area} sq ft` : ""}
+            />
             <Detail label="BHK" value={property.bhk} />
             <Detail label="Bathrooms" value={property.bathrooms} />
             <Detail label="Balconies" value={property.balconies} />
