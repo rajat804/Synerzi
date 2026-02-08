@@ -15,6 +15,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import ShowListings from "./pages/ShowListings";
 import AdminEditProperty from "./pages/AdminEditProperty";
 import AddListing from "./pages/AddListing";
+import PropertyDetails from "./pages/PropertyDetails";
 
 
 function App() {
@@ -44,7 +45,7 @@ const hideHeaderandFooter =
         <Route path="/register" element={<Register/>}></Route>
         <Route path="/google-success" element={<GoogleSuccess/>}></Route>
         <Route path="/dashboard" element={<UserDashboard/>}></Route>
-
+        <Route path="/property/:id" element={<PropertyDetails/>}></Route>
 
         {/* admin  */}
         <Route path="/admin-login" element={<AdminLogin/>}></Route>
