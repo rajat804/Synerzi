@@ -101,7 +101,7 @@ export default function ShowListings() {
                 <th className="border p-2">BHK</th>
                 <th className="border p-2">Bathrooms</th>
                 <th className="border p-2">Balconies</th>
-                <th className="border p-2">Floor No</th>
+                {/* <th className="border p-2">Floor No</th> */}
                 <th className="border p-2">Total Floors</th>
                 <th className="border p-2">Facing</th>
                 <th className="border p-2">Parking</th>
@@ -127,7 +127,7 @@ export default function ShowListings() {
                   <td className="border p-2">{p.bhk}</td>
                   <td className="border p-2">{p.bathrooms}</td>
                   <td className="border p-2">{p.balconies}</td>
-                  <td className="border p-2">{p.floorNo}</td>
+                  {/* <td className="border p-2">{p.floorNo}</td> */}
                   <td className="border p-2">{p.totalFloors}</td>
                   <td className="border p-2">{p.facing || "—"}</td>
                   <td className="border p-2">{p.parking || "—"}</td>
