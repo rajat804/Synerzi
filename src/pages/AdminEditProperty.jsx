@@ -11,13 +11,13 @@ export default function AdminEditProperty() {
   const [deletedImages, setDeletedImages] = useState([]);
   const allAmenities = ["Lift", "Gym", "Pool", "Security", "Garden", "CCTV"];
 
-  const purposes = ["Sale", "Rent", "Lease", "Investment"]; // replaced type with purpose
+  const purposes = ["Sale", "Rent", "Lease", "Buy"]; // replaced type with purpose
   const categories = [
-    "Apartment",
-    "Villa",
-    "Plot",
     "Commercial",
     "Office Space",
+    "Retail Shop",
+    "Warehouse",
+    "Residential",
   ];
 
   const parkingOptions = ["Parking", "Available", "Not Available"];
