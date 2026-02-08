@@ -11,12 +11,18 @@ export default function PropertyPage() {
     const fetchProperties = async () => {
       try {
         const res = await fetch(
-          "https://vercel-synerzi-sbckend.vercel.app/api/properties",
+          "https://vercel-synerzi-sbckend.vercel.app/api/properties"
         );
         if (!res.ok) throw new Error("Failed to fetch properties");
 
         const data = await res.json();
-        setProperties(data);
+
+        // 🔥 DESC ORDER (latest first)
+        const sorted = [...data].sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+
+        setProperties(sorted);
       } catch (err) {
         console.error(err);
         setError("Failed to load properties");
@@ -68,54 +74,6 @@ export default function PropertyPage() {
         </div>
       </section>
 
-      {/* FILTER BAR */}
-      <section className="bg-white py-8 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
-              <option>Type</option>
-              <option>Buy</option>
-              <option>Rent</option>
-            </select>
-
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
-              <option>Category</option>
-              <option>Apartment</option>
-              <option>Villa</option>
-              <option>Plot</option>
-              <option>Commercial</option>
-              <option>Office Space</option>
-            </select>
-
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
-              <option>State</option>
-              <option>Maharashtra</option>
-              <option>Delhi</option>
-              <option>Karnataka</option>
-              <option>Gujarat</option>
-            </select>
-
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
-              <option>City</option>
-              <option>Mumbai</option>
-              <option>Pune</option>
-              <option>Bangalore</option>
-              <option>Ahmedabad</option>
-            </select>
-
-            <input
-              type="text"
-              placeholder="Area (sq ft)"
-              className="border rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#06B6D4] outline-none"
-            />
-
-            <button className="bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] rounded-lg font-semibold hover:scale-105 transition">
-              Search
-            </button>
-          </div>
-        </div>
-      </section>
-
       {/* ================= PROPERTIES GRID ================= */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
@@ -136,11 +94,11 @@ export default function PropertyPage() {
                       <img
                         src={
                           item.images[0].startsWith("http")
-                            ? item.images[0] // Already a full URL (Cloudinary)
-                            : `https://vercel-synerzi-sbckend.vercel.app/${item.images[0]}` // Backend path
+                            ? item.images[0] // Cloudinary
+                            : `https://vercel-synerzi-sbckend.vercel.app/${item.images[0]}`
                         }
                         alt={item.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                       />
                     ) : (
                       <div className="w-full h-full bg-gray-200 flex items-center justify-center">
@@ -165,7 +123,7 @@ export default function PropertyPage() {
                     </p>
 
                     <p className="text-gray-600 text-sm mt-3">
-                      {truncateText(item.description, 120)}
+                      {truncateText(item.description)}
                     </p>
 
                     <div className="flex justify-between items-center mt-5">
@@ -173,7 +131,10 @@ export default function PropertyPage() {
                         ₹ {item.price}
                       </span>
 
-                      <Link to={`/property/${item._id}`} className="text-sm px-4 py-2 rounded-full border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-[#0F172A] transition">
+                      <Link
+                        to={`/property/${item._id}`}
+                        className="text-sm px-4 py-2 rounded-full border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-[#0F172A] transition"
+                      >
                         View Details
                       </Link>
                     </div>
