@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function PropertyPage() {
   const [properties, setProperties] = useState([]);
@@ -172,9 +173,9 @@ export default function PropertyPage() {
                         ₹ {item.price}
                       </span>
 
-                      <button className="text-sm px-4 py-2 rounded-full border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-[#0F172A] transition">
+                      <Link to={`/property/${item._id}`} className="text-sm px-4 py-2 rounded-full border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-[#0F172A] transition">
                         View Details
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
