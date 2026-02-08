@@ -169,10 +169,12 @@ export default function AddListing() {
               onChange={handleChange}
               className="border p-2 rounded"
             >
-              <option>Apartment</option>
-              <option>Villa</option>
-              <option>Plot</option>
+              <option>Select Property Category</option>
               <option>Commercial</option>
+              <option>Office Space</option>
+              <option>Retail Shop</option>
+              <option>Warehouse</option>
+              <option>Residential</option>
             </select>
 
             <select
@@ -184,7 +186,7 @@ export default function AddListing() {
               <option>Sale</option>
               <option>Rent</option>
               <option>Lease</option>
-              <option>Investment</option>
+              <option>Buy</option>
             </select>
 
             <input
