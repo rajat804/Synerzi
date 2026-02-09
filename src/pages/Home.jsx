@@ -50,7 +50,7 @@ const Home = () => {
         </section>
       </div>
 
-      <div className="w-full px-4">
+      <div className="w-full px-4 bg-gradient-to-br from-[#E0F2FE] via-[#F8FAFC] to-[#ECFEFF]">
         <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl p-5 sm:p-6 md:p-8 -mt-20 sm:-mt-24 relative z-20">
           <SearchBox />
         </div>
@@ -58,7 +58,6 @@ const Home = () => {
 
       {/* Property by area */}
       <PropertyArea />
-
 
       {/* Our company overview */}
       <CompanyOverview />
@@ -68,7 +67,7 @@ const Home = () => {
 
       {/* Synerzi Section */}
       <SynerziSection />
-      
+
       {/* Contact us */}
       <ContactUs />
 
