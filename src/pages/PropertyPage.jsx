@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import SearchBox from "./SearchBox";
+
 
 export default function PropertyPage() {
   const [properties, setProperties] = useState([]);
@@ -75,70 +77,6 @@ export default function PropertyPage() {
       </section>
 
       {/* FILTER BAR */}
-      {/* <section className="bg-white py-8 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
-              <option>Type</option>
-              <option>Buy</option>
-              <option>Rent</option>
-              <option>Sale</option>
-              <option>Lease</option>
-            </select>
-
-            <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
-              <option>Property Type</option>
-              <option>Apartment</option>
-              <option>Villa</option>
-              <option>Plot</option>
-              <option>Commercial</option>
-              <option>Office Space</option>
-            </select>
-
-            <div>
-              <input
-                list="states"
-                placeholder="State"
-                className="border rounded-lg px-4 py-3 w-full text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none"
-              />
-              <datalist id="states">
-                <option value="Maharashtra" />
-                <option value="Delhi" />
-                <option value="Karnataka" />
-                <option value="Gujarat" />
-                <option value="Rajasthan" />
-                <option value="Uttar Pradesh" />
-              </datalist>
-            </div>
-
-            <div>
-              <input
-                list="cities"
-                placeholder="City"
-                className="border rounded-lg px-4 py-3 w-full text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none"
-              />
-              <datalist id="cities">
-                <option value="Mumbai" />
-                <option value="Pune" />
-                <option value="Delhi" />
-                <option value="Bangalore" />
-                <option value="Ahmedabad" />
-                <option value="Jaipur" />
-              </datalist>
-            </div>
-
-            <input
-              type="text"
-              placeholder="Area (sq ft)"
-              className="border rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#06B6D4] outline-none"
-            />
-
-            <button className="bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] rounded-lg font-semibold hover:scale-105 transition">
-              Search
-            </button>
-          </div>
-        </div>
-      </section> */}
       <div className="w-full px-4">
         <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl p-5 sm:p-6 md:p-8 -mt-20 sm:-mt-24 relative z-20">
           <SearchBox />
