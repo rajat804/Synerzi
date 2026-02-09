@@ -7,6 +7,7 @@ import {
   FaLinkedinIn,
   FaTwitter,
 } from "react-icons/fa";
+import ContactUs from "../components/ContactUs";
 
 const Contact = () => {
   return (
@@ -57,18 +58,18 @@ const Contact = () => {
                 <p className="text-gray-700">
                   SRM Realty Pvt Ltd
                   <br />
-                  Sector 62, Noida, Uttar Pradesh
+                  Shop No. B-14, Main Market, Sector 1, IMT Manesar, Gurugram – 122050 (HR.)
                 </p>
               </div>
 
               <div className="flex items-center gap-4">
                 <FaPhoneAlt className="text-[#06B6D4]" />
-                <span className="text-gray-700">+91 98765 43210</span>
+                <span className="text-gray-700">+91 98967 07022</span>
               </div>
 
               <div className="flex items-center gap-4">
                 <FaEnvelope className="text-[#06B6D4]" />
-                <span className="text-gray-700">info@srm.com</span>
+                <span className="text-gray-700">shreeramrealtygroup@gmail.com</span>
               </div>
             </div>
 
@@ -91,7 +92,7 @@ const Contact = () => {
           </div>
 
           {/* RIGHT FORM */}
-          <div className="relative">
+          {/* <div className="relative">
             <div className="absolute inset-0 bg-[#06B6D4]/10 rounded-3xl blur-3xl"></div>
             <div className="relative bg-white/90 backdrop-blur-lg p-8 rounded-3xl shadow-xl">
               <h3 className="text-2xl font-semibold text-gray-900 mb-6">
@@ -126,7 +127,8 @@ const Contact = () => {
                 </button>
               </form>
             </div>
-          </div>
+          </div> */}
+          <ContactUs/>
         </div>
       </section>
     </>
