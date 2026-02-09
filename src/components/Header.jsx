@@ -90,7 +90,7 @@ const Header = () => {
                   onClick={() => setCategoryOpen(!categoryOpen)}
                   className="flex items-center justify-between w-full text-gray-300"
                 >
-                  <span>List by Category</span>
+                  <span>Property by Category</span>
                   <i
                     className={`fas fa-chevron-down transition ${
                       categoryOpen ? "rotate-180" : ""
