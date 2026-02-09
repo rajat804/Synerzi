@@ -49,7 +49,6 @@ const hideHeaderandFooter =
         <Route path="/dashboard" element={<UserDashboard/>}></Route>
         <Route path="/property/:id" element={<PropertyDetails/>}></Route>
         <Route path="/search" element={<SearchResults/>}></Route>
-        <FloatingContact/>
 
 
         {/* admin  */}
@@ -60,6 +59,7 @@ const hideHeaderandFooter =
         <Route path="/admin-listings" element={<ShowListings/>}></Route>
         <Route path="/admin-edit-property/:id" element={<AdminEditProperty/>}></Route>
       </Routes>
+      <FloatingContact/>
       {!hideHeaderandFooter && <Footer />}
     </>
   );
