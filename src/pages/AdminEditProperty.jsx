@@ -11,7 +11,7 @@ export default function AdminEditProperty() {
   const [deletedImages, setDeletedImages] = useState([]);
   const allAmenities = ["Lift", "Gym", "Pool", "Security", "Garden", "CCTV"];
 
-  const purposes = ["Sale", "Rent", "Lease", "Buy"]; // replaced type with purpose
+  const purposes = ["Sale", "Lease", "Buy"]; // replaced type with purpose
   const categories = [
     "Commercial",
     "Office Space",
@@ -217,6 +217,16 @@ export default function AdminEditProperty() {
             placeholder="City"
             className="border p-2 rounded w-full"
             list="cities"
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-semibold">Location</label>
+          <input
+            name="location"
+            value={formData.location || ""}
+            onChange={handleChange}
+            placeholder="Location"
+            className="border p-2 rounded w-full"
           />
         </div>
 
