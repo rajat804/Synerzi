@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import SynerziSection from "./SynerziSection";
+// import SynerziSection from "./SynerziSection";
 
 const testimonials = [
   {
@@ -97,7 +97,7 @@ export default function TestimonialsSection() {
 
           {/* SRM HIGHLIGHTS */}
           {/* SRM HIGHLIGHTS */}
-          {/* <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             <div className="bg-white rounded-xl shadow-md p-5 text-center hover:shadow-xl transition">
               <div className="text-3xl mb-2">🏢</div>
               <h4 className="text-lg font-semibold text-[#0F172A]">500+</h4>
@@ -120,9 +120,9 @@ export default function TestimonialsSection() {
               </h4>
               <p className="text-sm text-gray-500">Industry Experience</p>
             </div>
-          </div> */}
+          </div>
 
-          <SynerziSection/>
+          {/* <SynerziSection/> */}
         </div>
       </div>
     </section>
