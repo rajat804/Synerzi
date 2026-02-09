@@ -59,8 +59,6 @@ const Home = () => {
       {/* Property by area */}
       <PropertyArea />
 
-      {/* Synerzi Section */}
-      {/* <SynerziSection /> */}
 
       {/* Our company overview */}
       <CompanyOverview />
@@ -68,6 +66,10 @@ const Home = () => {
       {/* Testimonials */}
       <Testimonials />
 
+      {/* Synerzi Section */}
+      <SynerziSection />
+
+      
       {/* Contact us */}
       <ContactUs />
 
