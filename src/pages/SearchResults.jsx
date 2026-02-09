@@ -1,62 +1,68 @@
+import { useSearchParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
 
 const SearchResults = () => {
-  const { search } = useLocation();
+  const [params] = useSearchParams();
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchResults = async () => {
-      setLoading(true);
+    const fetchData = async () => {
+      const query = params.toString();
+
       const res = await fetch(
-        `https://vercel-synerzi-sbckend.vercel.app/api/properties/search${search}`
+        `https://vercel-synerzi-sbckend.vercel.app/api/properties/search?${query}`
       );
+
       const data = await res.json();
       setProperties(data);
       setLoading(false);
     };
 
-    fetchResults();
-  }, [search]);
+    fetchData();
+  }, [params]);
 
-  if (loading) return <div className="p-10">Loading...</div>;
+  if (loading) return <div className="p-10 text-center">Searching...</div>;
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
-      <h2 className="text-2xl font-semibold mb-6">
-        Search Results ({properties.length})
-      </h2>
+    <div className="max-w-7xl mx-auto px-4 py-10">
+      <h2 className="text-2xl font-bold mb-6">Search Results</h2>
 
       {properties.length === 0 ? (
         <p>No property found</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {properties.map((item) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {properties.map((p) => (
             <div
-              key={item._id}
-              className="bg-white rounded-xl shadow hover:shadow-lg overflow-hidden"
+              key={p._id}
+              className="bg-white rounded-xl shadow hover:shadow-lg"
             >
               <img
-                src={item.images?.[0]}
-                className="h-48 w-full object-cover"
+                src={
+                  p.images?.[0]?.startsWith("http")
+                    ? p.images[0]
+                    : `https://vercel-synerzi-sbckend.vercel.app/${p.images?.[0]}`
+                }
+                className="h-52 w-full object-cover rounded-t-xl"
               />
 
               <div className="p-4">
-                <h3 className="font-semibold">{item.title}</h3>
+                <h3 className="font-semibold">{p.title}</h3>
                 <p className="text-sm text-gray-500">
-                  {item.location}, {item.city}
-                </p>
-                <p className="text-[#06B6D4] font-bold mt-2">
-                  ₹ {item.price}
+                  {p.city}, {p.location}
                 </p>
 
-                <Link
-                  to={`/property/${item._id}`}
-                  className="block mt-3 text-center text-sm py-2 rounded bg-[#06B6D4] text-white"
-                >
-                  View Details
-                </Link>
+                <div className="mt-4 flex justify-between">
+                  <span className="text-[#06B6D4] font-bold">
+                    ₹ {p.price}
+                  </span>
+                  <Link
+                    to={`/property/${p._id}`}
+                    className="text-sm text-[#06B6D4]"
+                  >
+                    View
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
