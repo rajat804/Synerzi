@@ -56,7 +56,7 @@ const Home = () => {
             <div>
               <label className="text-sm text-gray-500">Type</label>
               <select className="w-full h-[44px] rounded-lg border px-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
-                <option>Buy/Lease/Sale</option>
+                <option>Select Buy/Lease/Sale</option>
                 {/* <option>Rent</option> */}
                 <option>Lease</option>
                 <option>Buy</option>
