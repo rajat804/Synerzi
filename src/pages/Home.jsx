@@ -50,8 +50,8 @@ const Home = () => {
         </section>
       </div>
 
-      <div className="w-full px-4 bg-gradient-to-br from-[#E0F2FE] via-[#F8FAFC] to-[#ECFEFF]">
-        <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl p-5 sm:p-6 md:p-8 -mt-20 sm:-mt-24 relative z-20">
+      <div className="w-full px-4 bg-gradient-to-r from-[#020617] to-[#0F172A]">
+        <div className="max-w-7xl mx-auto rounded-2xl p-6 -mt-20 sm:-mt-24 backdrop-blur-lg bg-white/90 shadow-2xl relative z-20">
           <SearchBox />
         </div>
       </div>
