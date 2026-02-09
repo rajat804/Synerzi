@@ -50,58 +50,11 @@ const Home = () => {
         </section>
       </div>
 
-      {/* <div className="w-full px-4">
+      <div className="w-full px-4">
         <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl p-5 sm:p-6 md:p-8 -mt-20 sm:-mt-24 relative z-20">
-          <form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
-            <div>
-              <label className="text-sm text-gray-500">Type</label>
-              <select className="w-full h-[44px] rounded-lg border px-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
-                <option>Buy/Lease/Sale</option>
-                <option>Lease</option>
-                <option>Buy</option>
-                <option>Sale</option>
-              </select>
-            </div>
-            <div>
-              <label className="text-sm text-gray-500">Property Type</label>
-              <select className="w-full h-[44px] rounded-lg border px-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
-                <option>Select Property</option>
-                <option>Commercial</option>
-                <option>Office Space</option>
-                <option>Retail Shop</option>
-                <option>Warehouse</option>
-                <option>Residential</option>
-              </select>
-            </div>
-            <div>
-              <label className="text-sm text-gray-500">Location</label>
-              <input
-                type="text"
-                placeholder="E.g Nodia"
-                className="w-full h-[44px] rounded-lg border px-3 focus:ring-2 focus:ring-[#06B6D4] outline-none"
-              />
-            </div>
-            <div>
-              <label className="text-sm text-gray-500">Area</label>
-              <input
-                type="text"
-                placeholder="Area Noida Sector 62"
-                className="w-full h-[44px] rounded-lg border px-3 focus:ring-2 focus:ring-[#06B6D4] outline-none"
-              />
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                className="w-full h-[44px] rounded-lg bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white font-semibold shadow-md hover:scale-[1.03] transition"
-              >
-                Search
-              </button>
-            </div>
-          </form>
+          <SearchBox />
         </div>
-      </div> */}
-      <SearchBox/>
+      </div>
 
       {/* Property by area */}
       <PropertyArea />
