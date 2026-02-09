@@ -49,7 +49,7 @@ export default function Footer() {
                 <FaPhoneAlt /> +91 9896707022
               </li>
               <li className="flex gap-2 items-center">
-                <FaEnvelope /> info@srm.com
+                <FaEnvelope /> shreeramrealtygroup@gmail.com
               </li>
             </ul>
           </div>
