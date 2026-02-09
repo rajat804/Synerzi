@@ -24,7 +24,7 @@ const SearchBox = () => {
   return (
     <form
       onSubmit={handleSearch}
-      className="bg-white rounded-2xl shadow-xl p-5 md:p-6
+      className="
                  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end"
     >
       {/* PURPOSE */}
