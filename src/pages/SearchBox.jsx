@@ -17,7 +17,6 @@ const SearchBox = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-
     const query = new URLSearchParams(filters).toString();
     navigate(`/search?${query}`);
   };
@@ -25,15 +24,20 @@ const SearchBox = () => {
   return (
     <form
       onSubmit={handleSearch}
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end"
+      className="bg-white rounded-2xl shadow-xl p-5 md:p-6
+                 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end"
     >
-      {/* Type */}
+      {/* PURPOSE */}
       <div>
-        <label className="text-sm text-gray-500">Type</label>
+        <label className="text-xs font-semibold text-gray-500 mb-1 block">
+          Type
+        </label>
         <select
           name="purpose"
           onChange={handleChange}
-          className="w-full h-[44px] rounded-lg border px-3"
+          className="w-full h-[48px] rounded-xl border border-gray-200 px-4
+                     focus:ring-2 focus:ring-[#06B6D4] focus:border-[#06B6D4]
+                     hover:border-[#06B6D4] transition outline-none"
         >
           <option value="">Buy / Lease / Sale</option>
           <option value="Buy">Buy</option>
@@ -42,13 +46,17 @@ const SearchBox = () => {
         </select>
       </div>
 
-      {/* Property Type */}
+      {/* CATEGORY */}
       <div>
-        <label className="text-sm text-gray-500">Property Type</label>
+        <label className="text-xs font-semibold text-gray-500 mb-1 block">
+          Property Type
+        </label>
         <select
           name="category"
           onChange={handleChange}
-          className="w-full h-[44px] rounded-lg border px-3"
+          className="w-full h-[48px] rounded-xl border border-gray-200 px-4
+                     focus:ring-2 focus:ring-[#06B6D4] focus:border-[#06B6D4]
+                     hover:border-[#06B6D4] transition outline-none"
         >
           <option value="">Select Property</option>
           <option value="Commercial">Commercial</option>
@@ -59,32 +67,43 @@ const SearchBox = () => {
         </select>
       </div>
 
-      {/* City */}
+      {/* CITY */}
       <div>
-        <label className="text-sm text-gray-500">City</label>
+        <label className="text-xs font-semibold text-gray-500 mb-1 block">
+          City
+        </label>
         <input
           name="city"
           placeholder="Gurugram"
           onChange={handleChange}
-          className="w-full h-[44px] rounded-lg border px-3"
+          className="w-full h-[48px] rounded-xl border border-gray-200 px-4
+                     focus:ring-2 focus:ring-[#06B6D4] focus:border-[#06B6D4]
+                     hover:border-[#06B6D4] transition outline-none"
         />
       </div>
 
-      {/* Location */}
+      {/* LOCATION */}
       <div>
-        <label className="text-sm text-gray-500">Location</label>
+        <label className="text-xs font-semibold text-gray-500 mb-1 block">
+          Location
+        </label>
         <input
           name="location"
           placeholder="Udyog Vihar Phase 4"
           onChange={handleChange}
-          className="w-full h-[44px] rounded-lg border px-3"
+          className="w-full h-[48px] rounded-xl border border-gray-200 px-4
+                     focus:ring-2 focus:ring-[#06B6D4] focus:border-[#06B6D4]
+                     hover:border-[#06B6D4] transition outline-none"
         />
       </div>
 
-      {/* Button */}
+      {/* BUTTON */}
       <button
         type="submit"
-        className="w-full h-[44px] rounded-lg bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white font-semibold"
+        className="h-[48px] rounded-xl font-semibold text-white
+                   bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9]
+                   shadow-md hover:shadow-xl hover:scale-[1.03]
+                   transition-all duration-300"
       >
         Search
       </button>
