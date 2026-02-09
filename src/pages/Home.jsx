@@ -58,8 +58,8 @@ const Home = () => {
       <div className="w-full px-4">
         <div
           className="max-w-7xl mx-auto rounded-2xl p-5 sm:p-6 md:p-8 -mt-20 sm:-mt-24
-            bg-gradient-to-br from-[#06B6D4]/20 via-[#38BDF8]/20 to-[#6366F1]/20
-            backdrop-blur-lg shadow-2xl border border-white/30 relative z-20"
+          bg-gradient-to-r from-[#020617] to-[#0F172A]
+          shadow-2xl border border-[#1E293B] relative z-20"
         >
           <SearchBox />
         </div>
