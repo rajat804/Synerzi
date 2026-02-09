@@ -53,13 +53,13 @@ export default function AdminEditProperty() {
   };
 
   const handleDeleteOldImage = (index) => {
-  const removed = formData.images[index];
-  setDeletedImages((prev) => [...prev, removed]); // mark for deletion
-  setFormData({
-    ...formData,
-    images: formData.images.filter((_, i) => i !== index),
-  });
-};
+    const removed = formData.images[index];
+    setDeletedImages((prev) => [...prev, removed]); // mark for deletion
+    setFormData({
+      ...formData,
+      images: formData.images.filter((_, i) => i !== index),
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -304,6 +304,34 @@ export default function AdminEditProperty() {
               </option>
             ))}
           </select>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+          {/* FEATURED */}
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={formData.isFeatured}
+              onChange={(e) =>
+                setFormData({ ...formData, isFeatured: e.target.checked })
+              }
+              className="w-5 h-5 accent-[#06B6D4]"
+            />
+            <span className="text-gray-700 font-medium">Featured Property</span>
+          </label>
+
+          {/* LATEST */}
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={formData.isLatest}
+              onChange={(e) =>
+                setFormData({ ...formData, isLatest: e.target.checked })
+              }
+              className="w-5 h-5 accent-[#0EA5E9]"
+            />
+            <span className="text-gray-700 font-medium">Latest Property</span>
+          </label>
         </div>
 
         {/* Amenities */}
