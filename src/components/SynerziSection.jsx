@@ -1,4 +1,3 @@
-import WhyChooseUs from "./WhyChooseUs"
 
 const SynerziSection = () => {
   const items = [
@@ -76,7 +75,7 @@ const SynerziSection = () => {
           </div>
         </div>
       </section>
-      <WhyChooseUs/>
+      
     </>
   );
 };
