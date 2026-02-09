@@ -55,10 +55,10 @@ const Header = () => {
             {/* RIGHT: Secondary Actions */}
             <div className="hidden md:flex items-center gap-4 ml-auto">
               {/* Phone */}
-              <div className="flex items-center gap-2 text-sm text-gray-300 hover:text-[#06B6D4] transition cursor-pointer">
+              {/* <div className="flex items-center gap-2 text-sm text-gray-300 hover:text-[#06B6D4] transition cursor-pointer">
                 <i className="fas fa-phone-alt text-[#06B6D4]" />
                 <span className="hidden lg:block">+91 98967 07022</span>
-              </div>
+              </div> */}
 
               {/* User Login */}
               <Link
