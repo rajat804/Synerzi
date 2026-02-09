@@ -43,7 +43,7 @@ const PropertyArea = () => {
     const fetchProperties = async () => {
       try {
         const res = await fetch(
-          "https://vercel-synerzi-sbckend.vercel.app/api/properties"
+          "https://vercel-synerzi-sbckend.vercel.app/api/properties",
         );
         const data = await res.json();
 
@@ -75,23 +75,30 @@ const PropertyArea = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {propertyAreas.map((area, index) => (
               <div
                 key={index}
-                className="relative h-[280px] rounded-xl overflow-hidden group cursor-pointer"
+                className="relative h-[180px] sm:h-[220px] lg:h-[280px] 
+                 rounded-xl overflow-hidden group cursor-pointer"
               >
+                {/* IMAGE */}
                 <img
                   src={area.image}
                   alt={area.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                  className="w-full h-full object-cover 
+                   group-hover:scale-110 transition duration-500"
                 />
-                <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition" />
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center">
-                  <h3 className="text-xl font-semibold text-white">
+
+                {/* OVERLAY */}
+                <div className="absolute inset-0 bg-black/45 group-hover:bg-black/60 transition" />
+
+                {/* CONTENT */}
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-2">
+                  <h3 className="text-sm sm:text-lg font-semibold text-white leading-tight">
                     {area.title}
                   </h3>
-                  <p className="text-md font-bold text-[#06B6D4] mt-2">
+                  <p className="text-xs sm:text-sm font-bold text-[#06B6D4] mt-1">
                     {area.listings}
                   </p>
                 </div>
