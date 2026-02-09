@@ -53,37 +53,6 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-
-          {/* LISTS BY CATEGORY */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Lists by Category</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li className="hover:text-white cursor-pointer">Commercial Property</li>
-              <li className="hover:text-white cursor-pointer">Residential Property</li>
-              <li className="hover:text-white cursor-pointer">Office Spaces</li>
-              <li className="hover:text-white cursor-pointer">Retail Shops</li>
-              <li className="hover:text-white cursor-pointer">Warehouses</li>
-            </ul>
-          </div>
-
-          {/* LATEST PROPERTIES */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Latest Properties</h4>
-            <ul className="space-y-3 text-sm text-gray-400">
-              <li>
-                <p className="text-white">Udyog Vihar, Gurugram</p>
-                <span className="text-xs">₹1.2 Cr • Office Space</span>
-              </li>
-              <li>
-                <p className="text-white">Cyber City, Gurugram</p>
-                <span className="text-xs">₹2.5 Cr • Commercial</span>
-              </li>
-              <li>
-                <p className="text-white">Sohna Road</p>
-                <span className="text-xs">₹90 Lakh • Retail</span>
-              </li>
-            </ul>
-          </div>
         </div>
 
         {/* BOTTOM BAR */}
