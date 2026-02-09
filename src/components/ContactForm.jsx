@@ -22,11 +22,11 @@ const ContactForm = () => {
         Hello SRM 👋
         I am interested in your property.
 
-        👤 Name: ${formData.name}
-        📞 Phone: ${formData.phone}
-        🏙️ City: ${formData.city}
-        📧 Email: ${formData.email}
-        📝 Message: ${formData.message}
+        Name: ${formData.name}
+        Phone: ${formData.phone}
+        City: ${formData.city}
+        Email: ${formData.email}
+        Message: ${formData.message}
     `;
 
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
@@ -34,6 +34,15 @@ const ContactForm = () => {
     )}`;
 
     window.open(whatsappURL, "_blank");
+
+    // RESET FORM AFTER SEND
+    setFormData({
+      name: "",
+      phone: "",
+      city: "",
+      email: "",
+      message: "",
+    });
   };
 
   return (
