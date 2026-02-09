@@ -17,6 +17,7 @@ import AdminEditProperty from "./pages/AdminEditProperty";
 import AddListing from "./pages/AddListing";
 import PropertyDetails from "./pages/PropertyDetails";
 import SearchResults from "./pages/SearchResults";
+import FloatingContact from "./components/FloatingContact";
 
 
 function App() {
@@ -48,6 +49,9 @@ const hideHeaderandFooter =
         <Route path="/dashboard" element={<UserDashboard/>}></Route>
         <Route path="/property/:id" element={<PropertyDetails/>}></Route>
         <Route path="/search" element={<SearchResults/>}></Route>
+        <FloatingContact/>
+
+
         {/* admin  */}
         <Route path="/admin-login" element={<AdminLogin/>}></Route>
         <Route path="/admin-register" element={<AdminRegister/>}></Route>
