@@ -22,7 +22,9 @@ const Contact = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/40"></div>
         <div className="relative max-w-7xl mx-auto px-4 text-white">
-          <h1 className="text-4xl md:text-6xl font-bold">Let’s Talk Business</h1>
+          <h1 className="text-4xl md:text-6xl font-bold">
+            Let’s Talk Business
+          </h1>
           <p className="mt-4 max-w-xl text-gray-200 text-lg">
             Connect with SRM to explore smart property solutions crafted for
             your future.
@@ -31,11 +33,11 @@ const Contact = () => {
       </section>
 
       {/* ===== MAP ===== */}
-      <div className="w-full h-[350px]">
+      <div className="w-full h-[350px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg">
         <iframe
           className="w-full h-full border-0"
           loading="lazy"
-          src="https://www.google.com/maps?q=Noida%20India&output=embed"
+          src="https://www.google.com/maps?q=Shop%20No.%20B-14,%20Main%20Market,%20Sector%201,%20IMT%20Manesar,%20Gurugram,%20Haryana%20122050&output=embed"
         ></iframe>
       </div>
 
@@ -47,8 +49,8 @@ const Contact = () => {
             <div>
               <h2 className="text-3xl font-bold text-gray-900">Get in Touch</h2>
               <p className="mt-3 text-gray-600 max-w-md">
-                Our experts are always ready to guide you with the right property
-                decisions.
+                Our experts are always ready to guide you with the right
+                property decisions.
               </p>
             </div>
 
@@ -58,7 +60,8 @@ const Contact = () => {
                 <p className="text-gray-700">
                   SRM Realty Pvt Ltd
                   <br />
-                  Shop No. B-14, Main Market, Sector 1, IMT Manesar, Gurugram – 122050 (HR.)
+                  Shop No. B-14, Main Market, Sector 1, IMT Manesar, Gurugram –
+                  122050 (HR.)
                 </p>
               </div>
 
@@ -69,7 +72,9 @@ const Contact = () => {
 
               <div className="flex items-center gap-4">
                 <FaEnvelope className="text-[#06B6D4]" />
-                <span className="text-gray-700">shreeramrealtygroup@gmail.com</span>
+                <span className="text-gray-700">
+                  shreeramrealtygroup@gmail.com
+                </span>
               </div>
             </div>
 
@@ -85,50 +90,14 @@ const Contact = () => {
                     >
                       <Icon />
                     </div>
-                  )
+                  ),
                 )}
               </div>
             </div>
           </div>
 
           {/* RIGHT FORM */}
-          {/* <div className="relative">
-            <div className="absolute inset-0 bg-[#06B6D4]/10 rounded-3xl blur-3xl"></div>
-            <div className="relative bg-white/90 backdrop-blur-lg p-8 rounded-3xl shadow-xl">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">
-                Send Us a Message
-              </h3>
-              <form className="space-y-5">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-[#06B6D4] outline-none"
-                />
-                <input
-                  type="text"
-                  placeholder="Your Phone"
-                  className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-[#06B6D4] outline-none"
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-[#06B6D4] outline-none"
-                />
-                <textarea
-                  rows="4"
-                  placeholder="Your Message"
-                  className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-[#06B6D4] outline-none"
-                ></textarea>
-                <button
-                  type="submit"
-                  className="w-full py-3 rounded-lg bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white font-semibold hover:scale-[1.02] transition-all shadow-lg"
-                >
-                  Send Email
-                </button>
-              </form>
-            </div>
-          </div> */}
-          <ContactForm/>
+          <ContactForm />
         </div>
       </section>
     </>
