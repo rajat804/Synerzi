@@ -56,7 +56,7 @@ const Home = () => {
             <div>
               <label className="text-sm text-gray-500">Type</label>
               <select className="w-full h-[44px] rounded-lg border px-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
-                <option>Select Buy/Lease/Sale</option>
+                <option>Buy/Lease/Sale</option>
                 {/* <option>Rent</option> */}
                 <option>Lease</option>
                 <option>Buy</option>
@@ -80,7 +80,7 @@ const Home = () => {
               <label className="text-sm text-gray-500">Location</label>
               <input
                 type="text"
-                placeholder="Enter Location"
+                placeholder="E.g Nodia"
                 className="w-full h-[44px] rounded-lg border px-3 focus:ring-2 focus:ring-[#06B6D4] outline-none"
               />
             </div>
@@ -90,7 +90,7 @@ const Home = () => {
               <label className="text-sm text-gray-500">Area</label>
               <input
                 type="text"
-                placeholder="Enter Area"
+                placeholder="Area Noida Sector 62"
                 className="w-full h-[44px] rounded-lg border px-3 focus:ring-2 focus:ring-[#06B6D4] outline-none"
               />
             </div>
