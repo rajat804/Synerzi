@@ -70,11 +70,15 @@ export default function TestimonialsSection() {
                 <h4 className="font-semibold text-gray-900">
                   {testimonials[index].name}
                 </h4>
-                <p className="text-sm text-gray-500">{testimonials[index].role}</p>
+                <p className="text-sm text-gray-500">
+                  {testimonials[index].role}
+                </p>
               </div>
             </div>
 
-            <p className="mt-4 text-gray-700 italic">“{testimonials[index].text}”</p>
+            <p className="mt-4 text-gray-700 italic">
+              “{testimonials[index].text}”
+            </p>
 
             {/* DOTS */}
             <div className="flex gap-2 mt-4">
@@ -90,19 +94,39 @@ export default function TestimonialsSection() {
             </div>
           </div>
 
-          {/* COMPANY LOGOS - RIGHT SIDE */}
-          {/* <div className="overflow-hidden bg-white py-4 rounded-xl shadow">
-            <div className="flex gap-10 animate-scroll px-6">
-              {logos.concat(logos).map((logo, i) => (
-                <img
-                  key={i}
-                  src={logo}
-                  alt="Company Logo"
-                  className="h-8 w-auto object-contain grayscale hover:grayscale-0 transition"
-                />
-              ))}
+          {/* SRM HIGHLIGHTS */}
+          {/* SRM HIGHLIGHTS */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+            {/* Highlight 1 */}
+            <div className="bg-white rounded-xl shadow-md p-5 text-center hover:shadow-xl transition">
+              <div className="text-3xl mb-2">🏢</div>
+              <h4 className="text-lg font-semibold text-[#0F172A]">500+</h4>
+              <p className="text-sm text-gray-500">Commercial Deals</p>
             </div>
-          </div> */}
+
+            {/* Highlight 2 */}
+            <div className="bg-white rounded-xl shadow-md p-5 text-center hover:shadow-xl transition">
+              <div className="text-3xl mb-2">📍</div>
+              <h4 className="text-lg font-semibold text-[#0F172A]">25+</h4>
+              <p className="text-sm text-gray-500">Prime Locations</p>
+            </div>
+
+            {/* Highlight 3 */}
+            <div className="bg-white rounded-xl shadow-md p-5 text-center hover:shadow-xl transition">
+              <div className="text-3xl mb-2">🤝</div>
+              <h4 className="text-lg font-semibold text-[#0F172A]">300+</h4>
+              <p className="text-sm text-gray-500">Happy Clients</p>
+            </div>
+
+            {/* Highlight 4 */}
+            <div className="bg-white rounded-xl shadow-md p-5 text-center hover:shadow-xl transition">
+              <div className="text-3xl mb-2">⏱️</div>
+              <h4 className="text-lg font-semibold text-[#0F172A]">
+                10+ Years
+              </h4>
+              <p className="text-sm text-gray-500">Industry Experience</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
