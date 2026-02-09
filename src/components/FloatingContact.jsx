@@ -1,49 +1,51 @@
 import { useState } from "react";
+import { FaPhoneAlt, FaWhatsapp, FaEnvelope, FaComments } from "react-icons/fa";
 
 const FloatingContact = () => {
   const [open, setOpen] = useState(false);
 
-  const phoneNumber = "9896707022";
-  const whatsappNumber = "919896707022";
-
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-3">
-      {/* WhatsApp Button */}
+    <div className="fixed bottom-5 right-5 z-50">
+      {/* Floating Options */}
       {open && (
-        <a
-          href={`https://wa.me/${whatsappNumber}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-12 h-12 flex items-center justify-center rounded-full
-          bg-green-500 text-white shadow-lg
-          hover:scale-110 transition-all"
-        >
-          <i className="fab fa-whatsapp text-xl"></i>
-        </a>
+        <div className="flex flex-col items-end gap-3 mb-3 animate-fadeIn">
+          {/* CALL */}
+          <a
+            href="tel:9896707022"
+            className="flex items-center gap-3 bg-white shadow-lg px-4 py-2 rounded-full text-gray-700 hover:bg-[#06B6D4] hover:text-white transition"
+          >
+            <FaPhoneAlt />
+            <span className="text-sm font-medium">Call</span>
+          </a>
+
+          {/* WHATSAPP */}
+          <a
+            href="https://wa.me/919896707022"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 bg-white shadow-lg px-4 py-2 rounded-full text-gray-700 hover:bg-green-500 hover:text-white transition"
+          >
+            <FaWhatsapp />
+            <span className="text-sm font-medium">WhatsApp</span>
+          </a>
+
+          {/* EMAIL */}
+          <a
+            href="mailto:shreeramrealtygroup@gmail.com"
+            className="flex items-center gap-3 bg-white shadow-lg px-4 py-2 rounded-full text-gray-700 hover:bg-red-500 hover:text-white transition"
+          >
+            <FaEnvelope />
+            <span className="text-sm font-medium">Email</span>
+          </a>
+        </div>
       )}
 
-      {/* Phone Button */}
-      {open && (
-        <a
-          href={`tel:${phoneNumber}`}
-          className="w-12 h-12 flex items-center justify-center rounded-full
-          bg-blue-500 text-white shadow-lg
-          hover:scale-110 transition-all"
-        >
-          <i className="fas fa-phone text-lg"></i>
-        </a>
-      )}
-
-      {/* Main Menu Button */}
+      {/* Main Floating Button */}
       <button
         onClick={() => setOpen(!open)}
-        className="w-14 h-14 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9]
-        text-white shadow-xl flex items-center justify-center
-        hover:scale-110 transition-all"
+        className="w-14 h-14 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-white flex items-center justify-center shadow-xl hover:scale-110 transition"
       >
-        <i
-          className={`fas ${open ? "fa-times" : "fa-comment-dots"} text-xl`}
-        ></i>
+        <FaComments size={22} />
       </button>
     </div>
   );
