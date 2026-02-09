@@ -13,7 +13,7 @@ const TopBar = () => {
                 >
                   <i className={`fab fa-${icon}`} />
                 </a>
-              )
+              ),
             )}
           </div>
 
@@ -25,10 +25,15 @@ const TopBar = () => {
               <span className="sm:inline">shreeramrealtygroup@gmail.com</span>
 
               {/* WhatsApp CTA */}
-              <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#38bdf8] text-[#38bdf8] hover:bg-[#38bdf8] hover:text-[#020617] transition cursor-pointer font-medium">
-                <i className="fab fa-whatsapp" />
+              <a
+                href="https://wa.me/919896707022?text=Hi%20I%20am%20interested%20in%20this%20property"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#38bdf8] text-[#38bdf8] hover:bg-[#38bdf8] hover:text-[#020617] transition cursor-pointer font-medium"
+              >
+                <i className="fab fa-whatsapp text-lg" />
                 <span>WhatsApp</span>
-              </div>
+              </a>
             </div>
           </div>
         </div>
