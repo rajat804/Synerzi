@@ -11,7 +11,7 @@ const SearchResults = () => {
       const query = params.toString();
 
       const res = await fetch(
-        `https://vercel-synerzi-sbckend.vercel.app/api/properties/search?${query}`
+        `https://vercel-synerzi-sbckend.vercel.app/api/properties/search?${query}`,
       );
 
       const data = await res.json();
@@ -53,14 +53,12 @@ const SearchResults = () => {
                 </p>
 
                 <div className="mt-4 flex justify-between">
-                  <span className="text-[#06B6D4] font-bold">
-                    ₹ {p.price}
-                  </span>
+                  <span className="text-[#06B6D4] font-bold">₹ {p.price}</span>
                   <Link
                     to={`/property/${p._id}`}
-                    className="text-sm text-[#06B6D4]"
+                    className="text-sm px-4 py-2 rounded-full border border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-[#0F172A] transition"
                   >
-                    View
+                    View Details
                   </Link>
                 </div>
               </div>
