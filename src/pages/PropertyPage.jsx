@@ -75,7 +75,7 @@ export default function PropertyPage() {
       </section>
 
       {/* FILTER BAR */}
-      <section className="bg-white py-8 shadow-sm">
+      {/* <section className="bg-white py-8 shadow-sm">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <select className="border rounded-lg px-4 py-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
@@ -138,7 +138,12 @@ export default function PropertyPage() {
             </button>
           </div>
         </div>
-      </section>
+      </section> */}
+      <div className="w-full px-4">
+        <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl p-5 sm:p-6 md:p-8 -mt-20 sm:-mt-24 relative z-20">
+          <SearchBox />
+        </div>
+      </div>
 
       {/* ================= PROPERTIES GRID ================= */}
       <section className="py-16 bg-gray-50">
