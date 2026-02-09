@@ -91,7 +91,7 @@ export default function TestimonialsSection() {
           </div>
 
           {/* COMPANY LOGOS - RIGHT SIDE */}
-          <div className="overflow-hidden bg-white py-4 rounded-xl shadow">
+          {/* <div className="overflow-hidden bg-white py-4 rounded-xl shadow">
             <div className="flex gap-10 animate-scroll px-6">
               {logos.concat(logos).map((logo, i) => (
                 <img
@@ -102,7 +102,7 @@ export default function TestimonialsSection() {
                 />
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
