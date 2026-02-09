@@ -4,6 +4,7 @@ import PropertyArea from "../components/PropertyArea";
 import CompanyOverview from "../components/CompanyOurView";
 import Testimonials from "../components/Testimonials";
 import ContactUs from "../components/ContactUs";
+import SearchBox from "./SearchBox";
 
 const innerImage =
   "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80";
@@ -49,21 +50,18 @@ const Home = () => {
         </section>
       </div>
 
-      <div className="w-full px-4">
+      {/* <div className="w-full px-4">
         <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl p-5 sm:p-6 md:p-8 -mt-20 sm:-mt-24 relative z-20">
           <form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
-            {/* Type */}
             <div>
               <label className="text-sm text-gray-500">Type</label>
               <select className="w-full h-[44px] rounded-lg border px-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
                 <option>Buy/Lease/Sale</option>
-                {/* <option>Rent</option> */}
                 <option>Lease</option>
                 <option>Buy</option>
                 <option>Sale</option>
               </select>
             </div>
-            {/* Property Type */}
             <div>
               <label className="text-sm text-gray-500">Property Type</label>
               <select className="w-full h-[44px] rounded-lg border px-3 text-gray-600 focus:ring-2 focus:ring-[#06B6D4] outline-none">
@@ -75,7 +73,6 @@ const Home = () => {
                 <option>Residential</option>
               </select>
             </div>
-            {/* Location */}
             <div>
               <label className="text-sm text-gray-500">Location</label>
               <input
@@ -84,8 +81,6 @@ const Home = () => {
                 className="w-full h-[44px] rounded-lg border px-3 focus:ring-2 focus:ring-[#06B6D4] outline-none"
               />
             </div>
-
-            {/* Area */}
             <div>
               <label className="text-sm text-gray-500">Area</label>
               <input
@@ -95,7 +90,6 @@ const Home = () => {
               />
             </div>
 
-            {/* Button */}
             <div>
               <button
                 type="submit"
@@ -106,13 +100,14 @@ const Home = () => {
             </div>
           </form>
         </div>
-      </div>
+      </div> */}
+      <SearchBox/>
 
       {/* Property by area */}
       <PropertyArea />
 
       {/* Synerzi Section */}
-      <SynerziSection />
+      {/* <SynerziSection /> */}
 
       {/* Our company overview */}
       <CompanyOverview />
