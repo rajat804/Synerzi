@@ -7,7 +7,7 @@ import {
   FaLinkedinIn,
   FaTwitter,
 } from "react-icons/fa";
-import ContactUs from "../components/ContactUs";
+import ContactForm from "../components/ContactForm";
 
 const Contact = () => {
   return (
@@ -128,7 +128,7 @@ const Contact = () => {
               </form>
             </div>
           </div> */}
-          <ContactUs/>
+          <ContactForm/>
         </div>
       </section>
     </>
