@@ -19,6 +19,7 @@ import PropertyDetails from "./pages/PropertyDetails";
 import SearchResults from "./pages/SearchResults";
 import FloatingContact from "./components/FloatingContact";
 import CategoryProperties from "./pages/CategoryProperties";
+import Blogs from "./pages/Blogs";
 
 
 function App() {
@@ -51,7 +52,7 @@ const hideHeaderandFooter =
         <Route path="/property/:id" element={<PropertyDetails/>}></Route>
         <Route path="/search" element={<SearchResults/>}></Route>
         <Route path="/category/:category" element={<CategoryProperties/>}></Route>
-
+        <Route path="/blogs" element={<Blogs/>}></Route>
         {/* admin  */}
         <Route path="/admin-login" element={<AdminLogin/>}></Route>
         <Route path="/admin-register" element={<AdminRegister/>}></Route>
