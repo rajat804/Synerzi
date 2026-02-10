@@ -21,6 +21,9 @@ const Header = () => {
     { name: "Office Spaces", path: "/category/office" },
     { name: "Retail Shops", path: "/category/retail" },
     { name: "Warehouses", path: "/category/warehouse" },
+    { name: "Latest Property", path: "/latestProperty" },
+    { name: "Featured", path: "/featuredProperty" },
+
   ];
 
   return (
