@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function LatestProperty() {
   const [properties, setProperties] = useState([]);
