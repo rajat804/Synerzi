@@ -305,7 +305,6 @@ export default function AdminEditProperty() {
             ))}
           </select>
         </div>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
           {/* FEATURED */}
           <label className="flex items-center gap-3 cursor-pointer">
