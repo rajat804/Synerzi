@@ -37,22 +37,31 @@ const propertyAreas = [
 
 const PropertyArea = () => {
   const [properties, setProperties] = useState([]);
+  const [latestProperties, setLatestProperties] = useState([]);
+  const [featuredProperties, setFeaturedProperties] = useState([]);
 
   /* ================= FETCH PROPERTIES ================= */
   useEffect(() => {
     const fetchProperties = async () => {
       try {
         const res = await fetch(
-          "https://vercel-synerzi-sbckend.vercel.app/api/properties",
+          "https://vercel-synerzi-sbckend.vercel.app/api/properties"
         );
         const data = await res.json();
 
-        // 🔥 DESC order + latest 8 only
-        const latest = [...data]
+        setProperties(data);
+
+        // 🔥 Latest (DESC + max 8)
+        const latest = data
+          .filter((p) => p.isLatest === true)
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
           .slice(0, 8);
 
-        setProperties(latest);
+        // 🔥 Featured
+        const featured = data.filter((p) => p.isFeatured === true);
+
+        setLatestProperties(latest);
+        setFeaturedProperties(featured);
       } catch (err) {
         console.error("Failed to fetch properties", err);
       }
@@ -79,7 +88,7 @@ const PropertyArea = () => {
             {propertyAreas.map((area, index) => (
               <div
                 key={index}
-                className="relative h-[280px] rounded-xl overflow-hidden group cursor-pointer"
+                className="relative h-[260px] sm:h-[280px] rounded-xl overflow-hidden group cursor-pointer"
               >
                 <img
                   src={area.image}
@@ -100,180 +109,142 @@ const PropertyArea = () => {
           </div>
         </div>
       </section>
+
       {/* ================= LATEST PROPERTIES ================= */}
-      <section className="py-14 bg-gray-50 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-4">
-          <div className="mb-10 text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#0F172A]">
-              Latest Properties
-            </h2>
-            <p className="text-gray-500 mt-1 text-sm">
-              Latest premium properties
-            </p>
+      {latestProperties.length > 0 && (
+        <section className="py-16 bg-gradient-to-br from-[#0F172A] via-[#020617] to-[#0F172A] overflow-hidden">
+          <div className="max-w-[1400px] mx-auto px-4">
+            <div className="mb-12 text-center">
+              <h2 className="text-2xl md:text-3xl font-semibold text-white">
+                Latest Properties
+              </h2>
+              <p className="text-gray-400 mt-1 text-sm">
+                Newly added premium listings
+              </p>
+            </div>
+
+            <div className="rounded-3xl p-6 md:p-10 backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl">
+              <Swiper
+                modules={[Navigation, Pagination, Autoplay]}
+                autoplay={{ delay: 3500, disableOnInteraction: false }}
+                navigation
+                pagination={{ clickable: true }}
+                spaceBetween={30}
+                breakpoints={{
+                  320: { slidesPerView: 1.1 },
+                  640: { slidesPerView: 2 },
+                  768: { slidesPerView: 3 },
+                  1024: { slidesPerView: 3 },
+                }}
+                className="pb-12"
+              >
+                {latestProperties.map((property) => (
+                  <SwiperSlide key={property._id}>
+                    <PropertyCard property={property} badge="Latest" />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
-
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            autoplay={{ delay: 3500, disableOnInteraction: false }}
-            navigation
-            pagination={{ clickable: true }}
-            spaceBetween={30}
-            breakpoints={{
-              320: { slidesPerView: 1.2 },
-              640: { slidesPerView: 2 },
-              768: { slidesPerView: 3 },
-              1024: { slidesPerView: 3 },
-            }}
-            className="pb-12"
-          >
-            {properties
-              ?.filter((property) => property.isLatest === true)
-              .map((property) => (
-                <SwiperSlide key={property._id}>
-                  <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
-                    {/* IMAGE */}
-                    <div className="relative h-60 overflow-hidden">
-                      <img
-                        src={
-                          property.images?.[0]?.startsWith("http")
-                            ? property.images[0]
-                            : `https://vercel-synerzi-sbckend.vercel.app/${property.images?.[0]}`
-                        }
-                        alt={property.title}
-                        className="w-full h-full object-cover hover:scale-105 transition duration-500"
-                      />
-
-                      <span className="absolute top-3 left-3 bg-[#06B6D4] text-white text-xs px-3 py-1 rounded">
-                        ₹ {property.price}
-                      </span>
-                    </div>
-
-                    {/* CONTENT */}
-                    <div className="px-4 py-4">
-                      <h3 className="text-sm md:text-base font-semibold text-[#0F172A] truncate">
-                        {property.title}
-                      </h3>
-
-                      <p className="text-xs text-gray-500 mt-1">
-                        {property.city}, {property.state}
-                      </p>
-
-                      {/* DESCRIPTION */}
-                      <p className="text-xs text-gray-600 mt-2 line-clamp-2">
-                        {property.description}
-                      </p>
-
-                      <div className="mt-4 flex gap-2">
-                        <Link
-                          to={`/property/${property._id}`}
-                          className="flex-1 text-xs py-2 rounded-md bg-[#06B6D4] text-white text-center hover:bg-[#0891B2]"
-                        >
-                          Details
-                        </Link>
-
-                        <a
-                          href="tel:9896707022"
-                          className="flex-1 text-xs py-2 rounded-md border border-[#06B6D4] text-[#06B6D4] text-center hover:bg-[#06B6D4] hover:text-white transition"
-                        >
-                          Call
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-          </Swiper>
-        </div>
-      </section>
-
-
+        </section>
+      )}
 
       {/* ================= FEATURED PROPERTIES ================= */}
-      <section className="py-14 bg-gray-50 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-4">
-          <div className="mb-10 text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#0F172A]">
-              Featured Properties
-            </h2>
-            <p className="text-gray-500 mt-1 text-sm">
-              Featured premium properties
-            </p>
-          </div>
+      {featuredProperties.length > 0 && (
+        <section className="py-14 bg-gray-50 overflow-hidden">
+          <div className="max-w-[1400px] mx-auto px-4">
+            <div className="mb-10 text-center">
+              <h2 className="text-2xl md:text-3xl font-semibold text-[#0F172A]">
+                Featured Properties
+              </h2>
+              <p className="text-gray-500 mt-1 text-sm">
+                Handpicked premium listings
+              </p>
+            </div>
 
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            autoplay={{ delay: 3500, disableOnInteraction: false }}
-            navigation
-            pagination={{ clickable: true }}
-            spaceBetween={30}
-            breakpoints={{
-              320: { slidesPerView: 1.2 },
-              640: { slidesPerView: 2 },
-              768: { slidesPerView: 3 },
-              1024: { slidesPerView: 3 },
-            }}
-            className="pb-12"
-          >
-            {properties
-              ?.filter((property) => property.isFeatured === true)
-              .map((property) => (
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              autoplay={{ delay: 3500, disableOnInteraction: false }}
+              navigation
+              pagination={{ clickable: true }}
+              spaceBetween={30}
+              breakpoints={{
+                320: { slidesPerView: 1.1 },
+                640: { slidesPerView: 2 },
+                768: { slidesPerView: 3 },
+                1024: { slidesPerView: 3 },
+              }}
+              className="pb-12"
+            >
+              {featuredProperties.map((property) => (
                 <SwiperSlide key={property._id}>
-                  <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
-                    {/* IMAGE */}
-                    <div className="relative h-60 overflow-hidden">
-                      <img
-                        src={
-                          property.images?.[0]?.startsWith("http")
-                            ? property.images[0]
-                            : `https://vercel-synerzi-sbckend.vercel.app/${property.images?.[0]}`
-                        }
-                        alt={property.title}
-                        className="w-full h-full object-cover hover:scale-105 transition duration-500"
-                      />
-
-                      <span className="absolute top-3 left-3 bg-[#06B6D4] text-white text-xs px-3 py-1 rounded">
-                        ₹ {property.price}
-                      </span>
-                    </div>
-
-                    {/* CONTENT */}
-                    <div className="px-4 py-4">
-                      <h3 className="text-sm md:text-base font-semibold text-[#0F172A] truncate">
-                        {property.title}
-                      </h3>
-
-                      <p className="text-xs text-gray-500 mt-1">
-                        {property.city}, {property.state}
-                      </p>
-
-                      {/* DESCRIPTION */}
-                      <p className="text-xs text-gray-600 mt-2 line-clamp-2">
-                        {property.description}
-                      </p>
-
-                      <div className="mt-4 flex gap-2">
-                        <Link
-                          to={`/property/${property._id}`}
-                          className="flex-1 text-xs py-2 rounded-md bg-[#06B6D4] text-white text-center hover:bg-[#0891B2]"
-                        >
-                          Details
-                        </Link>
-
-                        <a
-                          href="tel:9896707022"
-                          className="flex-1 text-xs py-2 rounded-md border border-[#06B6D4] text-[#06B6D4] text-center hover:bg-[#06B6D4] hover:text-white transition"
-                        >
-                          Call
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                  <PropertyCard property={property} badge="Featured" />
                 </SwiperSlide>
               ))}
-          </Swiper>
-        </div>
-      </section>
+            </Swiper>
+          </div>
+        </section>
+      )}
     </>
+  );
+};
+
+/* ================= PROPERTY CARD ================= */
+const PropertyCard = ({ property, badge }) => {
+  return (
+    <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
+      <div className="relative h-60 overflow-hidden">
+        <img
+          src={
+            property.images?.[0]?.startsWith("http")
+              ? property.images[0]
+              : `https://vercel-synerzi-sbckend.vercel.app/${property.images?.[0]}`
+          }
+          alt={property.title}
+          className="w-full h-full object-cover hover:scale-105 transition duration-500"
+        />
+
+        {badge && (
+          <span className="absolute top-3 right-3 bg-emerald-500 text-white text-[10px] px-3 py-1 rounded-full uppercase">
+            {badge}
+          </span>
+        )}
+
+        <span className="absolute top-3 left-3 bg-[#06B6D4] text-white text-xs px-3 py-1 rounded">
+          ₹ {property.price}
+        </span>
+      </div>
+
+      <div className="px-4 py-4">
+        <h3 className="text-sm md:text-base font-semibold text-[#0F172A] truncate">
+          {property.title}
+        </h3>
+
+        <p className="text-xs text-gray-500 mt-1">
+          {property.city}, {property.state}
+        </p>
+
+        <p className="text-xs text-gray-600 mt-2 line-clamp-2">
+          {property.description}
+        </p>
+
+        <div className="mt-4 flex gap-2">
+          <Link
+            to={`/property/${property._id}`}
+            className="flex-1 text-xs py-2 rounded-md bg-[#06B6D4] text-white text-center hover:bg-[#0891B2]"
+          >
+            Details
+          </Link>
+
+          <a
+            href="tel:9896707022"
+            className="flex-1 text-xs py-2 rounded-md border border-[#06B6D4] text-[#06B6D4] text-center hover:bg-[#06B6D4] hover:text-white transition"
+          >
+            Call
+          </a>
+        </div>
+      </div>
+    </div>
   );
 };
 
