@@ -125,28 +125,26 @@ const PropertyArea = () => {
             </div>
 
             {/* CARD WRAPPER */}
-            <div className="rounded-3xl p-6 md:p-10 bg-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]">
-              <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
-                autoplay={{ delay: 3500, disableOnInteraction: false }}
-                navigation
-                pagination={{ clickable: true }}
-                spaceBetween={30}
-                breakpoints={{
-                  320: { slidesPerView: 1.1 },
-                  640: { slidesPerView: 2 },
-                  768: { slidesPerView: 3 },
-                  1024: { slidesPerView: 3 },
-                }}
-                className="pb-12"
-              >
-                {latestProperties.map((property) => (
-                  <SwiperSlide key={property._id}>
-                    <PropertyCard property={property} badge="Latest" />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              autoplay={{ delay: 3500, disableOnInteraction: false }}
+              navigation
+              pagination={{ clickable: true }}
+              spaceBetween={30}
+              breakpoints={{
+                320: { slidesPerView: 1.1 },
+                640: { slidesPerView: 2 },
+                768: { slidesPerView: 3 },
+                1024: { slidesPerView: 3 },
+              }}
+              className="pb-12"
+            >
+              {latestProperties.map((property) => (
+                <SwiperSlide key={property._id}>
+                  <PropertyCard property={property} badge="Latest" />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </section>
       )}
