@@ -7,6 +7,7 @@ import {
   FaPhoneAlt,
   FaEnvelope,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -55,16 +56,12 @@ export default function Footer() {
           </div>
 
           {/* LISTS BY CATEGORY */}
-          {/* <div>
-            <h4 className="text-white font-semibold mb-4">Lists by Category</h4>
+          <div>
+            <h4 className="text-white font-semibold mb-4">Pages</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li className="hover:text-white cursor-pointer">Commercial Property</li>
-              <li className="hover:text-white cursor-pointer">Residential Property</li>
-              <li className="hover:text-white cursor-pointer">Office Spaces</li>
-              <li className="hover:text-white cursor-pointer">Retail Shops</li>
-              <li className="hover:text-white cursor-pointer">Warehouses</li>
+              <Link to={"/blogs"} className="hover:text-white cursor-pointer">Blogs</Link>
             </ul>
-          </div> */}
+          </div>
 
           {/* LATEST PROPERTIES */}
           {/* <div>
