@@ -106,6 +106,8 @@ export default function ShowListings() {
                 <th className="border p-2">Facing</th>
                 <th className="border p-2">Parking</th>
                 <th className="border p-2">Description</th>
+                <th className="border p-2">Featured</th>
+                <th className="border p-2">Latest</th>
                 <th className="border p-2">Amenities</th>
                 <th className="border p-2">Images</th>
                 <th className="border p-2">Actions</th>
@@ -132,6 +134,13 @@ export default function ShowListings() {
                   <td className="border p-2">{p.facing || "—"}</td>
                   <td className="border p-2">{p.parking || "—"}</td>
                   <td className="border p-2">{p.description || "—"}</td>
+                  <td className="border p-2 text-center">
+                    {p.isFeatured ? "Yes" : "No"}
+                  </td>
+
+                  <td className="border p-2 text-center">
+                    {p.isLatest ? "Yes" : "No"}
+                  </td>
                   <td className="border p-2">
                     {p.amenities?.join(", ") || "—"}
                   </td>
