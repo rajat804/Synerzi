@@ -100,6 +100,93 @@ const PropertyArea = () => {
           </div>
         </div>
       </section>
+      {/* ================= LATEST PROPERTIES ================= */}
+      <section className="py-14 bg-gray-50 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-4">
+          <div className="mb-10 text-center">
+            <h2 className="text-2xl md:text-3xl font-semibold text-[#0F172A]">
+              Latest Properties
+            </h2>
+            <p className="text-gray-500 mt-1 text-sm">
+              Latest premium properties
+            </p>
+          </div>
+
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            autoplay={{ delay: 3500, disableOnInteraction: false }}
+            navigation
+            pagination={{ clickable: true }}
+            spaceBetween={30}
+            breakpoints={{
+              320: { slidesPerView: 1.2 },
+              640: { slidesPerView: 2 },
+              768: { slidesPerView: 3 },
+              1024: { slidesPerView: 3 },
+            }}
+            className="pb-12"
+          >
+            {properties
+              ?.filter((property) => property.isLatest === true)
+              .map((property) => (
+                <SwiperSlide key={property._id}>
+                  <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
+                    {/* IMAGE */}
+                    <div className="relative h-60 overflow-hidden">
+                      <img
+                        src={
+                          property.images?.[0]?.startsWith("http")
+                            ? property.images[0]
+                            : `https://vercel-synerzi-sbckend.vercel.app/${property.images?.[0]}`
+                        }
+                        alt={property.title}
+                        className="w-full h-full object-cover hover:scale-105 transition duration-500"
+                      />
+
+                      <span className="absolute top-3 left-3 bg-[#06B6D4] text-white text-xs px-3 py-1 rounded">
+                        ₹ {property.price}
+                      </span>
+                    </div>
+
+                    {/* CONTENT */}
+                    <div className="px-4 py-4">
+                      <h3 className="text-sm md:text-base font-semibold text-[#0F172A] truncate">
+                        {property.title}
+                      </h3>
+
+                      <p className="text-xs text-gray-500 mt-1">
+                        {property.city}, {property.state}
+                      </p>
+
+                      {/* DESCRIPTION */}
+                      <p className="text-xs text-gray-600 mt-2 line-clamp-2">
+                        {property.description}
+                      </p>
+
+                      <div className="mt-4 flex gap-2">
+                        <Link
+                          to={`/property/${property._id}`}
+                          className="flex-1 text-xs py-2 rounded-md bg-[#06B6D4] text-white text-center hover:bg-[#0891B2]"
+                        >
+                          Details
+                        </Link>
+
+                        <a
+                          href="tel:9896707022"
+                          className="flex-1 text-xs py-2 rounded-md border border-[#06B6D4] text-[#06B6D4] text-center hover:bg-[#06B6D4] hover:text-white transition"
+                        >
+                          Call
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        </div>
+      </section>
+
+
 
       {/* ================= FEATURED PROPERTIES ================= */}
       <section className="py-14 bg-gray-50 overflow-hidden">
@@ -109,7 +196,7 @@ const PropertyArea = () => {
               Featured Properties
             </h2>
             <p className="text-gray-500 mt-1 text-sm">
-              Latest premium properties
+              Featured premium properties
             </p>
           </div>
 
