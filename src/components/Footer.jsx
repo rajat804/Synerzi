@@ -57,7 +57,7 @@ export default function Footer() {
 
           {/* LISTS BY CATEGORY */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Pages</h4>
+            <h4 className="text-white font-semibold mb-4">Other</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <Link to={"/blogs"} className="hover:text-white cursor-pointer">Blogs</Link>
             </ul>
