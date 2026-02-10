@@ -45,7 +45,7 @@ const PropertyArea = () => {
     const fetchProperties = async () => {
       try {
         const res = await fetch(
-          "https://vercel-synerzi-sbckend.vercel.app/api/properties"
+          "https://vercel-synerzi-sbckend.vercel.app/api/properties",
         );
         const data = await res.json();
 
@@ -112,18 +112,20 @@ const PropertyArea = () => {
 
       {/* ================= LATEST PROPERTIES ================= */}
       {latestProperties.length > 0 && (
-        <section className="py-16 bg-gradient-to-br from-[#0F172A] via-[#020617] to-[#0F172A] overflow-hidden">
+        <section className="py-16 bg-gradient-to-b from-[#F8FAFC] to-[#EEF2F7] overflow-hidden">
           <div className="max-w-[1400px] mx-auto px-4">
+            {/* HEADING */}
             <div className="mb-12 text-center">
-              <h2 className="text-2xl md:text-3xl font-semibold text-white">
+              <h2 className="text-2xl md:text-3xl font-semibold text-[#0F172A]">
                 Latest Properties
               </h2>
-              <p className="text-gray-400 mt-1 text-sm">
+              <p className="text-gray-500 mt-1 text-sm">
                 Newly added premium listings
               </p>
             </div>
 
-            <div className="rounded-3xl p-6 md:p-10 backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl">
+            {/* CARD WRAPPER */}
+            <div className="rounded-3xl p-6 md:p-10 bg-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]">
               <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 autoplay={{ delay: 3500, disableOnInteraction: false }}
