@@ -69,7 +69,6 @@ const Header = () => {
         {menuOpen && (
           <div className="bg-[#020617] border-t border-[#1E293B]">
             <div className="max-w-7xl mx-auto px-4 py-5 space-y-4">
-
               {/* MOBILE MAIN LINKS */}
               <div className="lg:hidden space-y-2">
                 {mainLinks.map((link) => (
@@ -127,7 +126,7 @@ const Header = () => {
                 <Link
                   to="/admin-login"
                   onClick={() => setMenuOpen(false)}
-                  className="flex-1 text-center py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold"
+                  className="w-[140px] text-center py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold"
                 >
                   Admin Login
                 </Link>
