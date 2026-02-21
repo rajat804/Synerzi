@@ -5,14 +5,14 @@ export default function AdminLogin() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const BASE_URL ="https://vercel-synerzi-sbckend.vercel.app";
+  const BASE_API = import.meta.env.VITE_BASE_URL
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await fetch(`${BASE_URL}/api/admin/login`, {
+      const response = await fetch(`${BASE_API}/api/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
