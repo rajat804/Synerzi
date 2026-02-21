@@ -7,10 +7,10 @@ const CategoryProperties = () => {
   const { category } = useParams();
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
-
+const BASE_API = import.meta.env.VITE_BASE_URL
   useEffect(() => {
     axios
-      .get(`https://vercel-synerzi-sbckend.vercel.app/api/properties/category/${category}`)
+      .get(`${BASE_API}/api/properties/category/${category}`)
       .then((res) => {
         setProperties(res.data);
         setLoading(false);
@@ -42,7 +42,7 @@ const CategoryProperties = () => {
                 src={
                   p.images?.[0]?.startsWith("http")
                     ? p.images[0]
-                    : `https://vercel-synerzi-sbckend.vercel.app/${p.images?.[0]}`
+                    : `${BASE_API}/${p.images?.[0]}`
                 }
                 className="h-52 w-full object-cover rounded-t-xl"
               />
