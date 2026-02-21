@@ -35,29 +35,52 @@ const propertyAreas = [
   },
 ];
 
+/* ================= CLEAN DESCRIPTION FUNCTION ================= */
+const cleanDescription = (html) => {
+  if (!html) return "No description available";
+
+  try {
+    let decoded = html;
+
+    // Decode multiple times (for encoded HTML)
+    for (let i = 0; i < 3; i++) {
+      const textarea = document.createElement("textarea");
+      textarea.innerHTML = decoded;
+      decoded = textarea.value;
+    }
+
+    // Remove tags
+    decoded = decoded.replace(/<[^>]*>/g, "");
+
+    // Remove extra spaces
+    return decoded.replace(/\s+/g, " ").trim();
+  } catch {
+    return html;
+  }
+};
+
+const truncateText = (text, limit = 120) => {
+  if (!text) return "No description available";
+  return text.length > limit ? text.slice(0, limit) + "..." : text;
+};
+
 const PropertyArea = () => {
-  const [properties, setProperties] = useState([]);
   const [latestProperties, setLatestProperties] = useState([]);
   const [featuredProperties, setFeaturedProperties] = useState([]);
 
-  /* ================= FETCH PROPERTIES ================= */
+  const BASE_API = import.meta.env.VITE_BASE_URL;
+
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const res = await fetch(
-          "https://vercel-synerzi-sbckend.vercel.app/api/properties",
-        );
+        const res = await fetch(`${BASE_API}/api/properties`);
         const data = await res.json();
 
-        setProperties(data);
-
-        // 🔥 Latest (DESC + max 8)
         const latest = data
           .filter((p) => p.isLatest === true)
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
           .slice(0, 8);
 
-        // 🔥 Featured
         const featured = data.filter((p) => p.isFeatured === true);
 
         setLatestProperties(latest);
@@ -68,15 +91,15 @@ const PropertyArea = () => {
     };
 
     fetchProperties();
-  }, []);
+  }, [BASE_API]);
 
   return (
     <>
-      {/* ================= PROPERTY AREAS ================= */}
+      {/* PROPERTY AREAS */}
       <section className="py-16 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-4">
           <div className="mb-10 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A]">
+            <h2 className="text-3xl font-bold text-[#0F172A]">
               Properties by Area
             </h2>
             <p className="text-gray-500 mt-2">
@@ -84,23 +107,21 @@ const PropertyArea = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {propertyAreas.map((area, index) => (
               <div
                 key={index}
-                className="relative h-[260px] sm:h-[280px] rounded-xl overflow-hidden group cursor-pointer"
+                className="relative h-[260px] rounded-xl overflow-hidden group"
               >
                 <img
                   src={area.image}
                   alt={area.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
                 />
-                <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition" />
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center">
-                  <h3 className="text-xl font-semibold text-white">
-                    {area.title}
-                  </h3>
-                  <p className="text-md font-bold text-[#06B6D4] mt-2">
+                <div className="absolute inset-0 bg-black/50" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+                  <h3 className="text-xl font-semibold">{area.title}</h3>
+                  <p className="text-[#06B6D4] font-bold mt-2">
                     {area.listings}
                   </p>
                 </div>
@@ -110,102 +131,88 @@ const PropertyArea = () => {
         </div>
       </section>
 
-      {/* ================= LATEST PROPERTIES ================= */}
+      {/* LATEST */}
       {latestProperties.length > 0 && (
-        <section className="py-16 bg-gradient-to-b from-[#F8FAFC] to-[#EEF2F7] overflow-hidden">
-          <div className="max-w-[1400px] mx-auto px-4">
-            {/* HEADING */}
-            <div className="mb-12 text-center">
-              <h2 className="text-2xl md:text-3xl font-semibold text-[#0F172A]">
-                Latest Properties
-              </h2>
-              <p className="text-gray-500 mt-1 text-sm">
-                Newly added premium listings
-              </p>
-            </div>
-
-            {/* CARD WRAPPER */}
-            <Swiper
-              modules={[Navigation, Pagination, Autoplay]}
-              autoplay={{ delay: 3500, disableOnInteraction: false }}
-              navigation
-              pagination={{ clickable: true }}
-              spaceBetween={30}
-              breakpoints={{
-                320: { slidesPerView: 1.1 },
-                640: { slidesPerView: 2 },
-                768: { slidesPerView: 3 },
-                1024: { slidesPerView: 3 },
-              }}
-              className="pb-12"
-            >
-              {latestProperties.map((property) => (
-                <SwiperSlide key={property._id}>
-                  <PropertyCard property={property} badge="Latest" />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </section>
+        <PropertySection
+          title="Latest Properties"
+          properties={latestProperties}
+          badge="Latest"
+          BASE_API={BASE_API}
+        />
       )}
 
-      {/* ================= FEATURED PROPERTIES ================= */}
+      {/* FEATURED */}
       {featuredProperties.length > 0 && (
-        <section className="py-14 bg-gray-50 overflow-hidden">
-          <div className="max-w-[1400px] mx-auto px-4">
-            <div className="mb-10 text-center">
-              <h2 className="text-2xl md:text-3xl font-semibold text-[#0F172A]">
-                Featured Properties
-              </h2>
-              <p className="text-gray-500 mt-1 text-sm">
-                Handpicked premium listings
-              </p>
-            </div>
-
-            <Swiper
-              modules={[Navigation, Pagination, Autoplay]}
-              autoplay={{ delay: 3500, disableOnInteraction: false }}
-              navigation
-              pagination={{ clickable: true }}
-              spaceBetween={30}
-              breakpoints={{
-                320: { slidesPerView: 1.1 },
-                640: { slidesPerView: 2 },
-                768: { slidesPerView: 3 },
-                1024: { slidesPerView: 3 },
-              }}
-              className="pb-12"
-            >
-              {featuredProperties.map((property) => (
-                <SwiperSlide key={property._id}>
-                  <PropertyCard property={property} badge="Featured" />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </section>
+        <PropertySection
+          title="Featured Properties"
+          properties={featuredProperties}
+          badge="Featured"
+          BASE_API={BASE_API}
+        />
       )}
     </>
   );
 };
 
+/* ================= REUSABLE SECTION ================= */
+const PropertySection = ({ title, properties, badge, BASE_API }) => (
+  <section className="py-16 bg-gray-50">
+    <div className="max-w-[1400px] mx-auto px-4">
+      <div className="mb-10 text-center">
+        <h2 className="text-2xl font-semibold text-[#0F172A]">{title}</h2>
+      </div>
+
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        autoplay={{ delay: 3500 }}
+        navigation
+        pagination={{ clickable: true }}
+        spaceBetween={30}
+        breakpoints={{
+          320: { slidesPerView: 1.1 },
+          640: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+        }}
+      >
+        {properties.map((property) => (
+          <SwiperSlide key={property._id}>
+            <PropertyCard
+              property={property}
+              badge={badge}
+              BASE_API={BASE_API}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  </section>
+);
+
 /* ================= PROPERTY CARD ================= */
-const PropertyCard = ({ property, badge }) => {
+const PropertyCard = ({ property, badge, BASE_API }) => {
+  const cleanText = truncateText(cleanDescription(property.description));
+
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
       <div className="relative h-60 overflow-hidden">
-        <img
-          src={
-            property.images?.[0]?.startsWith("http")
-              ? property.images[0]
-              : `https://vercel-synerzi-sbckend.vercel.app/${property.images?.[0]}`
-          }
-          alt={property.title}
-          className="w-full h-full object-cover hover:scale-105 transition duration-500"
-        />
+        {property.images?.[0] ? (
+          <img
+            src={
+              property.images[0].startsWith("http")
+                ? property.images[0]
+                : `${BASE_API}/${property.images[0]}`
+            }
+            alt={property.title}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+            No Image
+          </div>
+        )}
 
         {badge && (
-          <span className="absolute top-3 right-3 bg-emerald-500 text-white text-[10px] px-3 py-1 rounded-full uppercase">
+          <span className="absolute top-3 right-3 bg-emerald-500 text-white text-xs px-3 py-1 rounded-full">
             {badge}
           </span>
         )}
@@ -216,7 +223,7 @@ const PropertyCard = ({ property, badge }) => {
       </div>
 
       <div className="px-4 py-4">
-        <h3 className="text-sm md:text-base font-semibold text-[#0F172A] truncate">
+        <h3 className="font-semibold text-[#0F172A] truncate">
           {property.title}
         </h3>
 
@@ -224,14 +231,14 @@ const PropertyCard = ({ property, badge }) => {
           {property.city}, {property.state}
         </p>
 
-        <p className="text-xs text-gray-600 mt-2 line-clamp-2">
-          {property.description}
+        <p className="text-xs text-gray-600 mt-2">
+          {cleanText}
         </p>
 
         <div className="mt-4 flex gap-2">
           <Link
             to={`/property/${property._id}`}
-            className="flex-1 text-xs py-2 rounded-md bg-[#06B6D4] text-white text-center hover:bg-[#0891B2]"
+            className="flex-1 text-xs py-2 rounded-md bg-[#06B6D4] text-white text-center"
           >
             Details
           </Link>
