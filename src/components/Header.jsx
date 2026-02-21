@@ -16,16 +16,18 @@ const Header = () => {
   ];
 
   const categories = [
-    { name: "Commercial Property", path: "/category/commercial" },
-    { name: "Dareshell Property", path: "/category/dareshell" },
-    { name: "Furnished", path: "/category/furnished" },
     { name: "Industrial Plot", path: "/category/industrial-plot" },
-    { name: "Plot", path: "/category/plot" },
-    { name: "Shed", path: "/category/shed" },
-    { name: "Warehouse", path: "/category/warehouse" },
     { name: "Factory", path: "/category/factory" },
-    { name: "Latest Property", path: "/latestProperty" },
+    { name: "Warehouse", path: "/category/warehouse" },
+    { name: "Commercial", path: "/category/commercial" },
+    { name: "Residential", path: "/residential" },
+    { name: "Latest", path: "/latestProperty" },
     { name: "Featured", path: "/featuredProperty" },
+    // { name: "Dareshell Property", path: "/category/dareshell" },
+    // { name: "Furnished", path: "/category/furnished" },
+    // { name: "Plot", path: "/category/plot" },
+    // { name: "Shed", path: "/category/shed" },
+
   ];
 
   return (
