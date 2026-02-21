@@ -2,26 +2,25 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SearchBox from "./SearchBox";
 
-
 export default function PropertyPage() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const BASE_API = import.meta.env.VITE_BASE_URL;
+
   /* ================= FETCH PROPERTIES ================= */
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const res = await fetch(
-          "https://vercel-synerzi-sbckend.vercel.app/api/properties",
-        );
+        const res = await fetch(`${BASE_API}/api/properties`);
         if (!res.ok) throw new Error("Failed to fetch properties");
 
         const data = await res.json();
 
-        // 🔥 DESC ORDER (latest first)
+        // Latest first
         const sorted = [...data].sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
 
         setProperties(sorted);
@@ -34,15 +33,22 @@ export default function PropertyPage() {
     };
 
     fetchProperties();
-  }, []);
+  }, [BASE_API]);
 
-  /* ================= HELPERS ================= */
+  /* ================= REMOVE HTML + TRUNCATE ================= */
   const truncateText = (text, limit = 120) => {
     if (!text) return "No description available";
-    return text.length > limit ? text.slice(0, limit) + "..." : text;
+
+    // 🔥 Remove all HTML tags safely
+    const doc = new DOMParser().parseFromString(text, "text/html");
+    const plainText = doc.body.textContent || "";
+
+    return plainText.length > limit
+      ? plainText.slice(0, limit) + "..."
+      : plainText;
   };
 
-  /* ================= LOADING / ERROR ================= */
+  /* ================= LOADING ================= */
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center text-lg">
@@ -51,6 +57,7 @@ export default function PropertyPage() {
     );
   }
 
+  /* ================= ERROR ================= */
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center text-red-600">
@@ -71,12 +78,16 @@ export default function PropertyPage() {
       >
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative text-center text-white px-4">
-          <h1 className="text-3xl md:text-4xl font-bold">All Properties</h1>
-          <p className="mt-2 text-gray-200">Home / All Properties</p>
+          <h1 className="text-3xl md:text-4xl font-bold">
+            All Properties
+          </h1>
+          <p className="mt-2 text-gray-200">
+            Home / All Properties
+          </p>
         </div>
       </section>
 
-      {/* FILTER BAR */}
+      {/* ================= FILTER BAR ================= */}
       <div className="w-full px-4">
         <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl p-5 sm:p-6 md:p-8 -mt-20 sm:-mt-24 relative z-20">
           <SearchBox />
@@ -103,8 +114,8 @@ export default function PropertyPage() {
                       <img
                         src={
                           item.images[0].startsWith("http")
-                            ? item.images[0] // Cloudinary
-                            : `https://vercel-synerzi-sbckend.vercel.app/${item.images[0]}`
+                            ? item.images[0]
+                            : `${BASE_API}/${item.images[0]}`
                         }
                         alt={item.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
@@ -128,7 +139,7 @@ export default function PropertyPage() {
                     </h3>
 
                     <p className="text-gray-500 text-sm mt-1">
-                      {item.city}, {item.state}
+                      {item.city || "Location not specified"}
                     </p>
 
                     <p className="text-gray-600 text-sm mt-3">
@@ -137,7 +148,7 @@ export default function PropertyPage() {
 
                     <div className="flex justify-between items-center mt-5">
                       <span className="text-[#06B6D4] font-bold">
-                        ₹ {item.price}
+                        ₹ {item.price || "On Request"}
                       </span>
 
                       <Link
