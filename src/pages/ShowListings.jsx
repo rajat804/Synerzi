@@ -156,7 +156,7 @@ export default function ShowListings() {
                   </td>
                   <td className="border p-2">
                     <div className="flex flex-wrap gap-2">
-                      {Array.isArray(p.images) &&
+                      {Array.isArray(p.images) && p.images.length > 0 ? (
                         p.images.map((img, idx) => (
                           <img
                             key={idx}
@@ -164,7 +164,10 @@ export default function ShowListings() {
                             className="w-12 h-12 object-cover rounded border"
                             alt="property"
                           />
-                        ))}
+                        ))
+                      ) : (
+                        <span>—</span>
+                      )}
                     </div>
                   </td>
                   <td className="border p-2 flex gap-2 justify-center">
