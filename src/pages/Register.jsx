@@ -15,7 +15,7 @@ const Register = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
+const BASE_API = import.meta.env.VITE_BASE_URL
   // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,7 +28,7 @@ const Register = () => {
     setError("");
 
     try {
-      const response = await fetch("https://vercel-synerzi-sbckend.vercel.app/api/auth/register", {
+      const response = await fetch(`${BASE_API}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
