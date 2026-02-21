@@ -5,7 +5,7 @@ export default function ShowListings() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+  const BASE_API = import.meta.env.VITE_BASE_URL;
   useEffect(() => {
     fetchProperties();
   }, []);
@@ -14,12 +14,9 @@ export default function ShowListings() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(
-        "https://vercel-synerzi-sbckend.vercel.app/api/properties",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      const res = await fetch(`${BASE_API}/api/properties`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       if (!res.ok) throw new Error("Failed to fetch properties");
 
@@ -36,13 +33,10 @@ export default function ShowListings() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure?")) return;
     try {
-      const res = await fetch(
-        `https://vercel-synerzi-sbckend.vercel.app/api/properties/${id}`,
-        {
-          method: "DELETE",
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        },
-      );
+      const res = await fetch(`${BASE_API}/api/properties/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
       const data = await res.json();
       if (!res.ok) return alert(data.message || "Delete failed");
       alert("Property deleted ✅");
@@ -91,24 +85,31 @@ export default function ShowListings() {
               <tr>
                 <th className="border p-2">#</th>
                 <th className="border p-2">Title</th>
+                <th className="border p-2">Description</th>
+                <th className="border p-2">Price</th>
+                <th className="border p-2">Price Label</th>
                 <th className="border p-2">Category</th>
                 <th className="border p-2">Purpose</th>
-                <th className="border p-2">Price</th>
+                <th className="border p-2">Status</th>
                 <th className="border p-2">City</th>
-                <th className="border p-2">State</th>
                 <th className="border p-2">Location</th>
-                <th className="border p-2">Area (sq ft)</th>
-                <th className="border p-2">BHK</th>
-                <th className="border p-2">Bathrooms</th>
-                <th className="border p-2">Balconies</th>
-                {/* <th className="border p-2">Floor No</th> */}
-                <th className="border p-2">Total Floors</th>
+                <th className="border p-2">Address</th>
+                <th className="border p-2">Pincode</th>
+                <th className="border p-2">Country</th>
+                <th className="border p-2">Size</th>
                 <th className="border p-2">Facing</th>
-                <th className="border p-2">Parking</th>
-                <th className="border p-2">Description</th>
+                <th className="border p-2">Year Built</th>
+                <th className="border p-2">Built Up Area</th>
+                <th className="border p-2">Flooring</th>
+                <th className="border p-2">Ownership</th>
+                <th className="border p-2">Possession</th>
+                <th className="border p-2">Structure Type</th>
+                <th className="border p-2">Total Floors</th>
+                <th className="border p-2">Road Width</th>
+                <th className="border p-2">Open Sides</th>
+                <th className="border p-2">Amenities</th>
                 <th className="border p-2">Featured</th>
                 <th className="border p-2">Latest</th>
-                <th className="border p-2">Amenities</th>
                 <th className="border p-2">Images</th>
                 <th className="border p-2">Actions</th>
               </tr>
@@ -118,55 +119,58 @@ export default function ShowListings() {
               {properties.map((p, i) => (
                 <tr key={p._id} className="hover:bg-gray-50">
                   <td className="border p-2 text-center">{i + 1}</td>
+
                   <td className="border p-2">{p.title}</td>
-                  <td className="border p-2">{p.category}</td>
+                  <td className="border p-2 max-w-[200px] truncate">
+                    {p.description || "—"}
+                  </td>
+                  <td className="border p-2">{p.price || "—"}</td>
+                  <td className="border p-2">{p.priceLabel || "—"}</td>
+                  <td className="border p-2">{p.category || "—"}</td>
                   <td className="border p-2">{p.purpose || "—"}</td>
-                  <td className="border p-2">{p.price}</td>
-                  <td className="border p-2">{p.city}</td>
-                  <td className="border p-2">{p.state}</td>
+                  <td className="border p-2">{p.status || "—"}</td>
+                  <td className="border p-2">{p.city || "—"}</td>
                   <td className="border p-2">{p.location || "—"}</td>
-                  <td className="border p-2">{p.area}</td>
-                  <td className="border p-2">{p.bhk}</td>
-                  <td className="border p-2">{p.bathrooms}</td>
-                  <td className="border p-2">{p.balconies}</td>
-                  {/* <td className="border p-2">{p.floorNo}</td> */}
-                  <td className="border p-2">{p.totalFloors}</td>
+                  <td className="border p-2">{p.address || "—"}</td>
+                  <td className="border p-2">{p.pincode || "—"}</td>
+                  <td className="border p-2">{p.country || "India"}</td>
+                  <td className="border p-2">{p.size || "—"}</td>
                   <td className="border p-2">{p.facing || "—"}</td>
-                  <td className="border p-2">{p.parking || "—"}</td>
-                  <td className="border p-2">{p.description || "—"}</td>
+                  <td className="border p-2">{p.yearBuilt || "—"}</td>
+                  <td className="border p-2">{p.builtUpArea || "—"}</td>
+                  <td className="border p-2">{p.flooring || "—"}</td>
+                  <td className="border p-2">{p.ownership || "—"}</td>
+                  <td className="border p-2">{p.possession || "—"}</td>
+                  <td className="border p-2">{p.structureType || "—"}</td>
+                  <td className="border p-2">{p.totalFloors || "—"}</td>
+                  <td className="border p-2">{p.roadWidth || "—"}</td>
+                  <td className="border p-2">{p.openSides || "—"}</td>
+                  <td className="border p-2">
+                    {p.amenities?.join(", ") || "—"}
+                  </td>
                   <td className="border p-2 text-center">
                     {p.isFeatured ? "Yes" : "No"}
                   </td>
-
                   <td className="border p-2 text-center">
                     {p.isLatest ? "Yes" : "No"}
                   </td>
                   <td className="border p-2">
-                    {p.amenities?.join(", ") || "—"}
-                  </td>
-                  <td className="border p-2">
                     <div className="flex flex-wrap gap-2">
                       {Array.isArray(p.images) &&
-                        p.images.filter(Boolean).map((img, idx) => {
-                          const imageUrl = img.startsWith("http")
-                            ? img // ✅ Cloudinary
-                            : `https://vercel-synerzi-sbckend.vercel.app/${img.startsWith("uploads") ? img : `uploads/${img}`}`;
-
-                          return (
-                            <img
-                              key={idx}
-                              src={imageUrl}
-                              className="w-12 h-12 object-cover rounded border"
-                              alt={`property-${idx}`}
-                            />
-                          );
-                        })}
+                        p.images.map((img, idx) => (
+                          <img
+                            key={idx}
+                            src={img}
+                            className="w-12 h-12 object-cover rounded border"
+                            alt="property"
+                          />
+                        ))}
                     </div>
                   </td>
-                  <td className="border p-2 flex flex-wrap gap-2 justify-center">
+                  <td className="border p-2 flex gap-2 justify-center">
                     <Link
                       to={`/admin-edit-property/${p._id}`}
-                      className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                      className="px-3 py-1 bg-blue-600 text-white rounded"
                     >
                       Edit
                     </Link>
