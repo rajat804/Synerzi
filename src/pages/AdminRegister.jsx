@@ -6,8 +6,6 @@ export default function AdminRegister() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Local + live backend support
-  // const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,9 +15,9 @@ export default function AdminRegister() {
       return;
     }
     const formData = { fullName, email, password };
-    const BASE_URL = "https://vercel-synerzi-sbckend.vercel.app";
+    const BASE_API = import.meta.env.VITE_BASE_URL
     try {
-      const response = await fetch(`${BASE_URL}/api/admin/register`, {
+      const response = await fetch(`${BASE_API}/api/admin/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
