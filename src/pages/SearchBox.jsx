@@ -59,11 +59,14 @@ const SearchBox = () => {
                      hover:border-[#06B6D4] transition outline-none"
         >
           <option value="">Select Property</option>
-          <option value="Commercial">Commercial</option>
-          <option value="Office Space">Office Space</option>
-          <option value="Retail Shop">Retail Shop</option>
-          <option value="Warehouse">Warehouse</option>
-          <option value="Residential">Residential</option>
+          <option>Dareshell</option>
+          <option>Commercial</option>
+          <option>Furnished</option>
+          <option>Industrial Plot</option>
+          <option>Plot</option>
+          <option>Shed</option>
+          <option>Warehouse</option>
+          <option>Factory</option>
         </select>
       </div>
 
