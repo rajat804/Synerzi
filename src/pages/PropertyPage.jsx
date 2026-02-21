@@ -20,7 +20,7 @@ export default function PropertyPage() {
 
         // Latest first
         const sorted = [...data].sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
         );
 
         setProperties(sorted);
@@ -70,26 +70,30 @@ export default function PropertyPage() {
     <>
       {/* ================= HERO ================= */}
       <section
-        className="relative h-[45vh] flex items-center justify-center bg-cover bg-center"
+        className="relative min-h-[50vh] sm:min-h-[55vh] flex items-center justify-center bg-cover bg-center"
         style={{
           backgroundImage:
             "url(https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1600)",
         }}
       >
         <div className="absolute inset-0 bg-black/60"></div>
-        <div className="relative text-center text-white px-4">
-          <h1 className="text-3xl md:text-4xl font-bold">
+
+        <div className="relative text-center text-white px-4 z-10">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
             All Properties
           </h1>
-          <p className="mt-2 text-gray-200">
+          <p className="mt-2 text-sm sm:text-base text-gray-200">
             Home / All Properties
           </p>
         </div>
       </section>
 
       {/* ================= FILTER BAR ================= */}
-      <div className="w-full px-4">
-        <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl p-5 sm:p-6 md:p-8 -mt-20 sm:-mt-24 relative z-20">
+      <div className="w-full px-4 relative z-20">
+        <div
+          className="max-w-7xl mx-auto bg-white rounded-2xl shadow-xl p-5 sm:p-6 md:p-8 
+                  -mt-10 sm:-mt-16 md:-mt-20"
+        >
           <SearchBox />
         </div>
       </div>
