@@ -11,7 +11,7 @@ const Login = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
+const BASE_API = import.meta.env.VITE_BASE_URL
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -22,7 +22,7 @@ const Login = () => {
 
     try {
       // ✅ Backend URL fixed to localhost:4000
-      const response = await fetch("https://vercel-synerzi-sbckend.vercel.app/api/auth/login", {
+      const response = await fetch(`${BASE_API}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
