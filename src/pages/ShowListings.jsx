@@ -14,7 +14,7 @@ export default function ShowListings() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(`${BASE_API}/api/properties`, {
+      const res = await fetch(`${BASE_API}/api/properties/admin/all`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
