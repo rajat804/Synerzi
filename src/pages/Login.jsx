@@ -39,7 +39,7 @@ const BASE_API = import.meta.env.VITE_BASE_URL
       localStorage.setItem("token", result.token);
       localStorage.setItem("user", JSON.stringify(result.user));
 
-      navigate("/dashboard"); // Redirect after login
+      navigate("/add-listing"); // Redirect after login
     } catch (err) {
       console.error("Login error:", err); // For debugging
       setError("Something went wrong. Please try again.");
