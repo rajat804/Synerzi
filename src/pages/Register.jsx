@@ -11,11 +11,12 @@ const Register = () => {
     email: "",
     phone: "",
     password: "",
+     role: "user",
   });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-const BASE_API = import.meta.env.VITE_BASE_URL
+  const BASE_API = import.meta.env.VITE_BASE_URL;
   // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -82,7 +83,9 @@ const BASE_API = import.meta.env.VITE_BASE_URL
           </div>
 
           {/* TITLE */}
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Create Account</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            Create Account
+          </h2>
           <p className="text-gray-500 mb-4">Register to explore properties</p>
 
           {error && <p className="text-red-500 mb-4 font-medium">{error}</p>}
@@ -128,6 +131,18 @@ const BASE_API = import.meta.env.VITE_BASE_URL
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#06B6D4] focus:ring-2 focus:ring-[#06B6D4]/30 outline-none"
               required
             />
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#06B6D4] focus:ring-2 focus:ring-[#06B6D4]/30 outline-none"
+              required
+            >
+              <option value="user">User</option>
+              <option value="agent">Agent</option>
+              <option value="agency">Agency</option>
+              <option value="developer">Developer</option>
+            </select>
 
             <button
               type="submit"
