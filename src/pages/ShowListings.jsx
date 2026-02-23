@@ -110,6 +110,7 @@ export default function ShowListings() {
                 <th className="border p-2">Amenities</th>
                 <th className="border p-2">Featured</th>
                 <th className="border p-2">Latest</th>
+                <th className="border p-2">Approved</th>
                 <th className="border p-2">Images</th>
                 <th className="border p-2">Actions</th>
               </tr>
@@ -153,6 +154,17 @@ export default function ShowListings() {
                   </td>
                   <td className="border p-2 text-center">
                     {p.isLatest ? "Yes" : "No"}
+                  </td>
+                  <td className="border p-2 text-center">
+                    {p.isApproved ? (
+                      <span className="text-green-600 font-semibold">
+                        Approved
+                      </span>
+                    ) : (
+                      <span className="text-red-600 font-semibold">
+                        Pending
+                      </span>
+                    )}
                   </td>
                   <td className="border p-2">
                     <div className="flex flex-wrap gap-2">
