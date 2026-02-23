@@ -3,7 +3,6 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-
 export default function AdminEditProperty() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -66,7 +65,7 @@ export default function AdminEditProperty() {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const res = await fetch(`${BASE_API}/api/properties/${id}`, {
+        const res = await fetch(`${BASE_API}/api/properties/admin/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -373,7 +372,15 @@ export default function AdminEditProperty() {
             Latest
           </label>
         </div>
-
+        <label>
+          <input
+            type="checkbox"
+            name="isApproved"
+            checked={formData.isApproved}
+            onChange={handleChange}
+          />
+          Approve Property
+        </label>
         {/* OLD IMAGES */}
         {formData.images?.length > 0 && (
           <div className="col-span-full flex gap-3 flex-wrap">
