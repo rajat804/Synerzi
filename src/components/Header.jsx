@@ -94,7 +94,7 @@ const Header = () => {
               </a>
 
               <Link
-                to="/admin-login"
+                to="/add-listing"
                 target="_blank"
                 className="px-4 py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold text-sm hover:opacity-90"
               >
@@ -176,7 +176,7 @@ const Header = () => {
                   +91 72900 09902
                 </a>
                 <Link
-                  to="/admin-login"
+                  to="/add-listing"
                   target="_blank"
                   onClick={() => setMenuOpen(false)}
                   className="px-4 py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold text-sm"
