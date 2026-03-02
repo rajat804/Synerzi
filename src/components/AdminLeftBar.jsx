@@ -45,13 +45,13 @@ const AdminLeftBar = ({ isOpen, toggleSidebar }) => {
             Dashboard
           </Link>
 
-          <Link
+          {/* <Link
             to="/admin/add-listing"
             className={`block px-4 py-2 rounded ${isActive("/admin/add-listing")}`}
             onClick={toggleSidebar}
           >
             Add Listing
-          </Link>
+          </Link> */}
 
           
         </nav>
