@@ -24,6 +24,7 @@ import LatestProperty from "./pages/LatestProperty";
 import FeaturedProperty from "./pages/FeaturedProperty";
 import UserAddListing from "./pages/UserAddListing";
 import ProtectedRoute from "./components/ProtectedRoute";
+import UserEditProperty from "./pages/UserEditProperty";
 
 
 function App() {
@@ -60,6 +61,7 @@ const hideHeaderandFooter =
         <Route path="/latestProperty" element={<LatestProperty/>}></Route>
         <Route path="/featuredProperty" element={<FeaturedProperty/>}></Route>
         <Route path="/add-listing" element={<ProtectedRoute><UserAddListing/></ProtectedRoute>}></Route>
+        <Route path="/user-edit-property/:id" element={<UserEditProperty/>}></Route>
         {/* admin  */}
         <Route path="/admin-login" element={<AdminLogin/>}></Route>
         <Route path="/admin-register" element={<AdminRegister/>}></Route>
