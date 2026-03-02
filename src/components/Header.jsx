@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import TopBar from "./TopBar";
 import navLogo from "../assets/images/srm-logo.png";
+import { AuthContext } from "./AuthComponent";
 
 const Header = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [categoryOpenMobile, setCategoryOpenMobile] = useState(false);
-
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user } = useContext(AuthContext);
   const mainLinks = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about-us" },
@@ -23,11 +25,6 @@ const Header = () => {
     { name: "Residential", path: "/residential" },
     { name: "Latest", path: "/latestProperty" },
     { name: "Featured", path: "/featuredProperty" },
-    // { name: "Dareshell Property", path: "/category/dareshell" },
-    // { name: "Furnished", path: "/category/furnished" },
-    // { name: "Plot", path: "/category/plot" },
-    // { name: "Shed", path: "/category/shed" },
-
   ];
 
   return (
@@ -79,12 +76,21 @@ const Header = () => {
 
             {/* RIGHT ACTIONS (DESKTOP) */}
             <div className="hidden lg:flex ml-auto items-center gap-4">
-              <Link
-                to="/login"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1E293B] text-gray-300 hover:bg-[#06B6D4] hover:text-[#0F172A]"
-              >
-                <i className="fas fa-user" />
-              </Link>
+              {user ? (
+                <Link
+                  to="/dashboard"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1E293B] text-gray-300 hover:bg-[#06B6D4] hover:text-[#0F172A]"
+                >
+                  <i className="fas fa-user-check" />
+                </Link>
+              ) : (
+                <Link
+                  to="/login"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1E293B] text-gray-300 hover:bg-[#06B6D4] hover:text-[#0F172A]"
+                >
+                  <i className="fas fa-user" />
+                </Link>
+              )}
 
               <a
                 href="tel:+917290009902"
@@ -93,13 +99,23 @@ const Header = () => {
                 +91 72900 09902
               </a>
 
+
+              {user ? (
               <Link
                 to="/add-listing"
-                target="_blank"
                 className="px-4 py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold text-sm hover:opacity-90"
               >
                 Add Listing
               </Link>
+
+              ) : (
+                <Link
+                to="/login"
+                className="px-4 py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold text-sm hover:opacity-90"
+              >
+                Add Listing
+              </Link>
+              )}
             </div>
 
             {/* MOBILE MENU BUTTON */}
