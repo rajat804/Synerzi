@@ -1,22 +1,20 @@
 // src/pages/UserDashboard.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../components/AuthComponent";
 
 const UserDashboard = () => {
-  const [user, setUser] = useState(null);
+  const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userData = localStorage.getItem("user");
-    if (!userData) {
+    if (!user) {
       navigate("/login");
-    } else {
-      setUser(JSON.parse(userData));
     }
-  }, [navigate]);
+  }, [user, navigate]);
 
   const handleLogout = () => {
-    localStorage.clear();
+    logout(); // 🔥 context logout
     navigate("/login");
   };
 
