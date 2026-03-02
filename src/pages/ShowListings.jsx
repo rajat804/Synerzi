@@ -67,10 +67,10 @@ export default function ShowListings() {
         <div>
           <h1 className="text-2xl font-bold">All Property Listings</h1>
           <Link
-            to="/admin/add-listing"
+            to="/admin-dashboard"
             className="inline-block mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
           >
-            ➕ Add Listing
+             Go to Dashboard
           </Link>
         </div>
         <span className="font-medium">Total: {properties.length}</span>
