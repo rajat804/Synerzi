@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { jwtDecode } from "jwt-decode";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { AuthContext } from "../components/AuthComponent";
 
 const initialFormState = {
   title: "",
@@ -44,8 +45,7 @@ export default function UserAddListing() {
   const [loading, setLoading] = useState(false);
   const BASE_API = import.meta.env.VITE_BASE_URL;
   const [showLoginModal, setShowLoginModal] = useState(false);
-
-  
+  const { user, token } = useContext(AuthContext);
 
   /* ================= INPUT CHANGE ================= */
   const handleChange = (e) => {
@@ -96,11 +96,8 @@ export default function UserAddListing() {
   const handleSubmit = async () => {
     if (step !== 5) return;
 
-    const token = localStorage.getItem("token");
-
-    // 🔥 LOGIN CHECK FIRST
-    if (!token) {
-      setShowLoginModal(true); // modal open hoga
+    if (!user || !token) {
+      setShowLoginModal(true);
       return;
     }
 
@@ -111,13 +108,6 @@ export default function UserAddListing() {
 
     try {
       setLoading(true);
-
-      const token = localStorage.getItem("token");
-      if (!token) {
-        alert("Unauthorized");
-        return;
-      }
-
       const data = new FormData();
 
       Object.entries(formData).forEach(([key, value]) => {
