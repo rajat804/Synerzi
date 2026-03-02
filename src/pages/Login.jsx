@@ -1,17 +1,19 @@
 // src/pages/Login.jsx
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import srmLogo from "../assets/images/srm-logo.png";
+import { AuthContext } from "../components/AuthComponent";
 
 const Login = () => {
   const navigate = useNavigate();
+  const {login} = useContext(AuthContext);
   const [formData, setFormData] = useState({
     emailOrPhone: "",
     password: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-const BASE_API = import.meta.env.VITE_BASE_URL
+  const BASE_API = import.meta.env.VITE_BASE_URL;
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -21,10 +23,11 @@ const BASE_API = import.meta.env.VITE_BASE_URL
     setError("");
 
     try {
-      // ✅ Backend URL fixed to localhost:4000
       const response = await fetch(`${BASE_API}/api/auth/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formData),
       });
 
@@ -35,14 +38,11 @@ const BASE_API = import.meta.env.VITE_BASE_URL
         return;
       }
 
-      // ✅ Save token & user in localStorage
-      localStorage.setItem("token", result.token);
-      localStorage.setItem("user", JSON.stringify(result.user));
+      login(result.user, result.token); // 🔥 GLOBAL LOGIN
 
-      navigate("/add-listing"); // Redirect after login
+      navigate("/add-listing");
     } catch (err) {
-      console.error("Login error:", err); // For debugging
-      setError("Something went wrong. Please try again.");
+      setError("Something went wrong");
     } finally {
       setLoading(false);
     }
