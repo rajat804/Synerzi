@@ -7,7 +7,7 @@ export default function AdminEditProperty() {
   const { id } = useParams();
   const navigate = useNavigate();
   const BASE_API = import.meta.env.VITE_BASE_URL;
-
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(null);
   const [newImages, setNewImages] = useState([]);
   const [deletedImages, setDeletedImages] = useState([]);
@@ -42,7 +42,7 @@ export default function AdminEditProperty() {
     "Garden",
   ];
 
-  const purposes = ["Sale", "Lease", "Buy"];
+  const purposes = ["Buy", "Sale", "Lease"];
   const categories = [
     "Dareshell",
     "Commercial",
@@ -99,18 +99,18 @@ export default function AdminEditProperty() {
     setFormData({ ...formData, amenities: updated });
   };
 
-    const handleDeleteOldImage = (index) => {
-      const removed = formData.images[index];
-      setDeletedImages([...deletedImages, removed]);
-      setFormData({
-        ...formData,
-        images: formData.images.filter((_, i) => i !== index),
-      });
-    };
+  const handleDeleteOldImage = (index) => {
+    const removed = formData.images[index];
+    setDeletedImages([...deletedImages, removed]);
+    setFormData({
+      ...formData,
+      images: formData.images.filter((_, i) => i !== index),
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const fd = new FormData();
 
@@ -411,9 +411,16 @@ export default function AdminEditProperty() {
 
         <button
           type="submit"
-          className="col-span-full bg-blue-600 text-white py-2 rounded"
+          disabled={loading}
+          className={`col-span-full py-2 rounded text-white flex items-center justify-center gap-2 transition-all duration-300
+    ${loading ? "bg-blue-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}
+  `}
         >
-          Update Property
+          {loading && (
+            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          )}
+
+          {loading ? "Updating..." : "Update Property"}
         </button>
       </form>
     </div>
