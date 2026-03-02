@@ -99,14 +99,14 @@ export default function AdminEditProperty() {
     setFormData({ ...formData, amenities: updated });
   };
 
-  const handleDeleteOldImage = (index) => {
-    const removed = formData.images[index];
-    setDeletedImages([...deletedImages, removed]);
-    setFormData({
-      ...formData,
-      images: formData.images.filter((_, i) => i !== index),
-    });
-  };
+    const handleDeleteOldImage = (index) => {
+      const removed = formData.images[index];
+      setDeletedImages([...deletedImages, removed]);
+      setFormData({
+        ...formData,
+        images: formData.images.filter((_, i) => i !== index),
+      });
+    };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
