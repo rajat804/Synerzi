@@ -2,25 +2,25 @@ import WhyChooseUs from "./WhyChooseUs"
 
 const SynerziSection = () => {
   const items = [
-    {
-      letter: "S",
-      title: "Signature Properties",
-      description: "Properties having exceptional qualities.",
-      img: "https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&w=400&q=80",
-    },
-    {
-      letter: "R",
-      title: "Remarkable",
-      description: "Extraordinary properties that stand out.",
-      img: "https://images.pexels.com/photos/373965/pexels-photo-373965.jpeg?auto=compress&cs=tinysrgb&w=400&q=80",
-    },
-    {
-      letter: "M",
-      title: "Modern Living",
-      description: "Innovative and contemporary property designs.",
-      img: "https://images.pexels.com/photos/323711/pexels-photo-323711.jpeg?auto=compress&cs=tinysrgb&w=400&q=80",
-    },
-  ];
+  {
+    letter: "S",
+    title: "Signature Properties",
+    description: "Properties having exceptional qualities.",
+    img: "https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&w=400&q=80",
+  },
+  {
+    letter: "R",
+    title: "Remarkable",
+    description: "Extraordinary properties that stand out.",
+    img: "https://images.pexels.com/photos/373965/pexels-photo-373965.jpeg?auto=compress&cs=tinysrgb&w=400&q=80",
+  },
+  {
+    letter: "R",
+    title: "Reliable Realty",
+    description: "Trusted real estate services for every client.",
+    img: "https://images.pexels.com/photos/323711/pexels-photo-323711.jpeg?auto=compress&cs=tinysrgb&w=400&q=80",
+  },
+];
   
 
   return (
