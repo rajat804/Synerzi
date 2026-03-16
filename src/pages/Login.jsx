@@ -1,7 +1,6 @@
 // src/pages/Login.jsx
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import srmLogo from "../assets/images/srm-logo.png";
 import { AuthContext } from "../components/AuthComponent";
 
 const Login = () => {
@@ -51,7 +50,6 @@ const Login = () => {
   return (
     <section className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <img src={srmLogo} alt="Logo" className="h-12 mb-4" />
         <h2 className="text-2xl font-bold mb-2">Login</h2>
         {error && <p className="text-red-500 mb-2">{error}</p>}
 
