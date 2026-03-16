@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import srmLogo from "../assets/images/srm-logo.png";
 
 const Register = () => {
   const navigate = useNavigate(); // To redirect after successful register
@@ -74,13 +73,13 @@ const Register = () => {
         {/* RIGHT FORM */}
         <div className="p-8 sm:p-10 flex flex-col justify-center">
           {/* LOGO */}
-          <div className="mb-6 flex items-center">
+          {/* <div className="mb-6 flex items-center border border-red-300">
             <img
               src={srmLogo}
               alt="SRM Logo"
-              className="h-10 sm:h-12 w-auto object-contain"
+              className="h-10 sm:h-12" style={{width:'250px'}}
             />
-          </div>
+          </div> */}
 
           {/* TITLE */}
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
