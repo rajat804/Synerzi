@@ -5,9 +5,10 @@ import CompanyOverview from "../components/CompanyOurView";
 import Testimonials from "../components/Testimonials";
 import ContactUs from "../components/ContactUs";
 import SearchBox from "./SearchBox";
+import innerImage from "../assets/images/hero-image.avif"
 
-const innerImage =
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80";
+// const innerImage =
+//   "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80";
 
 const Home = () => {
   const tabs = ["Invest", "Lease", "Sales"];
