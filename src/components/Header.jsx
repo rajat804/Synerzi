@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import TopBar from "./TopBar";
-import navLogo from "../assets/images/srm-logo.png";
+import navLogo from "../assets/images/srr-logo-removebg.png";
 import { AuthContext } from "./AuthComponent";
 
 const Header = () => {
@@ -33,10 +33,10 @@ const Header = () => {
 
       <nav className="sticky top-0 z-50 bg-[#0F172A]/95 backdrop-blur-md border-b border-[#1E293B]">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center h-16 relative">
+          <div className="flex items-center h-22 relative ">
             {/* LOGO */}
-            <Link to="/" className="flex items-center">
-              <img src={navLogo} alt="SRM Logo" className="h-9" />
+            <Link to="/" style={{width: '250px '}}>
+              <img src={navLogo} alt="SRM Logo" className=" w-full" />
             </Link>
 
             {/* CENTER MENU (DESKTOP) */}
