@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import TopBar from "./TopBar";
-import navLogo from "../assets/images/srr-logo-removebg.png";
+import navLogo from "../assets/images/shreeramrealtyLogo.png";
 import { AuthContext } from "./AuthComponent";
 
 const Header = () => {
@@ -31,12 +31,16 @@ const Header = () => {
     <>
       <TopBar />
 
-      <nav className="sticky top-0 z-50 bg-[#0F172A]/95 backdrop-blur-md border-b border-[#1E293B]">
+      <nav className="sticky top-0 z-50 bg-[#0F172A]/95 backdrop-blur-md border-b border-[#1E293B] py-1">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center h-22 relative ">
             {/* LOGO */}
-            <Link to="/" style={{width: '250px '}}>
-              <img src={navLogo} alt="SRM Logo" className=" w-full" />
+            <Link to="/" className="w-[150px] block">
+              <img
+                src={navLogo}
+                alt="SRM Logo"
+                className="w-full h-auto object-contain"
+              />
             </Link>
 
             {/* CENTER MENU (DESKTOP) */}
@@ -99,22 +103,20 @@ const Header = () => {
                 +91 72900 09902
               </a>
 
-
               {user ? (
-              <Link
-                to="/add-listing"
-                className="px-4 py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold text-sm hover:opacity-90"
-              >
-                Add Listing
-              </Link>
-
+                <Link
+                  to="/add-listing"
+                  className="px-4 py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold text-sm hover:opacity-90"
+                >
+                  Add Listing
+                </Link>
               ) : (
                 <Link
-                to="/login"
-                className="px-4 py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold text-sm hover:opacity-90"
-              >
-                Add Listing
-              </Link>
+                  to="/login"
+                  className="px-4 py-2 rounded-full bg-gradient-to-r from-[#06B6D4] to-[#0EA5E9] text-[#0F172A] font-semibold text-sm hover:opacity-90"
+                >
+                  Add Listing
+                </Link>
               )}
             </div>
 
